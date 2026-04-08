@@ -508,6 +508,15 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 
+function scrollToSectionGroup(sectionKey, groupKey) {
+  let selector = `[data-${sectionKey}-group="${groupKey}"]`;
+  if (sectionKey === 'location') selector = `[data-location-group="${groupKey}"]`;
+  const el = document.querySelector(selector);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 function wireJumpButtons() {
   document.querySelectorAll('[data-jump-supp]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -567,7 +576,7 @@ function renderPairedTableSection(title, sectionKey, pairs) {
   return `<section class="section" data-section="${sectionKey}">
     <div class="section-head"><div class="pill">${escapeHtml(title)}</div><button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button></div>
     <div class="locations-jumpbar">
-      ${groups.map((_, idx) => `<button class="locations-jumpchip" onclick="document.querySelector('[data-${sectionKey}-group="${idx+1}"]').scrollIntoView({behavior:'smooth'})">Section ${String.fromCharCode(65 + idx)}</button>`).join('')}
+      ${groups.map((_, idx) => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('${sectionKey}', '${idx+1}')">Section ${String.fromCharCode(65 + idx)}</button>`).join('')}
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${groups.map((group, idx) => `
@@ -634,7 +643,7 @@ function renderPowerSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      ${groups.map(g => `<button class="locations-jumpchip" onclick="document.querySelector('[data-power-group="${g.letter}"]').scrollIntoView({behavior:'smooth'})">Section ${g.letter}</button>`).join('')}
+      ${groups.map(g => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('power', '${g.letter}')">Section ${g.letter}</button>`).join('')}
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${groups.map(g => `
@@ -697,7 +706,7 @@ function renderCoreSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      ${groups.map(g => `<button class="locations-jumpchip" onclick="document.querySelector('[data-core-group="${g.letter}"]').scrollIntoView({behavior:'smooth'})">Section ${g.letter}</button>`).join('')}
+      ${groups.map(g => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('core', '${g.letter}')">Section ${g.letter}</button>`).join('')}
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${groups.map(g => `
@@ -760,7 +769,7 @@ function renderChartASection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      ${groups.map(g => `<button class="locations-jumpchip" onclick="document.querySelector('[data-charta-group="${g.letter}"]').scrollIntoView({behavior:'smooth'})">Section ${g.letter}</button>`).join('')}
+      ${groups.map(g => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('charta', '${g.letter}')">Section ${g.letter}</button>`).join('')}
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${groups.map(g => `
@@ -893,7 +902,7 @@ function renderChartBSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      ${groups.map(g => `<button class="locations-jumpchip" onclick="document.querySelector('[data-chartb-group="${g.letter}"]').scrollIntoView({behavior:'smooth'})">Section ${g.letter}</button>`).join('')}
+      ${groups.map(g => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('chartb', '${g.letter}')">Section ${g.letter}</button>`).join('')}
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${groups.map(g => `
@@ -981,11 +990,30 @@ function renderLocationsSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-location-group=&quot;1&quot;]').scrollIntoView({behavior:'smooth'})">1–9</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-location-group=&quot;10&quot;]').scrollIntoView({behavior:'smooth'})">10–13</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-location-group=&quot;14&quot;]').scrollIntoView({behavior:'smooth'})">14–16</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-location-group=&quot;17&quot;]').scrollIntoView({behavior:'smooth'})">17–20</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-location-group=&quot;21&quot;]').scrollIntoView({behavior:'smooth'})">21–24</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '1')">1</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '2')">2</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '3')">3</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '4')">4</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '5')">5</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '6')">6</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '7')">7</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '8')">8</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '9')">9</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '10')">10</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '11')">11</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '12')">12</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '13')">13</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '14')">14</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '15')">15</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '16')">16</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '17')">17</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '18')">18</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '19')">19</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '20')">20</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '21')">21</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '22')">22</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '23')">23</button>
+      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '24')">24</button>
     </div>
     <div class="locations-grid">
       ${groups.map(g=>`<div class="location-card" data-location-group="${g.number}">
@@ -1059,10 +1087,10 @@ function renderSuppressionSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      <button class="locations-jumpchip" data-jump-supp="1">1</button>
-      <button class="locations-jumpchip" data-jump-supp="2">2</button>
-      <button class="locations-jumpchip" data-jump-supp="3">3</button>
-      <button class="locations-jumpchip" data-jump-supp="4">4</button>
+      <button class="locations-jumpchip" data-jump-supp="1">Blood Binding Curses</button>
+      <button class="locations-jumpchip" data-jump-supp="2">Blood Curses</button>
+      <button class="locations-jumpchip" data-jump-supp="3">Binding Curses</button>
+      <button class="locations-jumpchip" data-jump-supp="4">Curses</button>
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${charts.map((chart, idx)=>`<div class="table-card" data-supp-chart="${idx+1}">
@@ -1097,7 +1125,7 @@ function renderSystemLocksSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-system-chart=&quot;1&quot;]').scrollIntoView({behavior:'smooth'})">Karmic</button>
+      <button class="locations-jumpchip" onclick="document.querySelector('[data-system-chart=&quot;1&quot;]').scrollIntoView({behavior:'smooth'})">Karmic Imprints</button>
       <button class="locations-jumpchip" onclick="document.querySelector('[data-system-chart=&quot;2&quot;]').scrollIntoView({behavior:'smooth'})">Imprints</button>
       <button class="locations-jumpchip" onclick="document.querySelector('[data-system-chart=&quot;3&quot;]').scrollIntoView({behavior:'smooth'})">Traumas</button>
       <button class="locations-jumpchip" onclick="document.querySelector('[data-system-chart=&quot;4&quot;]').scrollIntoView({behavior:'smooth'})">Wounds</button>
@@ -1178,10 +1206,10 @@ function renderSpellsSection() {
       </div>
     </div>
     <div class="locations-jumpbar">
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;1&quot;]').scrollIntoView({behavior:'smooth'})">1</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;2&quot;]').scrollIntoView({behavior:'smooth'})">2</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;3&quot;]').scrollIntoView({behavior:'smooth'})">3</button>
-      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;4&quot;]').scrollIntoView({behavior:'smooth'})">4</button>
+      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;1&quot;]').scrollIntoView({behavior:'smooth'})">Blood Binding Spells</button>
+      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;2&quot;]').scrollIntoView({behavior:'smooth'})">Blood Spells</button>
+      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;3&quot;]').scrollIntoView({behavior:'smooth'})">Binding Spells</button>
+      <button class="locations-jumpchip" onclick="document.querySelector('[data-spell-chart=&quot;4&quot;]').scrollIntoView({behavior:'smooth'})">Spells</button>
     </div>
     <div class="grid" style="grid-template-columns:1fr;">
       ${charts.map((chart, idx)=>`<div class="table-card" data-spell-chart="${idx+1}">
