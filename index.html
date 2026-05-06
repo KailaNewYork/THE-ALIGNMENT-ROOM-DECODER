@@ -968,17 +968,21 @@ function wireControlSearch() {
   const run = () => {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-spell-chart]').forEach(card => {
+      const titleMatch = card.querySelector('.table-title, .table-subtitle')?.textContent.toLowerCase().includes(term);
       let visibleCount = 0;
       card.querySelectorAll('.table-row').forEach(row => {
-        const show = !term || row.textContent.toLowerCase().includes(term);
+        const show = !term || titleMatch || row.textContent.toLowerCase().includes(term);
         row.style.display = show ? 'grid' : 'none';
         if (show) visibleCount++;
       });
-      card.querySelectorAll('.table-block-head, .table-gap').forEach(el => el.style.display = '');
+      card.querySelectorAll('.table-block-head, .table-gap').forEach(el => {
+        el.style.display = visibleCount ? '' : 'none';
+      });
       card.style.display = visibleCount ? 'block' : 'none';
     });
   };
   input.addEventListener('input', run);
+  run();
 }
 
 function wireSystemSearch() {
@@ -987,9 +991,10 @@ function wireSystemSearch() {
   const run = () => {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-system-chart]').forEach(card => {
+      const titleMatch = card.querySelector('.table-title, .table-subtitle')?.textContent.toLowerCase().includes(term);
       let visibleCount = 0;
       card.querySelectorAll('.table-row').forEach(row => {
-        const show = !term || row.textContent.toLowerCase().includes(term);
+        const show = !term || titleMatch || row.textContent.toLowerCase().includes(term);
         row.style.display = show ? 'grid' : 'none';
         if (show) visibleCount++;
       });
@@ -997,6 +1002,7 @@ function wireSystemSearch() {
     });
   };
   input.addEventListener('input', run);
+  run();
 }
 
 function wireLocationSearch() {
@@ -1633,7 +1639,6 @@ function renderSections() {
     renderRootBlocksSection(),
     renderLocationsSection(),
     renderSuppressionSection(),
-    renderControlSection(),
     renderSystemLocksSection(),
     renderSpellsSection(),
     renderCursesSection()
