@@ -761,7 +761,7 @@ function wirePowerSearch() {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-power-group]').forEach(group => {
       let visibleCount = 0;
-      group.querySelectorAll('.table-row').forEach(row => {
+      group.querySelectorAll('.paired-row').forEach(row => {
         const text = row.textContent.toLowerCase();
         const show = !term || text.includes(term);
         row.style.display = show ? 'grid' : 'none';
@@ -824,7 +824,7 @@ function wireCoreSearch() {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-core-group]').forEach(group => {
       let visibleCount = 0;
-      group.querySelectorAll('.table-row').forEach(row => {
+      group.querySelectorAll('.paired-row').forEach(row => {
         const text = row.textContent.toLowerCase();
         const show = !term || text.includes(term);
         row.style.display = show ? 'grid' : 'none';
@@ -887,7 +887,7 @@ function wireChartASearch() {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-charta-group]').forEach(group => {
       let visibleCount = 0;
-      group.querySelectorAll('.table-row').forEach(row => {
+      group.querySelectorAll('.paired-row').forEach(row => {
         const text = row.textContent.toLowerCase();
         const show = !term || text.includes(term);
         row.style.display = show ? 'grid' : 'none';
@@ -1020,7 +1020,7 @@ function wireChartBSearch() {
     const term = input.value.trim().toLowerCase();
     document.querySelectorAll('[data-chartb-group]').forEach(group => {
       let visibleCount = 0;
-      group.querySelectorAll('.table-row').forEach(row => {
+      group.querySelectorAll('.paired-row').forEach(row => {
         const text = row.textContent.toLowerCase();
         const show = !term || text.includes(term);
         row.style.display = show ? 'grid' : 'none';
