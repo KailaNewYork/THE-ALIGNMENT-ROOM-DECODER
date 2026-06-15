@@ -943,7 +943,7 @@ Ask This: Is this person ______?</option>
           <option value="tutorials">Tutorials</option>
           <option value="suppression">Suppression Blocks</option>
         </select>
-        <button class="clear-btn" id="clearBtn">Clear</button>
+        <button class="clear-btn" id="enterBtn">Enter</button>
       </div>
       <div id="search-results">Type a word or code to search the workbook app data.</div>
     </div>
@@ -2712,11 +2712,7 @@ function init() {
   wireJumpButtons();
   document.getElementById('global-search').addEventListener('input', runSearch);
   document.getElementById('section-filter').addEventListener('change', runSearch);
-  document.getElementById('clearBtn').addEventListener('click', () => {
-    document.getElementById('global-search').value = '';
-    document.getElementById('section-filter').value = 'all';
-    runSearch();
-  });
+  document.getElementById('enterBtn').addEventListener('click', runSearch);
   document.getElementById('topBtn').addEventListener('click', () => {
     const sectionKey = getActiveSectionKey();
     if (sectionKey) {
