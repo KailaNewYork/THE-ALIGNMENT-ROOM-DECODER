@@ -2986,7 +2986,17 @@ function sectionUsesLocationButton(sectionKey) {
 
 function sectionUsesGlossaryButton(sectionKey) {
   if (!sectionKey) return false;
-  if (sectionKey === 'dashboard' || sectionKey === 'locations') return false;
+  const glossaryDisabledSections = new Set([
+    'dashboard',
+    'locations',
+    'stable',
+    'vitals',
+    'need',
+    'mission',
+    'person',
+    'tutorials'
+  ]);
+  if (glossaryDisabledSections.has(sectionKey)) return false;
   if (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) return false;
   return true;
 }
