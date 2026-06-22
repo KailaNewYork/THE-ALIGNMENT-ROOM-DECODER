@@ -1291,6 +1291,47 @@ function getClosestVisibleGlossaryGroup() {
   return best ? { sectionKey: best.dataset.glossarySection, groupKey: best.dataset.glossaryGroup } : null;
 }
 
+function getClosestVisibleSectionGroup(sectionKey) {
+  if (!sectionKey) return null;
+  const cards = Array.from(document.querySelectorAll(`[data-${sectionKey}-group]`));
+  if (!cards.length) return null;
+  let best = null;
+  let bestDistance = Infinity;
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs(rect.top - 120);
+    if (rect.bottom > 80 && distance < bestDistance) {
+      best = card;
+      bestDistance = distance;
+    }
+  });
+  return best ? best.getAttribute(`data-${sectionKey}-group`) : null;
+}
+
+function getGlossaryKeyForSection(sectionKey) {
+  const map = {
+    power: 'glossary-power',
+    core: 'glossary-core',
+    charta: 'glossary-charta',
+    chartb: 'glossary-chartb',
+    rootblocks: 'glossary-rootblocks',
+    wounds: 'glossary-wounds',
+    suppression: 'glossary-suppression'
+  };
+  const glossaryKey = map[sectionKey];
+  return glossaryData.some(section => section.key === glossaryKey) ? glossaryKey : null;
+}
+
+function getGlossaryTargetForCurrentState(state) {
+  if (!state || !state.sectionKey) return null;
+  const glossaryKey = getGlossaryKeyForSection(state.sectionKey);
+  if (!glossaryKey) return null;
+  const target = { sectionKey: glossaryKey };
+  if (state.currentGroup) target.groupKey = state.currentGroup;
+  if (state.woundGroup) target.groupKey = state.woundGroup;
+  return target;
+}
+
 function rememberCurrentSectionForReturn() {
   const sectionKey = getActiveSectionKey && getActiveSectionKey();
   if (!sectionKey || sectionKey === 'locations') return;
@@ -1299,6 +1340,8 @@ function rememberCurrentSectionForReturn() {
     const woundGroup = getClosestVisibleWoundGroup();
     if (woundGroup) lastSectionReturnState.woundGroup = woundGroup;
   }
+  const currentGroup = getClosestVisibleSectionGroup(sectionKey);
+  if (currentGroup) lastSectionReturnState.currentGroup = currentGroup;
   if (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) {
     const glossaryGroup = getClosestVisibleGlossaryGroup();
     if (glossaryGroup) {
@@ -1317,7 +1360,15 @@ function openLocationFromCurrent() {
 function openGlossaryFromCurrent() {
   rememberCurrentSectionForReturn();
   lastGlossaryReturnState = lastSectionReturnState ? { ...lastSectionReturnState } : null;
-  goToSection('glossary');
+  const target = getGlossaryTargetForCurrentState(lastGlossaryReturnState);
+  if (target && target.sectionKey) {
+    goToSection(target.sectionKey);
+    if (target.groupKey) {
+      setTimeout(() => scrollToGlossaryGroup(target.sectionKey, target.groupKey), 120);
+    }
+  } else {
+    goToSection('glossary');
+  }
   updateBackToLastSectionButton();
   updateBackToLastFromGlossaryButton();
 }
@@ -1334,18 +1385,21 @@ function returnToPreviousFromGlossary() {
 }
 
 function updateBackToLastFromGlossaryButton() {
-  const btn = document.getElementById('back-to-last-from-glossary-btn');
-  if (!btn) return;
+  const buttons = Array.from(document.querySelectorAll('.back-to-last-from-glossary-btn, #back-to-last-from-glossary-btn'));
+  if (!buttons.length) return;
   const sectionKey = getActiveSectionKey && getActiveSectionKey();
-  if (sectionKey === 'glossary' && lastGlossaryReturnState && lastGlossaryReturnState.sectionKey) {
-    const savedLocationState = lastSectionReturnState;
-    lastSectionReturnState = lastGlossaryReturnState;
-    btn.textContent = getReturnButtonLabel();
-    lastSectionReturnState = savedLocationState;
-    btn.style.display = '';
-  } else {
-    btn.style.display = 'none';
-  }
+  const show = sectionKey && (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) && lastGlossaryReturnState && lastGlossaryReturnState.sectionKey;
+  buttons.forEach(btn => {
+    if (show) {
+      const savedLocationState = lastSectionReturnState;
+      lastSectionReturnState = lastGlossaryReturnState;
+      btn.textContent = getReturnButtonLabel();
+      lastSectionReturnState = savedLocationState;
+      btn.style.display = '';
+    } else {
+      btn.style.display = 'none';
+    }
+  });
 }
 
 function returnToPreviousSection() {
@@ -1357,6 +1411,8 @@ function returnToPreviousSection() {
   goToSection(state.sectionKey);
   if (state.sectionKey === 'wounds' && state.woundGroup) {
     setTimeout(() => scrollToSectionGroup('wounds', state.woundGroup), 120);
+  } else if (state.currentGroup) {
+    setTimeout(() => scrollToSectionGroup(state.sectionKey, state.currentGroup), 120);
   }
   if ((state.sectionKey === 'glossary' || state.sectionKey.startsWith('glossary-')) && state.glossarySection && state.glossaryGroup) {
     setTimeout(() => scrollToGlossaryGroup(state.glossarySection, state.glossaryGroup), 120);
@@ -2671,7 +2727,7 @@ function renderSuppressionGlossarySection(section) {
   const filtered = section.entries.filter(entry => !isSuppressionHeadingEntry(entry.name));
   const categories = ['Blood Bindings','Blood Curses','Binding Curses','Curses'];
   return `<section class="section" data-section="${section.key}">
-    <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div>
+    <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><div class="power-head-tools"><button class="ghost-btn back-to-last-from-glossary-btn" onclick="returnToPreviousFromGlossary()" style="display:none;">Back to Last Section</button><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div></div>
     <p class="glossary-help">This section follows the codex order from the Curses, Spells and their Attachments section: Blood Bindings first, Blood Curses second, Binding Curses third, and Curses last. Use the named buttons below to jump straight to the right block instead of sorting by letter. Definitions in this section are matched to the suppression order and phrasing from pages 75–85 of the codex.</p>
     <div class="glossary-jumpbar">
       ${categories.map(cat => `<button class="glossary-jumpchip" onclick="scrollToGlossaryGroup('${section.key}', '${cat}')">${escapeHtml(cat)}</button>`).join('')}
@@ -2720,7 +2776,7 @@ function renderGlossaryDetailSection(section) {
   }
   if (section.key === 'glossary-rootblocks') {
     return `<section class="section" data-section="${section.key}">
-      <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div>
+      <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><div class="power-head-tools"><button class="ghost-btn back-to-last-from-glossary-btn" onclick="returnToPreviousFromGlossary()" style="display:none;">Back to Last Section</button><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div></div>
       <div class="card" style="margin-bottom:16px;">
         <p style="margin:0; color:var(--text); line-height:1.5;"><strong>Root Layer Definition:</strong> You clear them in the order that you receive them. They also have to be cleared a specific way. This must be taught by a practitioner/master it cannot be learned from a book.</p>
       </div>
@@ -2746,7 +2802,7 @@ function renderGlossaryDetailSection(section) {
   });
   const groups = Array.from(groupMap.entries()).sort((a,b)=>a[0].localeCompare(b[0]));
   return `<section class="section" data-section="${section.key}">
-    <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div>
+    <div class="section-head"><div class="pill">${escapeHtml(section.label)}</div><div class="power-head-tools"><button class="ghost-btn back-to-last-from-glossary-btn" onclick="returnToPreviousFromGlossary()" style="display:none;">Back to Last Section</button><button class="ghost-btn" onclick="goToSection('glossary')">Back to Glossary</button></div></div>
     <div class="glossary-jumpbar">
       ${groups.map(([groupKey]) => `<button class="glossary-jumpchip" onclick="scrollToGlossaryGroup('${section.key}', '${groupKey}')">${escapeHtml(groupKey)}</button>`).join('')}
     </div>
