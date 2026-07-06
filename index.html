@@ -1143,9 +1143,31 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .age-stage-chart-title{
     font-size:1.05rem !important;
   }
-  .age-stage-chart{
-    min-width:680px;
-  }
+}
+
+/* Mobile fix: keep the Age/Stage chart swipeable instead of clipping off-screen */
+.age-stage-scroll-note{
+  display:none;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.35;
+  margin:0 0 8px;
+  font-style:italic;
+}
+.age-stage-chart{
+  overflow-x:auto !important;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.age-stage-chart-inner{
+  min-width:850px;
+}
+@media (max-width: 900px){
+  .age-stage-scroll-note{ display:block; }
+  .age-stage-chart-inner{ min-width:760px; }
+}
+@media (max-width: 520px){
+  .age-stage-chart-inner{ min-width:700px; }
 }
 
 </style>
@@ -2521,33 +2543,37 @@ function renderVersionOfSelfAgeLocationSection() {
       </div>
     </div>
 
+    <p class="age-stage-scroll-note">Swipe left or right to view the full Age/Stage Location Chart.</p>
+
     <div class="age-stage-chart table-card">
-      <div class="age-stage-chart-title">Age/Stage Location Chart</div>
-      <div class="age-stage-chart-subtitle">
-        <span class="age-stage-chart-question">Which Age (Self) Is Holding This?</span>
-        Use this chart to locate the age, life stage, or inner version of self connected to what is being cleared.
-        <span class="age-stage-chart-note">The range locates the stage, but you must identify the exact age before clearing or restoring.</span>
-      </div>
-      <div class="age-stage-command-label clear">To clear, say:</div>
-      <div class="age-stage-command-text">“I remove [blank] from my [age-year-old self]’s [location].”</div>
-      <div class="age-stage-spacer"></div>
-      <div class="age-stage-command-label activate">To activate the resource code, say:</div>
-      <div class="age-stage-command-text">“I activate the resource code of [blank] for my [age-year-old self]’s [location].”</div>
-      <div class="age-stage-spacer"></div>
-      <div class="age-self-row age-self-head">
-        <div class="age-self-cell">Stage</div>
-        <div class="age-self-cell">Age Range</div>
-        <div class="age-self-cell">Life Stage Name</div>
-        <div class="age-self-cell">What This Stage May Hold</div>
-      </div>
-      ${versionOfSelfAgeLocationRows.map(row => `
-        <div class="age-self-row version-self-card" data-age-self-stage="${row.stage}">
-          <div class="age-self-cell age-self-stage">${escapeHtml(row.stage)}</div>
-          <div class="age-self-cell age-self-range">${escapeHtml(row.ageRange)}</div>
-          <div class="age-self-cell age-self-name">${escapeHtml(row.name)}</div>
-          <div class="age-self-cell">${escapeHtml(row.holds)}</div>
+      <div class="age-stage-chart-inner">
+        <div class="age-stage-chart-title">Age/Stage Location Chart</div>
+        <div class="age-stage-chart-subtitle">
+          <span class="age-stage-chart-question">Which Age (Self) Is Holding This?</span>
+          Use this chart to locate the age, life stage, or inner version of self connected to what is being cleared.
+          <span class="age-stage-chart-note">The range locates the stage, but you must identify the exact age before clearing or restoring.</span>
         </div>
-      `).join('')}
+        <div class="age-stage-command-label clear">To clear, say:</div>
+        <div class="age-stage-command-text">“I remove [blank] from my [age-year-old self]’s [location].”</div>
+        <div class="age-stage-spacer"></div>
+        <div class="age-stage-command-label activate">To activate the resource code, say:</div>
+        <div class="age-stage-command-text">“I activate the resource code of [blank] for my [age-year-old self]’s [location].”</div>
+        <div class="age-stage-spacer"></div>
+        <div class="age-self-row age-self-head">
+          <div class="age-self-cell">Stage</div>
+          <div class="age-self-cell">Age Range</div>
+          <div class="age-self-cell">Life Stage Name</div>
+          <div class="age-self-cell">What This Stage May Hold</div>
+        </div>
+        ${versionOfSelfAgeLocationRows.map(row => `
+          <div class="age-self-row version-self-card" data-age-self-stage="${row.stage}">
+            <div class="age-self-cell age-self-stage">${escapeHtml(row.stage)}</div>
+            <div class="age-self-cell age-self-range">${escapeHtml(row.ageRange)}</div>
+            <div class="age-self-cell age-self-name">${escapeHtml(row.name)}</div>
+            <div class="age-self-cell">${escapeHtml(row.holds)}</div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   </section>`;
 }
