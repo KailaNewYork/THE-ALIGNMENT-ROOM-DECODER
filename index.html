@@ -653,7 +653,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .floating-location-chart-btn{
   position:fixed;
   right:18px;
-  bottom:66px;
+  bottom:114px;
   z-index:40;
   display:none;
   border-radius:999px;
@@ -671,7 +671,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 700px){
   .floating-location-chart-btn{
     right:10px;
-    bottom:58px;
+    bottom:102px;
     padding:9px 12px;
     font-size:.92rem;
   }
@@ -681,7 +681,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .floating-glossary-btn{
   position:fixed;
   right:18px;
-  bottom:114px;
+  bottom:162px;
   z-index:40;
   display:none;
   border-radius:999px;
@@ -699,7 +699,35 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 700px){
   .floating-glossary-btn{
     right:10px;
-    bottom:102px;
+    bottom:146px;
+    padding:9px 12px;
+    font-size:.92rem;
+  }
+}
+
+
+.floating-clearing-charts-btn{
+  position:fixed;
+  right:18px;
+  bottom:66px;
+  z-index:40;
+  display:none;
+  border-radius:999px;
+  padding:10px 14px;
+  cursor:pointer;
+  background:rgba(17,18,22,.94);
+  color:#f5dfaa;
+  border:1px solid rgba(216,181,106,.45);
+  font-weight:700;
+  box-shadow:var(--shadow);
+}
+.floating-clearing-charts-btn:hover{
+  background:rgba(216,181,106,.14);
+}
+@media (max-width: 700px){
+  .floating-clearing-charts-btn{
+    right:10px;
+    bottom:58px;
     padding:9px 12px;
     font-size:.92rem;
   }
@@ -962,6 +990,164 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
 }
 
+
+/* Age/Stage Location Chart */
+.age-stage-chart{
+  border:3px solid #000;
+  background:#efefef;
+  color:#000;
+  overflow:auto;
+  font-family:"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+.age-stage-chart-title{
+  text-align:center;
+  font-size:2rem;
+  font-weight:700;
+  line-height:1.15;
+  padding:10px 12px;
+  background:#f7f7f7;
+  color:#000;
+  border-bottom:3px solid #000;
+}
+.age-stage-chart-subtitle{
+  text-align:center;
+  font-size:1.15rem;
+  font-weight:700;
+  line-height:1.35;
+  padding:10px 14px;
+  background:#f7f7f7;
+  color:#000;
+  border-bottom:3px solid #000;
+}
+.age-stage-chart-question{
+  display:block;
+  margin-bottom:5px;
+  color:#000;
+  font-size:1.18rem;
+  font-weight:700;
+}
+.age-stage-chart-note{
+  display:block;
+  margin-top:6px;
+  color:#000;
+  font-size:1rem;
+  font-weight:700;
+}
+.age-stage-command-label{
+  text-align:center;
+  font-size:1.15rem;
+  font-weight:700;
+  padding:8px 12px;
+  line-height:1.2;
+  background:#f7f7f7;
+  color:#000;
+  border-bottom:1px solid #888;
+}
+.age-stage-command-label.clear,
+.age-stage-command-label.activate{
+  background:#f7f7f7;
+  color:#000;
+}
+.age-stage-command-text{
+  background:#efefef;
+  color:#000;
+  text-align:center;
+  font-size:1.08rem;
+  padding:8px 12px;
+  line-height:1.25;
+  border-bottom:1px solid #888;
+}
+.age-stage-spacer{
+  height:20px;
+  background:#efefef;
+  border-bottom:1px solid #bbb;
+}
+.age-self-row{
+  display:grid;
+  grid-template-columns:74px 130px minmax(220px,.9fr) minmax(360px,1.65fr);
+  border-bottom:1px solid #888;
+}
+.age-self-cell{
+  padding:14px 12px;
+  line-height:1.24;
+  display:flex;
+  align-items:center;
+  min-height:68px;
+  font-size:1.05rem;
+}
+.age-self-row .age-self-cell:not(:last-child){
+  justify-content:center;
+  text-align:center;
+  border-right:1px solid #888;
+}
+.age-self-row .age-self-cell:last-child{
+  justify-content:flex-start;
+  text-align:left;
+}
+.age-self-head{
+  background:#f7f7f7;
+  color:#000;
+  font-weight:700;
+  border-bottom:3px solid #000;
+}
+.age-self-head .age-self-cell{
+  min-height:46px;
+  padding:10px 12px;
+  font-size:1.05rem;
+}
+.age-self-stage,
+.age-self-range{
+  color:#000;
+  font-weight:700;
+}
+.age-self-name{
+  color:#000;
+  font-weight:700;
+}
+.age-self-row[data-age-self-stage="1"]{ background:#dbe8f5; }
+.age-self-row[data-age-self-stage="2"]{ background:#c4e8f4; }
+.age-self-row[data-age-self-stage="3"]{ background:#f4ded1; }
+.age-self-row[data-age-self-stage="4"]{ background:#c7f0cf; }
+.age-self-row[data-age-self-stage="5"]{ background:#cceef8; }
+.age-self-row[data-age-self-stage="6"]{ background:#efc9ee; }
+.age-self-row[data-age-self-stage="7"]{ background:#def4d7; }
+.age-self-row[data-age-self-stage="8"]{ background:#a8cbea; }
+.age-self-row[data-age-self-stage="9"]{ background:#f5c5aa; }
+.age-self-row[data-age-self-stage="10"]{ background:#df95d7; }
+@media (max-width: 900px){
+  .age-stage-chart-title{
+    font-size:1.35rem !important;
+    padding:10px 12px !important;
+  }
+  .age-stage-chart-subtitle,
+  .age-stage-command-label,
+  .age-stage-command-text{
+    font-size:.9rem !important;
+  }
+  .age-self-row{
+    grid-template-columns:46px 78px minmax(120px,.75fr) minmax(210px,1.45fr);
+  }
+  .age-self-cell{
+    padding:12px 7px;
+    min-height:62px;
+    font-size:.78rem;
+    line-height:1.18;
+  }
+  .age-self-head .age-self-cell{
+    min-height:38px;
+    padding:8px 5px;
+    font-size:.76rem;
+  }
+}
+@media (max-width: 520px){
+  .age-stage-chart-title{
+    font-size:1.05rem !important;
+  }
+  .age-stage-chart{
+    min-width:680px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -996,6 +1182,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
           <option value="person">Is This My Person?
 Ask This: Is this person ______?</option>
           <option value="locations">Locations</option>
+          <option value="ageself">Age/Stage Location Chart</option>
           <option value="glossary">Glossary</option>
           <option value="tutorials">Tutorials</option>
           <option value="suppression">Suppression Blocks</option>
@@ -1007,6 +1194,7 @@ Ask This: Is this person ______?</option>
   </div>
   <div id="quickStartStatic"></div>
   <div id="content"></div>
+  <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
   <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary</button>
   <button class="floating-location-chart-btn" id="locationFloatBtn">Location Chart</button>
   <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
@@ -1080,9 +1268,31 @@ const quickStarts = [
   { label: 'Control Blocks', desc: 'Open the control block charts.', tab: 'spells' },
   { label: 'System Blocks', desc: 'Open the system block charts.', tab: 'systemlocks' },
   { label: 'Location', desc: 'Jump to the location groups.', tab: 'locations' },
+  { label: 'Age/Stage Location Chart', desc: 'Identify the exact age-version of self connected to what is being cleared or restored.', tab: 'ageself' },
   { label: 'Glossary', desc: 'Open the glossary home and jump by chart section.', tab: 'glossary' },
   { label: 'Tutorials', desc: 'Coming soon: guides on how to use the app and muscle test.', tab: 'tutorials' }
+ ];
+
+const versionOfSelfAgeLocationRows = [
+  { stage: 1, ageRange: '0–10', name: 'The Foundation Self', holds: 'Early childhood wounds, safety, belonging, family imprinting, attachment, fear, rejection, abandonment, visibility, innocence, early body memories.' },
+  { stage: 2, ageRange: '11–21', name: 'The Becoming Self', holds: 'Identity, puberty, body image, peer acceptance, shame, comparison, first heartbreaks, school wounds, rebellion, pressure to fit in.' },
+  { stage: 3, ageRange: '22–32', name: 'The Independence Self', holds: 'Leaving home, survival patterns, early adulthood, relationships, career confusion, money beliefs, independence, poor choices, self-trust.' },
+  { stage: 4, ageRange: '33–43', name: 'The Responsibility Self', holds: 'Marriage, parenting, career pressure, emotional labor, sacrifice, exhaustion, proving yourself, feeling trapped, losing self in roles.' },
+  { stage: 5, ageRange: '44–54', name: 'The Awakening Self', holds: 'Midlife truth, grief, divorce, identity shifts, unprocessed childhood patterns rising, dissatisfaction, reclaiming voice, questioning everything.' },
+  { stage: 6, ageRange: '55–65', name: 'The Reclamation Self', holds: 'Self-worth, purpose, wisdom, body changes, freedom, boundaries, truth-telling, choosing self, ending old cycles.' },
+  { stage: 7, ageRange: '66–76', name: 'The Wisdom Self', holds: 'Legacy, reflection, forgiveness, regret, peace, family patterns, spiritual maturity, releasing what no longer matters.' },
+  { stage: 8, ageRange: '77–87', name: 'The Elder Self', holds: 'Ancestral wisdom, life review, dignity, being seen, receiving care, unresolved grief, belonging, contribution, acceptance.' },
+  { stage: 9, ageRange: '88–98', name: 'The Legacy Self', holds: 'Completion, memory, meaning, family impact, unfinished emotional business, spiritual preparation, peace with life choices.' },
+  { stage: 10, ageRange: '99+', name: 'The Completion Self', holds: 'Closure, surrender, soul peace, final forgiveness, life integration, releasing fear, honoring the full journey, eternal wisdom, ancestral continuation, and divine completion.' }
 ];
+
+const versionOfSelfAgeLocationSearchIndex = versionOfSelfAgeLocationRows.map(row => ({
+  section: 'Age/Stage Location Chart',
+  code: `Stage ${row.stage}`,
+  name: row.name,
+  entry: row.ageRange,
+  definition: row.holds
+}));
 
 
 
@@ -1435,7 +1645,8 @@ function getReturnButtonLabel() {
     dashboard: 'Back to Home', power: 'Back to Power Blocks', core: 'Back to Core Blocks',
     charta: 'Back to Chart A', chartb: 'Back to Chart B', rootblocks: 'Back to Root Blocks',
     curses: 'Back to Curses', suppression: 'Back to Suppression', spells: 'Back to Control Blocks',
-    wounds: 'Back to Wound Clearings', glossary: 'Back to Glossary'
+    wounds: 'Back to Wound Clearings', glossary: 'Back to Glossary',
+    ageself: 'Back to Age/Stage Location Chart'
   };
   return labels[lastSectionReturnState.sectionKey] || 'Back to Last Section';
 }
@@ -1452,6 +1663,7 @@ function updateBackToLastSectionButton() {
 }
 
 function goToSection(key) {
+  window.currentSectionKey = key;
   document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
   const target = document.querySelector(`.section[data-section="${key}"]`);
   if (target) {
@@ -1459,6 +1671,8 @@ function goToSection(key) {
     target.scrollIntoView({behavior:'smooth', block:'start'});
   }
   updateFloatingTopButton();
+  setTimeout(updateFloatingTopButton, 50);
+  setTimeout(updateFloatingTopButton, 250);
   setTimeout(updateBackToLastSectionButton, 0);
   setTimeout(updateBackToLastFromGlossaryButton, 0);
   document.querySelectorAll('.quick-start-card-static').forEach(card => {
@@ -2297,6 +2511,47 @@ function renderTutorialsSection() {
   </section>`;
 }
 
+
+function renderVersionOfSelfAgeLocationSection() {
+  return `<section class="section" data-section="ageself">
+    <div class="section-head power-head">
+      <div class="pill">Age/Stage Location Chart</div>
+      <div class="power-head-tools">
+        <button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button>
+      </div>
+    </div>
+
+    <div class="age-stage-chart table-card">
+      <div class="age-stage-chart-title">Age/Stage Location Chart</div>
+      <div class="age-stage-chart-subtitle">
+        <span class="age-stage-chart-question">Which Age (Self) Is Holding This?</span>
+        Use this chart to locate the age, life stage, or inner version of self connected to what is being cleared.
+        <span class="age-stage-chart-note">The range locates the stage, but you must identify the exact age before clearing or restoring.</span>
+      </div>
+      <div class="age-stage-command-label clear">To clear, say:</div>
+      <div class="age-stage-command-text">“I remove [blank] from my [age-year-old self]’s [location].”</div>
+      <div class="age-stage-spacer"></div>
+      <div class="age-stage-command-label activate">To activate the resource code, say:</div>
+      <div class="age-stage-command-text">“I activate the resource code of [blank] for my [age-year-old self]’s [location].”</div>
+      <div class="age-stage-spacer"></div>
+      <div class="age-self-row age-self-head">
+        <div class="age-self-cell">Stage</div>
+        <div class="age-self-cell">Age Range</div>
+        <div class="age-self-cell">Life Stage Name</div>
+        <div class="age-self-cell">What This Stage May Hold</div>
+      </div>
+      ${versionOfSelfAgeLocationRows.map(row => `
+        <div class="age-self-row version-self-card" data-age-self-stage="${row.stage}">
+          <div class="age-self-cell age-self-stage">${escapeHtml(row.stage)}</div>
+          <div class="age-self-cell age-self-range">${escapeHtml(row.ageRange)}</div>
+          <div class="age-self-cell age-self-name">${escapeHtml(row.name)}</div>
+          <div class="age-self-cell">${escapeHtml(row.holds)}</div>
+        </div>
+      `).join('')}
+    </div>
+  </section>`;
+}
+
 function renderLocationsSection() {
   const groups = [
     { number:1, items:['Heart','Small Intestine'] },
@@ -2835,6 +3090,7 @@ function renderGlossarySections() {
 function renderSections() {
   document.getElementById('content').innerHTML = [
     renderDashboard(),
+    renderVersionOfSelfAgeLocationSection(),
     renderGlossarySections(),
     renderTutorialsSection(),
     renderPowerSection(),
@@ -2862,7 +3118,7 @@ function runSearch() {
     return;
   }
   const woundSearchIndex = woundClearingPairs.map(p => ({...p, section: 'Wound Clearings'}));
-  const searchPool = [...appData.searchIndex, ...buildPrecheckSearchIndex(), ...woundSearchIndex, ...glossarySearchIndex];
+  const searchPool = [...appData.searchIndex, ...buildPrecheckSearchIndex(), ...woundSearchIndex, ...versionOfSelfAgeLocationSearchIndex, ...glossarySearchIndex];
   const results = searchPool.filter(item => {
     if (filter !== 'all' && normalizeSearchSectionKey(item) !== filter) return false;
     return JSON.stringify(item).toLowerCase().includes(term);
@@ -2931,6 +3187,8 @@ function normalizeSearchSectionKey(item) {
     'precheck': 'stable',
     'location': 'locations',
     'locations': 'locations',
+    'version of self (age) location chart': 'ageself',
+    'which age self is holding this?': 'ageself',
     'suppression blocks': 'suppression',
     'control blocks': 'control',
     'system blocks': 'systemlocks',
@@ -3004,6 +3262,11 @@ function openSearchResult(index) {
       }) || null;
     }
 
+    if (!target && sectionKey === 'ageself' && code) {
+      const stageNumber = code.replace(/[^0-9]/g, '');
+      target = document.querySelector(`.section.active [data-age-self-stage="${stageNumber}"]`) || null;
+    }
+
     if (!target && sectionKey === 'rootblocks') {
       const slug = String(item.name || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
       target = document.getElementById(`root-layer-${slug}`);
@@ -3016,7 +3279,7 @@ function openSearchResult(index) {
     }
 
     if (!target && name) {
-      target = Array.from(document.querySelectorAll('.section.active .paired-row, .section.active .glossary-entry, .section.active .list-item, .section.active .precheck-item, .section.active .rootblock-item, .section.active .location-card')).find(el => {
+      target = Array.from(document.querySelectorAll('.section.active .paired-row, .section.active .glossary-entry, .section.active .list-item, .section.active .precheck-item, .section.active .rootblock-item, .section.active .location-card, .section.active .version-self-card')).find(el => {
         return el.textContent.trim().toLowerCase().includes(name);
       }) || null;
     }
@@ -3043,7 +3306,7 @@ function enhanceBackToTopLinks() {
 
 
 const locationEnabledSections = new Set([
-  'power','core','wounds','charta','chartb','rootblocks','suppression','systemlocks','spells','curses'
+  'power','core','wounds','charta','chartb','rootblocks','suppression','systemlocks','spells','curses','ageself'
 ]);
 
 function sectionUsesLocationButton(sectionKey) {
@@ -3075,21 +3338,35 @@ function enhanceLocationButtonsForCharts() {
 
 function getActiveSectionKey() {
   const active = document.querySelector('.section.active[data-section]');
-  return active ? active.dataset.section : null;
+  if (active && active.dataset.section) return active.dataset.section;
+  return window.currentSectionKey || null;
+}
+
+function setFloatingButtonState(btn, shouldShow) {
+  if (!btn) return;
+  btn.style.setProperty('display', shouldShow ? 'inline-flex' : 'none', 'important');
+  btn.style.alignItems = 'center';
+  btn.style.justifyContent = 'center';
+  btn.style.visibility = shouldShow ? 'visible' : 'hidden';
+  btn.style.pointerEvents = shouldShow ? 'auto' : 'none';
 }
 
 function updateFloatingTopButton() {
   const topBtn = document.getElementById('topBtn');
+  const clearingChartsBtn = document.getElementById('clearingChartsFloatBtn');
   const locationBtn = document.getElementById('locationFloatBtn');
   const glossaryBtn = document.getElementById('glossaryFloatBtn');
   const sectionKey = getActiveSectionKey();
-  const showTop = sectionKey && window.scrollY > 250;
-  const showLocation = sectionKey && sectionKey !== 'dashboard' && sectionKey !== 'locations' && sectionUsesLocationButton(sectionKey);
-  const showGlossary = sectionKey && sectionUsesGlossaryButton(sectionKey);
+  const isDashboard = !sectionKey || sectionKey === 'dashboard';
+  const showTop = !isDashboard && window.scrollY > 250;
+  const showClearingCharts = !isDashboard;
+  const showLocation = !isDashboard && sectionKey !== 'locations' && sectionUsesLocationButton(sectionKey);
+  const showGlossary = !isDashboard && sectionUsesGlossaryButton(sectionKey);
 
-  if (topBtn) topBtn.style.display = showTop ? 'block' : 'none';
-  if (locationBtn) locationBtn.style.display = showLocation ? 'block' : 'none';
-  if (glossaryBtn) glossaryBtn.style.display = showGlossary ? 'block' : 'none';
+  setFloatingButtonState(topBtn, showTop);
+  setFloatingButtonState(clearingChartsBtn, showClearingCharts);
+  setFloatingButtonState(locationBtn, showLocation);
+  setFloatingButtonState(glossaryBtn, showGlossary);
 }
 
 function init() {
@@ -3111,6 +3388,7 @@ function init() {
       window.scrollTo({top:0, behavior:'smooth'});
     }
   });
+  document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => jumpToDashboardGroup('alignment-clearing-charts'));
   document.getElementById('locationFloatBtn').addEventListener('click', openLocationFromCurrent);
   document.getElementById('glossaryFloatBtn').addEventListener('click', openGlossaryFromCurrent);
   window.addEventListener('scroll', updateFloatingTopButton);
