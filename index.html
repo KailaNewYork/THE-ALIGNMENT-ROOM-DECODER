@@ -1145,7 +1145,10 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
 }
 
-/* Mobile fix: keep the Age/Stage chart swipeable instead of clipping off-screen */
+/* Age/Stage chart responsive behavior
+   Desktop keeps the original chart.
+   Tablet can swipe if needed.
+   Phone fits inside the page as stacked rows. */
 .age-stage-scroll-note{
   display:none;
   color:var(--muted);
@@ -1162,12 +1165,95 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .age-stage-chart-inner{
   min-width:850px;
 }
-@media (max-width: 900px){
+@media (max-width: 900px) and (min-width: 521px){
   .age-stage-scroll-note{ display:block; }
   .age-stage-chart-inner{ min-width:760px; }
 }
-@media (max-width: 520px){
-  .age-stage-chart-inner{ min-width:700px; }
+@media only screen and (max-width: 520px){
+  .age-stage-scroll-note{ display:none !important; }
+
+  .age-stage-chart{
+    width:100% !important;
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+
+  .age-stage-chart-inner{
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  .age-self-head{
+    display:none !important;
+  }
+
+  .age-self-row{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    border-bottom:3px solid #000 !important;
+  }
+
+  .age-self-cell{
+    width:100% !important;
+    min-height:0 !important;
+    padding:8px 10px !important;
+    font-size:.86rem !important;
+    line-height:1.22 !important;
+    display:block !important;
+    text-align:left !important;
+    border-right:none !important;
+    border-bottom:1px solid rgba(0,0,0,.28) !important;
+  }
+
+  .age-self-cell:last-child{
+    border-bottom:none !important;
+  }
+
+  .age-self-row .age-self-cell:not(:last-child){
+    text-align:left !important;
+    justify-content:flex-start !important;
+  }
+
+  .age-self-cell:nth-child(1)::before{
+    content:"Stage: ";
+    font-weight:700;
+  }
+
+  .age-self-cell:nth-child(2)::before{
+    content:"Age Range: ";
+    font-weight:700;
+  }
+
+  .age-self-cell:nth-child(3)::before{
+    content:"Version of Self: ";
+    font-weight:700;
+  }
+
+  .age-self-cell:nth-child(4)::before{
+    content:"What This Age Self May Be Holding: ";
+    font-weight:700;
+  }
+
+  .age-stage-chart-title{
+    font-size:1.05rem !important;
+    line-height:1.15 !important;
+  }
+
+  .age-stage-chart-subtitle,
+  .age-stage-command-label,
+  .age-stage-command-text{
+    font-size:.82rem !important;
+    line-height:1.18 !important;
+    padding:8px 10px !important;
+  }
+
+  .age-stage-chart-question{
+    font-size:.9rem !important;
+  }
+
+  .age-stage-chart-note{
+    font-size:.78rem !important;
+  }
 }
 
 </style>
