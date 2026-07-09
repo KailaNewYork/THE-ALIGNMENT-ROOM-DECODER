@@ -2537,93 +2537,6 @@ html, body { max-width: 100%; overflow-x: hidden; }
   overflow:visible;
 }
 
-
-/* Floating shortcuts pop-up menu */
-.floating-shortcut-wrap{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:70;
-  display:none;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:10px;
-}
-.floating-shortcut-toggle{
-  border-radius:999px;
-  padding:11px 15px;
-  cursor:pointer;
-  background:linear-gradient(180deg, #cda95c, #9b793b);
-  color:#0a0907;
-  border:none;
-  font-weight:900;
-  box-shadow:var(--shadow);
-}
-.floating-shortcut-menu{
-  position:absolute;
-  right:0;
-  bottom:54px;
-  display:none;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:8px;
-  padding:10px;
-  border:1px solid rgba(216,181,106,.22);
-  border-radius:18px;
-  background:rgba(7,7,9,.72);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  box-shadow:var(--shadow);
-}
-.floating-shortcut-menu.is-open{
-  display:flex;
-}
-.floating-shortcut-menu .checkpoint-float-btn,
-.floating-shortcut-menu .floating-clearing-charts-btn,
-.floating-shortcut-menu .floating-glossary-btn,
-.floating-shortcut-menu .floating-location-chart-btn,
-.floating-shortcut-menu .floating-section-top-btn{
-  position:static !important;
-  right:auto !important;
-  bottom:auto !important;
-  min-width:158px;
-  justify-content:center;
-  text-align:center;
-  white-space:nowrap;
-  background:rgba(17,18,22,.86);
-  color:#f5dfaa;
-  border:1px solid rgba(216,181,106,.45);
-  box-shadow:none;
-}
-.floating-shortcut-menu .floating-section-top-btn{
-  background:linear-gradient(180deg, #cda95c, #9b793b);
-  color:#0a0907;
-  border:none;
-}
-@media (max-width: 700px){
-  .floating-shortcut-wrap{
-    right:10px;
-    bottom:14px;
-  }
-  .floating-shortcut-toggle{
-    padding:10px 13px;
-    font-size:.92rem;
-  }
-  .floating-shortcut-menu{
-    bottom:50px;
-    max-width:calc(100vw - 20px);
-  }
-  .floating-shortcut-menu .checkpoint-float-btn,
-  .floating-shortcut-menu .floating-clearing-charts-btn,
-  .floating-shortcut-menu .floating-glossary-btn,
-  .floating-shortcut-menu .floating-location-chart-btn,
-  .floating-shortcut-menu .floating-section-top-btn{
-    min-width:150px;
-    padding:9px 12px;
-    font-size:.9rem;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -2674,17 +2587,12 @@ Ask This: Is this person ______?</option>
   </div>
   <div id="quickStartStatic"></div>
   <div id="content"></div>
-  <div class="floating-shortcut-wrap" id="floatingShortcutWrap">
-    <div class="floating-shortcut-menu" id="floatingShortcutMenu" aria-hidden="true">
-      <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
-      <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
-      <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
-      <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary</button>
-      <button class="floating-location-chart-btn" id="locationFloatBtn">Location Chart</button>
-      <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
-    </div>
-    <button class="floating-shortcut-toggle" id="floatingShortcutToggle" type="button" aria-expanded="false" aria-controls="floatingShortcutMenu">Shortcuts</button>
-  </div>
+  <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
+  <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
+  <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
+  <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary</button>
+  <button class="floating-location-chart-btn" id="locationFloatBtn">Location Chart</button>
+  <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
 </div>
 
 <script>
@@ -2804,7 +2712,7 @@ const relationshipCheckpointCards = [
   { label: 'Relationship Chessboard\nAsk: Who am I really playing?', desc: 'Scan the board to identify who or what is influencing the relationship dynamic, then choose the piece, objective, and next move.', tab: 'relationshipchess' }
 ];
 
-const clearingChartCards = originalDashboardCards.slice(9, 18);
+const clearingChartCards = originalDashboardCards.slice(8, 18);
 const referenceVaultCards = originalDashboardCards.slice(18);
 const quickStarts = [...selfCheckCards, ...relationshipCheckpointCards, ...clearingChartCards, ...referenceVaultCards];
 
@@ -5526,7 +5434,19 @@ function sectionUsesLocationButton(sectionKey) {
 
 function sectionUsesGlossaryButton(sectionKey) {
   if (!sectionKey) return false;
-  if (sectionKey === 'dashboard') return false;
+  const glossaryDisabledSections = new Set([
+    'dashboard',
+    'locations',
+    'stable',
+    'relationshipplay',
+    'boundaryclearing',
+    'vitals',
+    'need',
+    'mission',
+    'person',
+    'tutorials'
+  ]);
+  if (glossaryDisabledSections.has(sectionKey)) return false;
   if (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) return false;
   return true;
 }
@@ -5572,9 +5492,6 @@ function stackFloatingButtons(buttons) {
 }
 
 function updateFloatingTopButton() {
-  const wrap = document.getElementById('floatingShortcutWrap');
-  const menu = document.getElementById('floatingShortcutMenu');
-  const toggle = document.getElementById('floatingShortcutToggle');
   const topBtn = document.getElementById('topBtn');
   const selfCheckBtn = document.getElementById('selfCheckFloatBtn');
   const relationshipCheckBtn = document.getElementById('relationshipCheckFloatBtn');
@@ -5583,23 +5500,11 @@ function updateFloatingTopButton() {
   const glossaryBtn = document.getElementById('glossaryFloatBtn');
   const sectionKey = getActiveSectionKey();
   const isDashboard = !sectionKey || sectionKey === 'dashboard';
-  const showShortcutMenu = !isDashboard;
-  const showTop = !isDashboard;
+  const showTop = !isDashboard && window.scrollY > 250;
   const showCheckpointFloats = !isDashboard;
   const showClearingCharts = !isDashboard;
   const showLocation = !isDashboard;
   const showGlossary = !isDashboard && sectionUsesGlossaryButton(sectionKey);
-
-  if (wrap) {
-    wrap.style.setProperty('display', showShortcutMenu ? 'flex' : 'none', 'important');
-  }
-  if (!showShortcutMenu && menu) {
-    menu.classList.remove('is-open');
-    menu.setAttribute('aria-hidden', 'true');
-  }
-  if (!showShortcutMenu && toggle) {
-    toggle.setAttribute('aria-expanded', 'false');
-  }
 
   setFloatingButtonState(topBtn, showTop);
   setFloatingButtonState(selfCheckBtn, showCheckpointFloats);
@@ -5607,27 +5512,15 @@ function updateFloatingTopButton() {
   setFloatingButtonState(clearingChartsBtn, showClearingCharts);
   setFloatingButtonState(locationBtn, showLocation);
   setFloatingButtonState(glossaryBtn, showGlossary);
-}
 
-
-function closeFloatingShortcutMenu() {
-  const menu = document.getElementById('floatingShortcutMenu');
-  const toggle = document.getElementById('floatingShortcutToggle');
-  if (menu) {
-    menu.classList.remove('is-open');
-    menu.setAttribute('aria-hidden', 'true');
-  }
-  if (toggle) toggle.setAttribute('aria-expanded', 'false');
-}
-
-function toggleFloatingShortcutMenu() {
-  const menu = document.getElementById('floatingShortcutMenu');
-  const toggle = document.getElementById('floatingShortcutToggle');
-  if (!menu || !toggle) return;
-  const open = !menu.classList.contains('is-open');
-  menu.classList.toggle('is-open', open);
-  menu.setAttribute('aria-hidden', open ? 'false' : 'true');
-  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  stackFloatingButtons([
+    topBtn,
+    clearingChartsBtn,
+    locationBtn,
+    glossaryBtn,
+    relationshipCheckBtn,
+    selfCheckBtn
+  ]);
 }
 
 function init() {
@@ -5641,11 +5534,6 @@ function init() {
   document.getElementById('global-search').addEventListener('input', runSearch);
   document.getElementById('section-filter').addEventListener('change', runSearch);
   document.getElementById('enterBtn').addEventListener('click', clearGlobalSearch);
-  document.getElementById('floatingShortcutToggle').addEventListener('click', toggleFloatingShortcutMenu);
-  document.addEventListener('click', (event) => {
-    const wrap = document.getElementById('floatingShortcutWrap');
-    if (wrap && !wrap.contains(event.target)) closeFloatingShortcutMenu();
-  });
   document.getElementById('topBtn').addEventListener('click', () => {
     const sectionKey = getActiveSectionKey();
     if (sectionKey) {
@@ -5653,13 +5541,12 @@ function init() {
     } else {
       window.scrollTo({top:0, behavior:'smooth'});
     }
-    closeFloatingShortcutMenu();
   });
-  document.getElementById('selfCheckFloatBtn').addEventListener('click', () => { jumpToDashboardSubsection('self-check-section'); closeFloatingShortcutMenu(); });
-  document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => { jumpToDashboardSubsection('relationship-checkpoint-section'); closeFloatingShortcutMenu(); });
-  document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => { jumpToDashboardGroup('alignment-clearing-charts'); closeFloatingShortcutMenu(); });
-  document.getElementById('locationFloatBtn').addEventListener('click', () => { openLocationFromCurrent(); closeFloatingShortcutMenu(); });
-  document.getElementById('glossaryFloatBtn').addEventListener('click', () => { openGlossaryFromCurrent(); closeFloatingShortcutMenu(); });
+  document.getElementById('selfCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('self-check-section'));
+  document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('relationship-checkpoint-section'));
+  document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => jumpToDashboardGroup('alignment-clearing-charts'));
+  document.getElementById('locationFloatBtn').addEventListener('click', openLocationFromCurrent);
+  document.getElementById('glossaryFloatBtn').addEventListener('click', openGlossaryFromCurrent);
   window.addEventListener('scroll', updateFloatingTopButton);
   goToSection('dashboard');
   updateFloatingTopButton();
