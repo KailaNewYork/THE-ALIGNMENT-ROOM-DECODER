@@ -2712,7 +2712,9 @@ const relationshipCheckpointCards = [
   { label: 'Relationship Chessboard\nAsk: Who am I really playing?', desc: 'Scan the board to identify who or what is influencing the relationship dynamic, then choose the piece, objective, and next move.', tab: 'relationshipchess' }
 ];
 
-const clearingChartCards = originalDashboardCards.slice(8, 18);
+const clearingChartCards = originalDashboardCards.filter(card =>
+  ['power', 'core', 'wounds', 'charta', 'chartb', 'rootblocks', 'suppression', 'spells', 'systemlocks'].includes(card.tab)
+);
 const referenceVaultCards = originalDashboardCards.slice(18);
 const quickStarts = [...selfCheckCards, ...relationshipCheckpointCards, ...clearingChartCards, ...referenceVaultCards];
 
@@ -2804,8 +2806,7 @@ function renderWoundClearingSection() {
         </div>
       `).join('')}
     </div>
-const clearingChartCards = originalDashboardCards.filter(card =>
-}
+
 
 function scrollToWoundCategory(category) {
   const el = document.querySelector(`[data-wound-category="${category}"]`);
