@@ -2538,7 +2538,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 
 </style>
-</head>
+/* FIXED_POPUP_SHORTCUTS_20260709 - Floating shortcuts pop-up menu */
 <body>
 <div class="shell">
   <div class="hero">
@@ -2674,7 +2674,7 @@ const relationshipPlaySearchIndex = [
 
 const originalDashboardCards = [
 { label: 'Am I Stable?\nAsk: Am I?', desc: 'Check alignment, source connection, mission, vibration, and direction.', tab: 'stable' },
-  { label: 'Find the Play of Your Relationship\nAsk: Play, Pause, or Stop?', desc: 'Check whether the relationship is active, paused, or stopped before deciding to clear, enforce a boundary, or release.', tab: 'relationshipplay' },
+ <div class="floating-shortcut-wrap" id="floatingShortcutWrap">
   { label: 'Am I Being...?\nAsk: Am I being ___?', desc: 'Check what is happening to you in the interaction before you respond.', tab: 'amibeing' },
   { label: 'Relationship Chessboard\nAsk: Who am I really playing?', desc: 'Scan the board to identify who or what is influencing the relationship dynamic, then choose the piece, objective, and next move.', tab: 'relationshipchess' },
   { label: 'Boundary or Clearing?\nAsk: What does this require?', desc: 'Decide whether the situation needs clearing, a boundary, they/you need time/distance, Divine Timing, Spirit Safety Block, an ending, or more information.', tab: 'boundaryclearing' },
@@ -2804,7 +2804,7 @@ function renderWoundClearingSection() {
         </div>
       `).join('')}
     </div>
-  </section>`;
+const clearingChartCards = originalDashboardCards.filter(card =>
 }
 
 function scrollToWoundCategory(category) {
