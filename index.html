@@ -2463,13 +2463,13 @@ html, body { max-width: 100%; overflow-x: hidden; }
 
 /* Compact floating shortcut stack */
 .floating-self-check-btn{
-  bottom:210px !important;
+  bottom:258px !important;
 }
 .floating-relationship-check-btn{
-  bottom:162px !important;
+  bottom:210px !important;
 }
 .floating-glossary-btn{
-  bottom:114px !important;
+  bottom:162px !important;
 }
 .floating-location-chart-btn{
   bottom:114px !important;
@@ -2482,22 +2482,22 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 @media (max-width: 700px){
   .floating-self-check-btn{
-    bottom:198px !important;
+    bottom:234px !important;
   }
   .floating-relationship-check-btn{
-    bottom:154px !important;
+    bottom:190px !important;
   }
   .floating-glossary-btn{
-    bottom:110px !important;
+    bottom:146px !important;
   }
   .floating-location-chart-btn{
-    bottom:110px !important;
+    bottom:102px !important;
   }
   .floating-clearing-charts-btn{
-    bottom:66px !important;
+    bottom:58px !important;
   }
   .floating-section-top-btn{
-    bottom:22px !important;
+    bottom:14px !important;
   }
 }
 
@@ -5504,7 +5504,7 @@ function updateFloatingTopButton() {
   const showCheckpointFloats = !isDashboard;
   const showClearingCharts = !isDashboard;
   const showLocation = !isDashboard;
-  const showGlossary = !isDashboard && sectionUsesGlossaryButton(sectionKey);
+  const showGlossary = !isDashboard;
 
   setFloatingButtonState(topBtn, showTop);
   setFloatingButtonState(selfCheckBtn, showCheckpointFloats);
