@@ -2565,6 +2565,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
           <option value="charta">Chart A</option>
           <option value="chartb">Chart B</option>
           <option value="stable">Am I Aligned? - Ask: Am I aligned?</option>
+          <option value="ami">Am I...? - Ask: Am I ___?</option>
           <option value="relationshipplay">Relationship Status Check</option>
           <option value="amibeing">Am I Being...?</option>
           <option value="relationshipchess">Relationship Chessboard</option>
@@ -2632,6 +2633,20 @@ const glossarySearchIndex = glossaryData.flatMap(section => section.entries.map(
 
 const precheckSectionConfigs = [
   { key: 'stable', title: 'Am I Aligned?\nAsk This: Am I aligned?', items: appData.preChecklist[0].items },
+  { key: 'ami', title: 'Am I...?\nAsk This: Am I ___?', items: [
+    'Stopping myself',
+    'Sabotaging this',
+    'Holding myself back',
+    'Causing the problem',
+    'Causing the delay',
+    'Causing the distance',
+    'Hurting myself',
+    'Hurting the relationship',
+    'Excited',
+    'Underwhelmed',
+    'Waiting for the other shoe to drop',
+    'Genuinely happy'
+  ] },
   { key: 'vitals', title: 'Body Signal Check\nAsk This: Is My ___ Right?', items: appData.preChecklist[1].items },
   { key: 'need', title: 'Needs Checkpoint\nAsk This: Do I Need ___?', items: appData.preChecklist[2].items },
   { key: 'mission', title: 'Mission Check - Ask This: Is this?', items: appData.missionCheck },
@@ -2699,6 +2714,7 @@ const originalDashboardCards = [
 
 const selfCheckCards = [
   { label: 'Am I Aligned?\nAsk: Am I aligned?', desc: 'Check alignment, source connection, mission, vibration, and direction before reading the situation.', tab: 'stable' },
+  { label: 'Am I...?\nAsk: Am I ___?', desc: 'Check what you may be doing, feeling, expecting, or creating in the situation.', tab: 'ami' },
   { label: 'Body Signal Check\nAsk This: Is My ___ Right?', desc: 'Check hormones, pressure, nervous system, brain, chakras, body systems, oxygen, repair, drainage, bones, joints, and nutrients.', tab: 'vitals' },
   { label: 'Needs Checkpoint\nAsk This: Do I Need ___?', desc: 'Check what may need to be added: love, compassion, trust, safety, rest, and more.', tab: 'need' }
 ];
@@ -4408,6 +4424,7 @@ function renderPrecheckSingleSection(group) {
   const getVitalsDefinition = (item) => vitalsDefinitions[item] || `Checks whether $${item} is balanced, functioning, and aligned with the body system.`;
 
   const isStableSection = group.key === 'stable';
+  const isAmISection = group.key === 'ami';
   const isMissionSection = group.key === 'mission';
   const isNeedSection = group.key === 'need';
   const isPersonSection = group.key === 'person';
@@ -4515,7 +4532,7 @@ function renderPrecheckSingleSection(group) {
         <div class="precheck-column">
           ${col.map(item=>`
             <div class="precheck-item" data-${group.key}-item="true" data-${group.key}-number="${item.number}" data-filter-group="${group.key}" data-filter-number="${item.number}" data-filter-search="${escapeHtml((String(item.number) + ' ' + item.text + ' ' + (item.explanation ? item.explanation.means + ' ' + item.explanation.important : '')).toLowerCase())}">
-              <strong>${(isStableSection || isMissionSection || isNeedSection || isPersonSection) ? `${item.number}. ` : ''}${escapeHtml(item.text)}</strong>
+              <strong>${(isStableSection || isAmISection || isMissionSection || isNeedSection || isPersonSection) ? `${item.number}. ` : ''}${escapeHtml(item.text)}</strong>
               ${item.explanation ? `
                 <div class="precheck-explanation">
                   <p><span>What it means:</span> ${escapeHtml(item.explanation.means)}</p>
@@ -5280,6 +5297,9 @@ function normalizeSearchSectionKey(item) {
     'am i stable': 'stable',
     'am i aligned?': 'stable',
     'am i aligned': 'stable',
+    'am i...?': 'ami',
+    'am i': 'ami',
+    'self action check': 'ami',
     'find the play of your relationship': 'relationshipplay',
     'relationship status check': 'relationshipplay',
     'am i being...?': 'amibeing',
