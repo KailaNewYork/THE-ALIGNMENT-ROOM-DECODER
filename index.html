@@ -2715,6 +2715,7 @@ const originalDashboardCards = [
 
 const selfCheckCards = [
   { label: 'Am I Aligned?\nAsk: Am I aligned?', desc: 'Check alignment, source connection, mission, vibration, and direction before reading the situation.', tab: 'stable' },
+  { label: 'Am I...?\nAsk: Am I ___?', desc: 'Check whether you are stopping yourself, sabotaging this, causing the problem or delay, hurting yourself or the relationship, and what you are genuinely feeling.', tab: 'ami' },
   { label: 'Body Signal Check\nAsk This: Is My ___ Right?', desc: 'Check hormones, pressure, nervous system, brain, chakras, body systems, oxygen, repair, drainage, bones, joints, and nutrients.', tab: 'vitals' },
   { label: 'Needs Checkpoint\nAsk This: Do I Need ___?', desc: 'Check what may need to be added: love, compassion, trust, safety, rest, and more.', tab: 'need' }
 ];
@@ -4544,25 +4545,6 @@ function renderPrecheckSingleSection(group) {
         </div>
       `).join('')}
     </div>
-    ${isStableSection ? `
-      <div class="relationship-play-panel" style="margin-top:18px;">
-        <div class="relationship-play-kicker">Am I?</div>
-        <h2 class="relationship-play-title">Ask: Am I…?</h2>
-        <p class="relationship-play-sub">Use each statement to complete the question “Am I…?”</p>
-        <div class="precheck-grid" style="margin-top:14px;">
-          <div class="precheck-column">
-            ${precheckSectionConfigs.find(section => section.key === 'ami').items.slice(0, 6).map((text, index) => `
-              <div class="precheck-item"><strong>${index + 1}. ${escapeHtml(text)}</strong></div>
-            `).join('')}
-          </div>
-          <div class="precheck-column">
-            ${precheckSectionConfigs.find(section => section.key === 'ami').items.slice(6).map((text, index) => `
-              <div class="precheck-item"><strong>${index + 7}. ${escapeHtml(text)}</strong></div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    ` : ''}
   </section>`;
 }
 
