@@ -2537,6 +2537,49 @@ html, body { max-width: 100%; overflow-x: hidden; }
   overflow:visible;
 }
 
+/* Tutorial course cards */
+.tutorial-course-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+.tutorial-course-card{
+  border:1px solid rgba(216,181,106,.24);
+  border-radius:20px;
+  padding:20px;
+  background:linear-gradient(145deg, rgba(216,181,106,.10), rgba(255,255,255,.035));
+  box-shadow:var(--shadow);
+}
+.tutorial-course-card h2{
+  margin:0 0 10px;
+  font-size:1.35rem;
+  line-height:1.15;
+}
+.tutorial-course-card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+.tutorial-course-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:16px;
+  padding:11px 16px;
+  border-radius:999px;
+  background:linear-gradient(180deg, #cda95c, #9b793b);
+  color:#0a0907;
+  text-decoration:none;
+  font-weight:800;
+}
+.tutorial-course-btn:hover{
+  filter:brightness(1.08);
+}
+@media (max-width:700px){
+  .tutorial-course-card{ padding:16px; }
+  .tutorial-course-btn{ width:100%; }
+}
+
 </style>
 </head>
 <body>
@@ -2710,7 +2753,7 @@ const originalDashboardCards = [
   { label: 'Location', desc: 'Jump to the location groups.', tab: 'locations' },
   { label: 'Age/Stage Location Chart', desc: 'Identify the exact age-version of self connected to what is being cleared or restored.', tab: 'ageself' },
   { label: 'Glossary', desc: 'Open the glossary home and jump by chart section.', tab: 'glossary' },
-  { label: 'Tutorials', desc: 'Coming soon: guides on how to use the app and muscle test.', tab: 'tutorials' }
+  { label: 'Tutorials', desc: 'Start with the Introduction to Muscle Testing course and build confidence before moving into clearing work.', tab: 'tutorials' }
 ];
 
 const selfCheckCards = [
@@ -4623,8 +4666,12 @@ function renderTutorialsSection() {
       <div class="pill">Tutorials</div>
       <button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button>
     </div>
-    <div class="empty-state">
-      Coming soon: guides on how to use the app and muscle test.
+    <div class="tutorial-course-grid">
+      <article class="tutorial-course-card">
+        <h2>Introduction to Muscle Testing</h2>
+        <p>New to muscle testing? Start here. Learn how to recognize your body’s yes and no responses, ask clearer questions, and build confidence before moving into deeper clearing work.</p>
+        <a class="tutorial-course-btn" href="https://www.youtube.com/playlist?list=PLMkVv6W706twFub8kzm-o4oX2o8gz_7wF" target="_blank" rel="noopener noreferrer">Start the Course</a>
+      </article>
     </div>
   </section>`;
 }
