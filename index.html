@@ -2580,6 +2580,166 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .tutorial-course-btn{ width:100%; }
 }
 
+
+/* Tutorial support, disclaimer, and contact cards */
+
+.app-footer-connect{
+  margin-top:16px;
+  border:1px solid rgba(216,181,106,.22);
+  border-radius:20px;
+  background:linear-gradient(145deg, rgba(216,181,106,.08), rgba(255,255,255,.025));
+  box-shadow:var(--shadow);
+  padding:18px;
+  text-align:center;
+}
+.app-footer-connect h2{
+  margin:0 0 8px;
+  font-size:1.25rem;
+}
+.app-footer-connect p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.45;
+}
+.app-footer-social-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-top:14px;
+}
+.app-footer-social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:130px;
+  border-radius:999px;
+  padding:10px 14px;
+  background:rgba(216,181,106,.10);
+  color:#f5dfaa;
+  border:1px solid rgba(216,181,106,.42);
+  font-weight:800;
+  text-decoration:none;
+}
+.app-footer-social-link:hover{
+  background:rgba(216,181,106,.18);
+}
+@media (max-width:700px){
+  .app-footer-social-links{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .app-footer-social-link{
+    width:100%;
+  }
+}
+
+.tutorial-info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+  margin-top:18px;
+}
+.tutorial-info-card{
+  border:1px solid rgba(216,181,106,.18);
+  border-radius:20px;
+  padding:20px;
+  background:rgba(255,255,255,.025);
+}
+.tutorial-info-card h2{
+  margin:0 0 10px;
+  font-size:1.2rem;
+  line-height:1.2;
+}
+.tutorial-info-card p{
+  margin:0 0 10px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.tutorial-info-card p:last-child{
+  margin-bottom:0;
+}
+.tutorial-contact-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.tutorial-contact-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(216,181,106,.42);
+  background:rgba(216,181,106,.10);
+  color:#f5dfaa;
+  text-decoration:none;
+  font-weight:800;
+}
+.tutorial-contact-link:hover{
+  background:rgba(216,181,106,.18);
+}
+@media (max-width:700px){
+  .tutorial-info-card{ padding:16px; }
+  .tutorial-contact-links{ display:grid; grid-template-columns:1fr; }
+  .tutorial-contact-link{ width:100%; }
+}
+
+/* App-wide disclaimer and support footer */
+.app-footer{
+  margin-top:28px;
+  padding-top:22px;
+  border-top:1px solid rgba(216,181,106,.22);
+}
+.app-footer-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.app-footer-card{
+  border:1px solid rgba(216,181,106,.22);
+  border-radius:18px;
+  background:rgba(17,18,22,.82);
+  box-shadow:var(--shadow);
+  padding:20px;
+}
+.app-footer-card h2{
+  margin:0 0 10px;
+  font-size:1.2rem;
+}
+.app-footer-card p{
+  margin:0 0 9px;
+  color:var(--muted);
+  line-height:1.48;
+}
+.app-footer-card p:last-child{ margin-bottom:0; }
+.app-footer-contact-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.app-footer-contact-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(216,181,106,.42);
+  background:rgba(216,181,106,.10);
+  color:#f5dfaa;
+  text-decoration:none;
+  font-weight:800;
+}
+.app-footer-contact-link:hover{ background:rgba(216,181,106,.18); }
+@media (max-width:700px){
+  .app-footer-grid{ grid-template-columns:1fr; }
+  .app-footer-card{ padding:16px; }
+  .app-footer-contact-links{ display:grid; grid-template-columns:1fr; }
+  .app-footer-contact-link{ width:100%; }
+}
+
 </style>
 </head>
 <body>
@@ -2631,6 +2791,37 @@ Ask This: Is this person ______?</option>
   </div>
   <div id="quickStartStatic"></div>
   <div id="content"></div>
+
+  <footer class="app-footer" aria-label="Disclaimer and support">
+    <div class="app-footer-grid">
+      <article class="app-footer-card">
+        <h2>Important Disclaimer</h2>
+        <p>The Alignment Room Decoder and its tutorials are provided for spiritual, educational, and personal-development purposes only.</p>
+        <p>This app and its teacher's instructions are not intended to diagnose, treat, cure, or prevent any medical or mental-health condition and do not replace medical, mental-health, legal, financial, or other professional care.</p>
+        <p>Please use your own discernment, seek qualified support when needed, and remember that you are responsible for how you interpret and use the information provided.</p>
+      </article>
+
+      <article class="app-footer-card">
+        <h2>Need Help?</h2>
+        <p>Begin with the Tutorials section. If you still need assistance with the Alignment Room Decoder, contact Kaila New York.</p>
+        <div class="app-footer-contact-links">
+          <a class="app-footer-contact-link" href="mailto:Hello@kailanewyork.com?subject=Alignment%20Room%20Decoder%20Support">Email: Hello@kailanewyork.com</a>
+        </div>
+      </article>
+    </div>
+
+    <section class="app-footer-connect" aria-label="Connect with Kaila New York">
+      <h2>Connect with Kaila New York</h2>
+      <p>Stay connected for classes, conversations, updates, and more from across the Kaila New York network.</p>
+      <div class="app-footer-social-links">
+        <a class="app-footer-social-link" href="https://www.youtube.com/@KailaNewYork30" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="app-footer-social-link" href="https://www.tiktok.com/@paradigmshiftspodcastnet" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a class="app-footer-social-link" href="https://www.instagram.com/kailanewyork/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="app-footer-social-link" href="https://open.spotify.com/show/2MulPhm8sZ7NduFpg0Cu6j?si=dd9adf36cae04028" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a class="app-footer-social-link" href="https://kailanewyork.com" target="_blank" rel="noopener noreferrer">Website</a>
+      </div>
+    </section>
+  </footer>
   <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
   <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
   <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
@@ -4678,6 +4869,7 @@ function renderTutorialsSection() {
         <a class="tutorial-course-btn" href="https://www.youtube.com/playlist?list=PLMkVv6W706tz8kkeDAFsP7HboY2Af7h9v" target="_blank" rel="noopener noreferrer">Open the Course</a>
       </article>
     </div>
+
   </section>`;
 }
 
