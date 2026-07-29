@@ -5898,14 +5898,18 @@ function updateFloatingTopButton() {
   const homeBtn = document.getElementById('homeFloatBtn');
   const sectionKey = getActiveSectionKey();
   const isDashboard = !sectionKey || sectionKey === 'dashboard';
-  const showTop = !isDashboard && window.scrollY > 250;
-  const showCheckpointFloats = !isDashboard;
-  const showClearingCharts = !isDashboard;
-  const showLocation = !isDashboard;
-  const showAgeStage = !isDashboard;
-  const showGlossary = !isDashboard;
-  const showRootBlocks = !isDashboard;
-  const showHome = !isDashboard;
+  const isDesktop = !window.matchMedia('(max-width: 700px)').matches;
+
+  // Keep the complete shortcut stack available on desktop, including Home.
+  // Preserve the existing mobile behavior: the drawer appears after leaving Home.
+  const showTop = isDesktop ? window.scrollY > 250 : (!isDashboard && window.scrollY > 250);
+  const showCheckpointFloats = isDesktop || !isDashboard;
+  const showClearingCharts = isDesktop || !isDashboard;
+  const showLocation = isDesktop || !isDashboard;
+  const showAgeStage = isDesktop || !isDashboard;
+  const showGlossary = isDesktop || !isDashboard;
+  const showRootBlocks = isDesktop || !isDashboard;
+  const showHome = isDesktop || !isDashboard;
 
   setFloatingButtonState(topBtn, showTop);
   setFloatingButtonState(selfCheckBtn, showCheckpointFloats);
