@@ -2675,6 +2675,121 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
 }
 
+
+
+/* Mobile Age/Stage chart: fit each stage fully inside the phone screen */
+@media (max-width: 700px){
+  .age-stage-chart{
+    width:100% !important;
+    min-width:0 !important;
+    overflow-x:hidden !important;
+  }
+  .age-stage-chart-title,
+  .age-stage-chart-subtitle,
+  .age-stage-command-label,
+  .age-stage-command-text{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-wrap:anywhere;
+  }
+  .age-stage-chart-question{
+    font-size:1rem !important;
+  }
+  .age-stage-chart-note{
+    font-size:.82rem !important;
+    line-height:1.3 !important;
+  }
+  .age-stage-command-text{
+    font-size:.82rem !important;
+    line-height:1.32 !important;
+    padding:10px 9px !important;
+  }
+  .age-self-head{
+    display:none !important;
+  }
+  .age-self-row:not(.age-self-head){
+    display:grid !important;
+    grid-template-columns:72px minmax(0,1fr) !important;
+    width:100% !important;
+    border-bottom:3px solid #000 !important;
+  }
+  .age-self-row:not(.age-self-head) .age-self-cell{
+    min-width:0 !important;
+    min-height:0 !important;
+    padding:9px 10px !important;
+    font-size:.82rem !important;
+    line-height:1.25 !important;
+    text-align:left !important;
+    justify-content:flex-start !important;
+    align-items:flex-start !important;
+    border-right:none !important;
+    border-bottom:1px solid rgba(0,0,0,.28) !important;
+    overflow-wrap:anywhere !important;
+  }
+  .age-self-row:not(.age-self-head) .age-self-cell::before{
+    display:block;
+    flex:0 0 auto;
+    margin-right:6px;
+    font-weight:700;
+    color:#000;
+  }
+  .age-self-row:not(.age-self-head) .age-self-stage{
+    grid-column:1;
+    grid-row:1 / span 2;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    font-size:1rem !important;
+    border-right:1px solid rgba(0,0,0,.35) !important;
+    border-bottom:none !important;
+  }
+  .age-self-row:not(.age-self-head) .age-self-stage::before{
+    content:'Stage';
+    display:block;
+    margin:0 0 4px;
+    font-size:.65rem;
+    line-height:1;
+  }
+  .age-self-row:not(.age-self-head) .age-self-range{
+    grid-column:2;
+    grid-row:1;
+    font-weight:700;
+  }
+  .age-self-row:not(.age-self-head) .age-self-range::before{
+    content:'Age Range:';
+  }
+  .age-self-row:not(.age-self-head) .age-self-name{
+    grid-column:2;
+    grid-row:2;
+    font-weight:700;
+  }
+  .age-self-row:not(.age-self-head) .age-self-name::before{
+    content:'Life Stage:';
+  }
+  .age-self-row:not(.age-self-head) .age-self-cell:last-child{
+    grid-column:1 / -1;
+    grid-row:3;
+    display:block !important;
+    border-bottom:none !important;
+    background:rgba(255,255,255,.22);
+  }
+  .age-self-row:not(.age-self-head) .age-self-cell:last-child::before{
+    content:'What This Stage May Hold';
+    display:block;
+    margin:0 0 5px;
+    font-size:.74rem;
+  }
+}
+@media (max-width: 380px){
+  .age-self-row:not(.age-self-head){
+    grid-template-columns:62px minmax(0,1fr) !important;
+  }
+  .age-self-row:not(.age-self-head) .age-self-cell{
+    font-size:.76rem !important;
+    padding:8px !important;
+  }
+}
+
 </style>
 </head>
 <body>
