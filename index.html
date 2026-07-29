@@ -2580,6 +2580,101 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .tutorial-course-btn{ width:100%; }
 }
 
+
+
+/* Mobile floating tools drawer */
+.floating-tools-toggle{
+  display:none;
+}
+.floating-tools-panel{
+  display:contents;
+}
+@media (max-width:700px){
+  .floating-tools-drawer{
+    position:fixed;
+    right:0;
+    bottom:14px;
+    z-index:60;
+    width:0;
+    height:0;
+    pointer-events:none;
+  }
+  .floating-tools-toggle{
+    pointer-events:auto;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    min-width:48px;
+    min-height:48px;
+    padding:10px 8px;
+    border-radius:16px 0 0 16px;
+    border:1px solid rgba(216,181,106,.55);
+    border-right:none;
+    background:linear-gradient(180deg,#cda95c,#9b793b);
+    color:#0a0907;
+    font-weight:900;
+    font-size:.78rem;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    position:absolute;
+    right:0;
+    bottom:0;
+    transition:right .22s ease;
+  }
+  .floating-tools-panel{
+    pointer-events:auto;
+    position:absolute;
+    right:0;
+    bottom:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    width:min(230px,72vw);
+    max-height:70vh;
+    overflow-y:auto;
+    padding:12px;
+    border:1px solid rgba(216,181,106,.45);
+    border-right:none;
+    border-radius:18px 0 0 18px;
+    background:rgba(7,7,9,.97);
+    box-shadow:var(--shadow);
+    transform:translateX(100%);
+    opacity:0;
+    visibility:hidden;
+    transition:transform .22s ease,opacity .18s ease,visibility .18s ease;
+  }
+  .floating-tools-drawer.is-open .floating-tools-panel{
+    transform:translateX(0);
+    opacity:1;
+    visibility:visible;
+  }
+  .floating-tools-drawer.is-open .floating-tools-toggle{
+    right:min(230px,72vw);
+    border-radius:16px 0 0 16px;
+  }
+  .floating-tools-panel .checkpoint-float-btn,
+  .floating-tools-panel .floating-clearing-charts-btn,
+  .floating-tools-panel .floating-glossary-btn,
+  .floating-tools-panel .floating-location-chart-btn,
+  .floating-tools-panel .floating-section-top-btn{
+    position:static !important;
+    right:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    min-height:44px;
+    margin:0 !important;
+    padding:10px 12px !important;
+    border-radius:12px !important;
+    font-size:.88rem !important;
+    text-align:center;
+    justify-content:center;
+    box-shadow:none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2631,12 +2726,17 @@ Ask This: Is this person ______?</option>
   </div>
   <div id="quickStartStatic"></div>
   <div id="content"></div>
-  <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
-  <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
-  <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
-  <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary</button>
-  <button class="floating-location-chart-btn" id="locationFloatBtn">Location Chart</button>
-  <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
+  <div class="floating-tools-drawer" id="floatingToolsDrawer">
+    <button class="floating-tools-toggle" id="floatingToolsToggle" type="button" aria-expanded="false" aria-controls="floatingToolsPanel">Tools</button>
+    <div class="floating-tools-panel" id="floatingToolsPanel">
+      <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
+      <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
+      <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Chart</button>
+      <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary</button>
+      <button class="floating-location-chart-btn" id="locationFloatBtn">Location Chart</button>
+      <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
+    </div>
+  </div>
 </div>
 
 <!-- AM-I-NESTED-FIX-2026-07-19 -->
@@ -5556,6 +5656,12 @@ function jumpToDashboardSubsection(sectionId) {
 
 
 function stackFloatingButtons(buttons) {
+  if (window.matchMedia('(max-width: 700px)').matches) {
+    buttons.forEach(btn => {
+      if (btn) btn.style.removeProperty('bottom');
+    });
+    return;
+  }
   let bottom = 18;
   buttons.forEach(btn => {
     if (!btn || btn.style.display === 'none' || btn.style.visibility === 'hidden') return;
@@ -5585,6 +5691,16 @@ function updateFloatingTopButton() {
   setFloatingButtonState(clearingChartsBtn, showClearingCharts);
   setFloatingButtonState(locationBtn, showLocation);
   setFloatingButtonState(glossaryBtn, showGlossary);
+
+  const toolsToggle = document.getElementById('floatingToolsToggle');
+  const toolsDrawer = document.getElementById('floatingToolsDrawer');
+  const anyToolVisible = [topBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, locationBtn, glossaryBtn]
+    .some(btn => btn && btn.style.display !== 'none' && btn.style.visibility !== 'hidden');
+  if (toolsToggle) toolsToggle.style.display = window.matchMedia('(max-width: 700px)').matches && anyToolVisible ? 'inline-flex' : 'none';
+  if (!anyToolVisible && toolsDrawer) {
+    toolsDrawer.classList.remove('is-open');
+    if (toolsToggle) toolsToggle.setAttribute('aria-expanded', 'false');
+  }
 
   stackFloatingButtons([
     topBtn,
@@ -5620,6 +5736,28 @@ function init() {
   document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => jumpToDashboardGroup('alignment-clearing-charts'));
   document.getElementById('locationFloatBtn').addEventListener('click', openLocationFromCurrent);
   document.getElementById('glossaryFloatBtn').addEventListener('click', openGlossaryFromCurrent);
+  const toolsDrawer = document.getElementById('floatingToolsDrawer');
+  const toolsToggle = document.getElementById('floatingToolsToggle');
+  const closeToolsDrawer = () => {
+    if (!toolsDrawer || !toolsToggle) return;
+    toolsDrawer.classList.remove('is-open');
+    toolsToggle.setAttribute('aria-expanded', 'false');
+  };
+  toolsToggle.addEventListener('click', () => {
+    const willOpen = !toolsDrawer.classList.contains('is-open');
+    toolsDrawer.classList.toggle('is-open', willOpen);
+    toolsToggle.setAttribute('aria-expanded', String(willOpen));
+  });
+  document.getElementById('floatingToolsPanel').addEventListener('click', event => {
+    if (event.target.closest('button')) closeToolsDrawer();
+  });
+  document.addEventListener('click', event => {
+    if (toolsDrawer.classList.contains('is-open') && !toolsDrawer.contains(event.target)) closeToolsDrawer();
+  });
+  window.addEventListener('resize', () => {
+    closeToolsDrawer();
+    updateFloatingTopButton();
+  });
   window.addEventListener('scroll', updateFloatingTopButton);
   goToSection('dashboard');
   updateFloatingTopButton();
