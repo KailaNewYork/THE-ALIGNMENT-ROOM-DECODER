@@ -2888,6 +2888,23 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .floating-clearing-charts-btn{ bottom:402px !important; }
 }
 
+/* Permanent Toolbox visibility */
+@media (min-width:701px){
+  .floating-tools-panel .checkpoint-float-btn,
+  .floating-tools-panel .floating-clearing-charts-btn,
+  .floating-tools-panel .floating-glossary-btn,
+  .floating-tools-panel .floating-location-chart-btn,
+  .floating-tools-panel .floating-age-stage-btn,
+  .floating-tools-panel .floating-root-blocks-btn,
+  .floating-tools-panel .floating-section-top-btn,
+  .floating-tools-panel .floating-home-btn{
+    display:block;
+  }
+}
+@media (max-width:700px){
+  .floating-tools-toggle{ display:inline-flex; }
+}
+
 </style>
 </head>
 <body>
@@ -2940,7 +2957,7 @@ Ask This: Is this person ______?</option>
   <div id="quickStartStatic"></div>
   <div id="content"></div>
   <div class="floating-tools-drawer" id="floatingToolsDrawer">
-    <button class="floating-tools-toggle" id="floatingToolsToggle" type="button" aria-expanded="false" aria-controls="floatingToolsPanel">Tools</button>
+    <button class="floating-tools-toggle" id="floatingToolsToggle" type="button" aria-expanded="false" aria-controls="floatingToolsPanel" aria-label="Open Toolbox">Toolbox</button>
     <div class="floating-tools-panel" id="floatingToolsPanel">
       <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Charts</button>
       <button class="floating-location-chart-btn" id="locationFloatBtn">Clearing Location</button>
@@ -5896,20 +5913,16 @@ function updateFloatingTopButton() {
   const glossaryBtn = document.getElementById('glossaryFloatBtn');
   const rootBlocksBtn = document.getElementById('rootBlocksFloatBtn');
   const homeBtn = document.getElementById('homeFloatBtn');
-  const sectionKey = getActiveSectionKey();
-  const isDashboard = !sectionKey || sectionKey === 'dashboard';
-  const isDesktop = !window.matchMedia('(max-width: 700px)').matches;
-
-  // Keep the complete shortcut stack available on desktop, including Home.
-  // Preserve the existing mobile behavior: the drawer appears after leaving Home.
-  const showTop = isDesktop ? window.scrollY > 250 : (!isDashboard && window.scrollY > 250);
-  const showCheckpointFloats = isDesktop || !isDashboard;
-  const showClearingCharts = isDesktop || !isDashboard;
-  const showLocation = isDesktop || !isDashboard;
-  const showAgeStage = isDesktop || !isDashboard;
-  const showGlossary = isDesktop || !isDashboard;
-  const showRootBlocks = isDesktop || !isDashboard;
-  const showHome = isDesktop || !isDashboard;
+  // The Toolbox is permanent: every shortcut is available immediately
+  // on desktop and inside the mobile Toolbox from the moment the app opens.
+  const showTop = true;
+  const showCheckpointFloats = true;
+  const showClearingCharts = true;
+  const showLocation = true;
+  const showAgeStage = true;
+  const showGlossary = true;
+  const showRootBlocks = true;
+  const showHome = true;
 
   setFloatingButtonState(topBtn, showTop);
   setFloatingButtonState(selfCheckBtn, showCheckpointFloats);
@@ -5925,7 +5938,7 @@ function updateFloatingTopButton() {
   const toolsDrawer = document.getElementById('floatingToolsDrawer');
   const anyToolVisible = [topBtn, homeBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, locationBtn, glossaryBtn, rootBlocksBtn, ageStageBtn]
     .some(btn => btn && btn.style.display !== 'none' && btn.style.visibility !== 'hidden');
-  if (toolsToggle) toolsToggle.style.display = window.matchMedia('(max-width: 700px)').matches && anyToolVisible ? 'inline-flex' : 'none';
+  if (toolsToggle) toolsToggle.style.display = window.matchMedia('(max-width: 700px)').matches ? 'inline-flex' : 'none';
   if (!anyToolVisible && toolsDrawer) {
     toolsDrawer.classList.remove('is-open');
     if (toolsToggle) toolsToggle.setAttribute('aria-expanded', 'false');
