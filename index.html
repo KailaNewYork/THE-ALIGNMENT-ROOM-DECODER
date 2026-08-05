@@ -2992,6 +2992,25 @@ html, body { max-width: 100%; overflow-x: hidden; }
   flex-wrap:wrap;
   margin:0 0 14px;
 }
+.clearing-charts-header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:22px;
+}
+.clearing-charts-header-row .dashboard-section-pill{
+  margin-top:0;
+}
+.clearing-charts-return-slot{
+  margin-left:auto;
+  display:flex;
+  justify-content:flex-end;
+}
+.clearing-charts-return-slot .ghost-btn{
+  cursor:pointer;
+  white-space:nowrap;
+}
 .toolbox-return-bar .ghost-btn{
   cursor:pointer;
 }
@@ -3002,6 +3021,21 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
   .toolbox-return-bar .ghost-btn{
     width:100%;
+  }
+  .clearing-charts-header-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .clearing-charts-header-row .dashboard-section-pill{
+    min-width:0;
+    font-size:.82rem;
+  }
+  .clearing-charts-return-slot .ghost-btn{
+    width:auto;
+    padding:9px 11px;
+    font-size:.78rem;
   }
 }
 
@@ -3379,7 +3413,10 @@ function renderQuickStart() {
         </div>
       </div>
 
-      <div class="pill dashboard-section-pill" id="alignment-clearing-charts">Alignment Clearing Charts</div>
+      <div class="clearing-charts-header-row">
+        <div class="pill dashboard-section-pill" id="alignment-clearing-charts">Alignment Clearing Charts</div>
+        <div class="clearing-charts-return-slot" id="clearing-charts-return-slot"></div>
+      </div>
       <div class="main-section-grid">
         ${clearingChartCards.map(renderCard).join('')}
       </div>
@@ -3679,7 +3716,16 @@ function openToolboxDashboardTarget(targetId, isGroup) {
   setTimeout(() => {
     const target = document.getElementById(targetId) || document.querySelector(`[data-dashboard-group="${targetId}"]`);
     if (target) {
-      addToolboxReturnHeader(target);
+      if (targetId === 'alignment-clearing-charts') {
+        document.querySelectorAll('#dashboard-section > .toolbox-return-bar').forEach(el => el.remove());
+        const slot = document.getElementById('clearing-charts-return-slot');
+        if (slot) {
+          const safeLabel = String(toolboxReturnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+          slot.innerHTML = `<button class="ghost-btn" type="button" onclick="returnFromToolboxDestination()">Back to ${safeLabel}</button>`;
+        }
+      } else {
+        addToolboxReturnHeader(target);
+      }
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, 120);
