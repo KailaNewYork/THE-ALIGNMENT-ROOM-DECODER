@@ -5220,6 +5220,7 @@ function renderSuppressionSection() {
         {label:'Soul Blood Bindings (2)',items:['Blood Binding Soul Curse','Blood Soul Binding Curse','Binding Blood Soul Curse','Binding Soul Blood Curse','Soul Blood Binding Curse','Soul Binding Blood Curse']},
         {label:'Body Blood Bindings (3)',items:['Blood Binding Body Curse','Blood Body Binding Curse','Binding Blood Body Curse','Binding Body Blood Curse','Body Blood Binding Curse','Body Binding Blood Curse']}
       ],
+      finalLabel:'Blood Binding Curses (5)', finalItems:['Blood Binding Curse'],
       rightBlocks:[
         {label:'',items:['Blood Legacy Binding Curse','Blood Binding Legacy Curse','Blood Legacy Binding Soul Curse','Blood Legacy Soul Binding Curse','Blood Binding Legacy Soul Curse','Blood Binding Soul Legacy Curse','Blood Soul Binding Legacy Curse','Blood Soul Legacy Binding Curse','Blood Legacy Binding Body Curse','Blood Legacy Body Binding Curse','Blood Binding Legacy Body Curse','Blood Binding Body Legacy Curse','Blood Body Binding Legacy Curse','Blood Body Legacy Binding Curse']},
         {label:'',items:['Legacy Blood Binding Curse','Legacy Binding Blood Curse','Legacy Blood Binding Soul Curse','Legacy Blood Soul Binding Curse','Legacy Binding Blood Soul Curse','Legacy Binding Soul Blood Curse','Legacy Soul Binding Blood Curse','Legacy Soul Blood Binding Curse','Legacy Blood Binding Body Curse','Legacy Blood Body Binding Curse','Legacy Binding Blood Body Curse','Legacy Binding Body Blood Curse','Legacy Body Binding Blood Curse','Legacy Body Blood Binding Curse']},
@@ -5234,7 +5235,8 @@ function renderSuppressionSection() {
         {label:'',items:['Soul Blood Curse','Blood Soul Curse','Body Blood Curse','Blood Body Curse']},
         {label:'Legacy',items:['Blood Legacy Curse','Blood Legacy Soul Curse','Blood Soul Legacy Curse','Blood Legacy Body Curse','Blood Body Legacy Curse']},
         {label:'',items:['Soul Blood Legacy Curse','Soul Legacy Blood Curse','Body Blood Legacy Curse','Body Legacy Blood Curse']},
-        {label:'',items:['Legacy Blood Curse','Legacy Blood Soul Curse','Legacy Soul Blood Curse','Legacy Blood Body Curse','Legacy Body Blood Curse']}
+        {label:'',items:['Legacy Blood Curse','Legacy Blood Soul Curse','Legacy Soul Blood Curse','Legacy Blood Body Curse','Legacy Body Blood Curse']},
+        {label:'Blood Curses (5)',items:['Blood Curse']}
       ]
     },
     {
@@ -5246,6 +5248,7 @@ function renderSuppressionSection() {
         {label:'Soul Bindings (2)',items:['Soul Binding Curse','Binding Soul Curse']},
         {label:'Body Bindings (3)',items:['Body Binding Curse','Binding Body Curse']}
       ],
+      finalLabel:'Binding Curses (5)', finalItems:['Binding Curse'],
       rightBlocks:[
         {label:'',items:['Legacy Binding Curse','Legacy Binding Soul Curse','Legacy Soul Binding Curse','Legacy Binding Body Curse','Legacy Body Binding Curse']},
         {label:'',items:['Binding Legacy Curse','Binding Legacy Soul Curse','Binding Soul Legacy Curse','Binding Legacy Body Curse','Binding Body Legacy Curse']}
@@ -5253,7 +5256,8 @@ function renderSuppressionSection() {
     },
     {
       title:'Curses Clear 4th', subtitle:'In This Order', single:[
-        {label:'',items:['Lineage Curse','Lineage Soul Curse','Soul Lineage Curse','Lineage Body Curse','Body Lineage Curse','Soul Curse','Body Curse','Legacy Curse','Legacy Soul Curse','Soul Legacy Curse','Legacy Body Curse','Body Legacy Curse']}
+        {label:'',items:['Lineage Curse','Lineage Soul Curse','Soul Lineage Curse','Lineage Body Curse','Body Lineage Curse','Soul Curse','Body Curse','Legacy Curse','Legacy Soul Curse','Soul Legacy Curse','Legacy Body Curse','Body Legacy Curse']},
+        {label:'Curses (5)',items:['Curse']}
       ]
     }
   ];
@@ -5288,7 +5292,7 @@ function renderSuppressionSection() {
       ${charts.map((chart, idx)=>`<div class="table-card" data-supp-chart="${idx+1}">
         <div class="table-title">${escapeHtml(chart.title)}</div>
         ${chart.subtitle ? `<div class="table-subtitle">${escapeHtml(chart.subtitle)}</div>` : ''}
-        ${chart.single ? chart.single.map(renderSingleBlock).join('') : `<div class="table-grid">${renderDualCol(chart.leftHeader, chart.leftBlocks)}${renderDualCol(chart.rightHeader, chart.rightBlocks)}</div>`}
+        ${chart.single ? chart.single.map(renderSingleBlock).join('') : `<div class="table-grid">${renderDualCol(chart.leftHeader, chart.leftBlocks)}${renderDualCol(chart.rightHeader, chart.rightBlocks)}</div>${chart.finalItems ? `<div class="table-block-head">${escapeHtml(chart.finalLabel || 'Curses (5)')}</div>${renderRows(chart.finalItems)}` : ''}`}
       </div>`).join('')}
     </div>
   </section>`;
