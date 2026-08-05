@@ -2966,20 +2966,21 @@ html, body { max-width: 100%; overflow-x: hidden; }
 /* Expanded desktop Toolbox stack: keep every shortcut on its own row */
 @media (min-width: 701px){
   #backFloatBtn{ bottom:18px !important; }
-  #homeFloatBtn{ bottom:66px !important; }
-  #topBtn{ bottom:114px !important; }
-  #relationshipCheckFloatBtn{ bottom:162px !important; }
-  #selfCheckFloatBtn{ bottom:210px !important; }
-  #ageStageFloatBtn{ bottom:258px !important; }
-  #rootBlocksFloatBtn{ bottom:450px !important; }
-  #glossaryFloatBtn{ bottom:306px !important; }
-  #locationFloatBtn{ bottom:354px !important; }
-  #systemBlocksFloatBtn{ bottom:402px !important; }
-  #universalChartBFloatBtn{ bottom:498px !important; }
-  #universalChartAFloatBtn{ bottom:546px !important; }
-  #coreBlocksFloatBtn{ bottom:594px !important; }
-  #powerBlocksFloatBtn{ bottom:642px !important; }
-  #clearingChartsFloatBtn{ bottom:690px !important; }
+  #forwardFloatBtn{ bottom:66px !important; }
+  #homeFloatBtn{ bottom:114px !important; }
+  #topBtn{ bottom:162px !important; }
+  #relationshipCheckFloatBtn{ bottom:210px !important; }
+  #selfCheckFloatBtn{ bottom:258px !important; }
+  #ageStageFloatBtn{ bottom:306px !important; }
+  #glossaryFloatBtn{ bottom:354px !important; }
+  #locationFloatBtn{ bottom:402px !important; }
+  #rootBlocksFloatBtn{ bottom:498px !important; }
+  #systemBlocksFloatBtn{ bottom:450px !important; }
+  #universalChartBFloatBtn{ bottom:546px !important; }
+  #universalChartAFloatBtn{ bottom:594px !important; }
+  #coreBlocksFloatBtn{ bottom:642px !important; }
+  #powerBlocksFloatBtn{ bottom:690px !important; }
+  #clearingChartsFloatBtn{ bottom:738px !important; }
 }
 </style>
 </head>
@@ -3049,6 +3050,7 @@ Ask This: Is this person ______?</option>
       <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
       <button class="floating-section-top-btn" id="topBtn">Back to Top</button>
       <button class="floating-home-btn" id="homeFloatBtn">Back Home</button>
+      <button class="floating-home-btn" id="forwardFloatBtn">Forward</button>
       <button class="floating-home-btn" id="backFloatBtn">Back</button>
     </div>
   </div>
@@ -3591,12 +3593,18 @@ function updateBackToLastSectionButton() {
 }
 
 const toolboxNavigationHistory = [];
+const toolboxForwardHistory = [];
 let toolboxBackInProgress = false;
 
-function rememberToolboxLocation() {
+function getCurrentToolboxLocation() {
   const sectionKey = getActiveSectionKey();
-  if (!sectionKey) return;
-  const state = { sectionKey, scrollY: window.scrollY };
+  if (!sectionKey) return null;
+  return { sectionKey, scrollY: window.scrollY };
+}
+
+function rememberToolboxLocation() {
+  const state = getCurrentToolboxLocation();
+  if (!state) return;
   const last = toolboxNavigationHistory[toolboxNavigationHistory.length - 1];
   if (!last || last.sectionKey !== state.sectionKey || Math.abs(last.scrollY - state.scrollY) > 8) {
     toolboxNavigationHistory.push(state);
@@ -3607,6 +3615,27 @@ function rememberToolboxLocation() {
 function goBackInToolbox() {
   const state = toolboxNavigationHistory.pop();
   if (!state) return;
+  const current = getCurrentToolboxLocation();
+  if (current) {
+    toolboxForwardHistory.push(current);
+    if (toolboxForwardHistory.length > 60) toolboxForwardHistory.shift();
+  }
+  toolboxBackInProgress = true;
+  goToSection(state.sectionKey);
+  setTimeout(() => {
+    window.scrollTo({ top: state.scrollY, behavior: 'smooth' });
+    toolboxBackInProgress = false;
+  }, 160);
+}
+
+function goForwardInToolbox() {
+  const state = toolboxForwardHistory.pop();
+  if (!state) return;
+  const current = getCurrentToolboxLocation();
+  if (current) {
+    toolboxNavigationHistory.push(current);
+    if (toolboxNavigationHistory.length > 60) toolboxNavigationHistory.shift();
+  }
   toolboxBackInProgress = true;
   goToSection(state.sectionKey);
   setTimeout(() => {
@@ -3616,7 +3645,10 @@ function goBackInToolbox() {
 }
 
 function goToSection(key) {
-  if (!toolboxBackInProgress) rememberToolboxLocation();
+  if (!toolboxBackInProgress) {
+    rememberToolboxLocation();
+    toolboxForwardHistory.length = 0;
+  }
   window.currentSectionKey = key;
   document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
   const target = document.querySelector(`.section[data-section="${key}"]`);
@@ -6034,6 +6066,7 @@ function updateFloatingTopButton() {
   const glossaryBtn = document.getElementById('glossaryFloatBtn');
   const rootBlocksBtn = document.getElementById('rootBlocksFloatBtn');
   const homeBtn = document.getElementById('homeFloatBtn');
+  const forwardBtn = document.getElementById('forwardFloatBtn');
   const backBtn = document.getElementById('backFloatBtn');
   // The Toolbox is permanent: every shortcut is available immediately
   // on desktop and inside the mobile Toolbox from the moment the app opens.
@@ -6060,11 +6093,12 @@ function updateFloatingTopButton() {
   setFloatingButtonState(glossaryBtn, showGlossary);
   setFloatingButtonState(rootBlocksBtn, showRootBlocks);
   setFloatingButtonState(homeBtn, showHome);
+  setFloatingButtonState(forwardBtn, showHome);
   setFloatingButtonState(backBtn, showHome);
 
   const toolsToggle = document.getElementById('floatingToolsToggle');
   const toolsDrawer = document.getElementById('floatingToolsDrawer');
-  const anyToolVisible = [topBtn, homeBtn, backBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, powerBlocksBtn, coreBlocksBtn, universalChartABtn, universalChartBBtn, systemBlocksBtn, locationBtn, glossaryBtn, rootBlocksBtn, ageStageBtn]
+  const anyToolVisible = [topBtn, homeBtn, forwardBtn, backBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, powerBlocksBtn, coreBlocksBtn, universalChartABtn, universalChartBBtn, systemBlocksBtn, locationBtn, glossaryBtn, rootBlocksBtn, ageStageBtn]
     .some(btn => btn && btn.style.display !== 'none' && btn.style.visibility !== 'hidden');
   if (toolsToggle) toolsToggle.style.display = window.matchMedia('(max-width: 700px)').matches ? 'inline-flex' : 'none';
   if (!anyToolVisible && toolsDrawer) {
@@ -6074,6 +6108,7 @@ function updateFloatingTopButton() {
 
   stackFloatingButtons([
     backBtn,
+    forwardBtn,
     homeBtn,
     topBtn,
     relationshipCheckBtn,
@@ -6114,6 +6149,7 @@ function init() {
     goToSection('dashboard');
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 140);
   });
+  document.getElementById('forwardFloatBtn').addEventListener('click', goForwardInToolbox);
   document.getElementById('backFloatBtn').addEventListener('click', goBackInToolbox);
   document.getElementById('selfCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('self-check-section'));
   document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('relationship-checkpoint-section'));
