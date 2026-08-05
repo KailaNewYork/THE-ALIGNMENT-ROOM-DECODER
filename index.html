@@ -2962,6 +2962,24 @@ html, body { max-width: 100%; overflow-x: hidden; }
     font-size:1.25rem;
   }
 }
+
+/* Expanded desktop Toolbox stack: keep every shortcut on its own row */
+@media (min-width: 701px){
+  #homeFloatBtn{ bottom:18px !important; }
+  #topBtn{ bottom:66px !important; }
+  #relationshipCheckFloatBtn{ bottom:114px !important; }
+  #selfCheckFloatBtn{ bottom:162px !important; }
+  #ageStageFloatBtn{ bottom:210px !important; }
+  #rootBlocksFloatBtn{ bottom:402px !important; }
+  #glossaryFloatBtn{ bottom:258px !important; }
+  #locationFloatBtn{ bottom:306px !important; }
+  #systemBlocksFloatBtn{ bottom:354px !important; }
+  #universalChartBFloatBtn{ bottom:450px !important; }
+  #universalChartAFloatBtn{ bottom:498px !important; }
+  #coreBlocksFloatBtn{ bottom:546px !important; }
+  #powerBlocksFloatBtn{ bottom:594px !important; }
+  #clearingChartsFloatBtn{ bottom:642px !important; }
+}
 </style>
 </head>
 <body>
@@ -3017,9 +3035,14 @@ Ask This: Is this person ______?</option>
     <button class="floating-tools-toggle" id="floatingToolsToggle" type="button" aria-expanded="false" aria-controls="floatingToolsPanel" aria-label="Open Toolbox">Toolbox</button>
     <div class="floating-tools-panel" id="floatingToolsPanel">
       <button class="floating-clearing-charts-btn" id="clearingChartsFloatBtn">Clearing Charts</button>
+      <button class="floating-clearing-charts-btn" id="powerBlocksFloatBtn">Power Blocks</button>
+      <button class="floating-clearing-charts-btn" id="coreBlocksFloatBtn">Core Blocks</button>
+      <button class="floating-clearing-charts-btn" id="universalChartAFloatBtn">Universal Chart A</button>
+      <button class="floating-clearing-charts-btn" id="universalChartBFloatBtn">Universal Chart B</button>
+      <button class="floating-root-blocks-btn" id="rootBlocksFloatBtn">Root Blocks</button>
+      <button class="floating-clearing-charts-btn" id="systemBlocksFloatBtn">System Blocks</button>
       <button class="floating-location-chart-btn" id="locationFloatBtn">Clearing Location</button>
       <button class="floating-glossary-btn" id="glossaryFloatBtn">Glossary / Definitions</button>
-      <button class="floating-root-blocks-btn" id="rootBlocksFloatBtn">Root Blocks</button>
       <button class="floating-age-stage-btn" id="ageStageFloatBtn">Age &amp; Stage Chart</button>
       <button class="floating-self-check-btn checkpoint-float-btn" id="selfCheckFloatBtn">Self Check</button>
       <button class="floating-relationship-check-btn checkpoint-float-btn" id="relationshipCheckFloatBtn">Relationship Check</button>
@@ -5965,6 +5988,11 @@ function updateFloatingTopButton() {
   const selfCheckBtn = document.getElementById('selfCheckFloatBtn');
   const relationshipCheckBtn = document.getElementById('relationshipCheckFloatBtn');
   const clearingChartsBtn = document.getElementById('clearingChartsFloatBtn');
+  const powerBlocksBtn = document.getElementById('powerBlocksFloatBtn');
+  const coreBlocksBtn = document.getElementById('coreBlocksFloatBtn');
+  const universalChartABtn = document.getElementById('universalChartAFloatBtn');
+  const universalChartBBtn = document.getElementById('universalChartBFloatBtn');
+  const systemBlocksBtn = document.getElementById('systemBlocksFloatBtn');
   const locationBtn = document.getElementById('locationFloatBtn');
   const ageStageBtn = document.getElementById('ageStageFloatBtn');
   const glossaryBtn = document.getElementById('glossaryFloatBtn');
@@ -5985,6 +6013,11 @@ function updateFloatingTopButton() {
   setFloatingButtonState(selfCheckBtn, showCheckpointFloats);
   setFloatingButtonState(relationshipCheckBtn, showCheckpointFloats);
   setFloatingButtonState(clearingChartsBtn, showClearingCharts);
+  setFloatingButtonState(powerBlocksBtn, showClearingCharts);
+  setFloatingButtonState(coreBlocksBtn, showClearingCharts);
+  setFloatingButtonState(universalChartABtn, showClearingCharts);
+  setFloatingButtonState(universalChartBBtn, showClearingCharts);
+  setFloatingButtonState(systemBlocksBtn, showClearingCharts);
   setFloatingButtonState(locationBtn, showLocation);
   setFloatingButtonState(ageStageBtn, showAgeStage);
   setFloatingButtonState(glossaryBtn, showGlossary);
@@ -5993,7 +6026,7 @@ function updateFloatingTopButton() {
 
   const toolsToggle = document.getElementById('floatingToolsToggle');
   const toolsDrawer = document.getElementById('floatingToolsDrawer');
-  const anyToolVisible = [topBtn, homeBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, locationBtn, glossaryBtn, rootBlocksBtn, ageStageBtn]
+  const anyToolVisible = [topBtn, homeBtn, selfCheckBtn, relationshipCheckBtn, clearingChartsBtn, powerBlocksBtn, coreBlocksBtn, universalChartABtn, universalChartBBtn, systemBlocksBtn, locationBtn, glossaryBtn, rootBlocksBtn, ageStageBtn]
     .some(btn => btn && btn.style.display !== 'none' && btn.style.visibility !== 'hidden');
   if (toolsToggle) toolsToggle.style.display = window.matchMedia('(max-width: 700px)').matches ? 'inline-flex' : 'none';
   if (!anyToolVisible && toolsDrawer) {
@@ -6010,6 +6043,11 @@ function updateFloatingTopButton() {
     rootBlocksBtn,
     glossaryBtn,
     locationBtn,
+    systemBlocksBtn,
+    universalChartBBtn,
+    universalChartABtn,
+    coreBlocksBtn,
+    powerBlocksBtn,
     clearingChartsBtn
   ]);
 }
@@ -6040,6 +6078,11 @@ function init() {
   document.getElementById('selfCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('self-check-section'));
   document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('relationship-checkpoint-section'));
   document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => jumpToDashboardGroup('alignment-clearing-charts'));
+  document.getElementById('powerBlocksFloatBtn').addEventListener('click', () => goToSection('power'));
+  document.getElementById('coreBlocksFloatBtn').addEventListener('click', () => goToSection('core'));
+  document.getElementById('universalChartAFloatBtn').addEventListener('click', () => goToSection('charta'));
+  document.getElementById('universalChartBFloatBtn').addEventListener('click', () => goToSection('chartb'));
+  document.getElementById('systemBlocksFloatBtn').addEventListener('click', () => goToSection('systemlocks'));
   document.getElementById('locationFloatBtn').addEventListener('click', openLocationFromCurrent);
   document.getElementById('ageStageFloatBtn').addEventListener('click', () => goToSection('ageself'));
   document.getElementById('rootBlocksFloatBtn').addEventListener('click', () => goToSection('rootblocks'));
