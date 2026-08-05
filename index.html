@@ -3655,6 +3655,18 @@ function updateBackToLastSectionButton() {
 
 
 let toolboxReturnState = null;
+const toolboxReturnStates = new Map();
+let toolboxReturnStateId = 0;
+
+function registerToolboxReturnState(state) {
+  const id = ++toolboxReturnStateId;
+  toolboxReturnStates.set(id, { ...state });
+  if (toolboxReturnStates.size > 120) {
+    const oldest = toolboxReturnStates.keys().next().value;
+    toolboxReturnStates.delete(oldest);
+  }
+  return id;
+}
 
 function getToolboxSourceLabel() {
   const sectionKey = getActiveSectionKey();
@@ -3679,10 +3691,11 @@ function saveToolboxReturnState() {
     scrollY: window.scrollY,
     label: getToolboxSourceLabel()
   };
+  return { ...toolboxReturnState };
 }
 
-function returnFromToolboxDestination() {
-  const state = toolboxReturnState;
+function returnFromToolboxDestination(stateId) {
+  const state = stateId ? toolboxReturnStates.get(Number(stateId)) : toolboxReturnState;
   if (!state || !state.sectionKey) {
     goToSection('dashboard');
     return;
@@ -3691,27 +3704,28 @@ function returnFromToolboxDestination() {
   setTimeout(() => window.scrollTo({ top: state.scrollY || 0, behavior: 'smooth' }), 160);
 }
 
-function addToolboxReturnHeader(container) {
-  if (!container || !toolboxReturnState) return;
+function addToolboxReturnHeader(container, returnState) {
+  if (!container || !returnState) return;
   container.querySelectorAll(':scope > .toolbox-return-bar').forEach(el => el.remove());
+  const stateId = registerToolboxReturnState(returnState);
   const bar = document.createElement('div');
   bar.className = 'toolbox-return-bar';
-  const safeLabel = String(toolboxReturnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  bar.innerHTML = `<button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button><button class="ghost-btn" type="button" onclick="returnFromToolboxDestination()">Back to ${safeLabel}</button>`;
+  const safeLabel = String(returnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  bar.innerHTML = `<button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button><button class="ghost-btn" type="button" onclick="returnFromToolboxDestination(${stateId})">Back to ${safeLabel}</button>`;
   container.prepend(bar);
 }
 
 function openToolboxSection(sectionKey) {
-  saveToolboxReturnState();
+  const returnState = saveToolboxReturnState();
   goToSection(sectionKey);
   setTimeout(() => {
     const section = document.querySelector(`.section.active[data-section="${sectionKey}"]`);
-    addToolboxReturnHeader(section);
+    addToolboxReturnHeader(section, returnState);
   }, 60);
 }
 
 function openToolboxDashboardTarget(targetId, isGroup) {
-  saveToolboxReturnState();
+  const returnState = saveToolboxReturnState();
   goToSection('dashboard');
   setTimeout(() => {
     const target = document.getElementById(targetId) || document.querySelector(`[data-dashboard-group="${targetId}"]`);
@@ -3720,11 +3734,12 @@ function openToolboxDashboardTarget(targetId, isGroup) {
         document.querySelectorAll('#dashboard-section > .toolbox-return-bar').forEach(el => el.remove());
         const slot = document.getElementById('clearing-charts-return-slot');
         if (slot) {
-          const safeLabel = String(toolboxReturnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-          slot.innerHTML = `<button class="ghost-btn" type="button" onclick="returnFromToolboxDestination()">Back to ${safeLabel}</button>`;
+          const stateId = registerToolboxReturnState(returnState);
+          const safeLabel = String(returnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+          slot.innerHTML = `<button class="ghost-btn" type="button" onclick="returnFromToolboxDestination(${stateId})">Back to ${safeLabel}</button>`;
         }
       } else {
-        addToolboxReturnHeader(target);
+        addToolboxReturnHeader(target, returnState);
       }
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
