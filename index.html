@@ -2982,6 +2982,29 @@ html, body { max-width: 100%; overflow-x: hidden; }
   #powerBlocksFloatBtn{ bottom:690px !important; }
   #clearingChartsFloatBtn{ bottom:738px !important; }
 }
+
+/* Toolbox destination return header */
+.toolbox-return-bar{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 14px;
+}
+.toolbox-return-bar .ghost-btn{
+  cursor:pointer;
+}
+@media (max-width:700px){
+  .toolbox-return-bar{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .toolbox-return-bar .ghost-btn{
+    width:100%;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3590,6 +3613,76 @@ function updateBackToLastSectionButton() {
   } else {
     btn.style.display = 'none';
   }
+}
+
+
+
+let toolboxReturnState = null;
+
+function getToolboxSourceLabel() {
+  const sectionKey = getActiveSectionKey();
+  const labels = {
+    dashboard: 'Home', power: 'Power Blocks', core: 'Core Blocks',
+    charta: 'Universal Chart A', chartb: 'Universal Chart B',
+    rootblocks: 'Root Blocks', systemlocks: 'System Blocks',
+    locations: 'Clearing Location', ageself: 'Age & Stage Chart',
+    glossary: 'Glossary', wounds: 'Wound Clearings',
+    suppression: 'Suppression Blocks', spells: 'Control Blocks'
+  };
+  if (sectionKey && sectionKey.startsWith('glossary-')) {
+    const section = glossaryData.find(item => item.key === sectionKey);
+    if (section) return section.label;
+  }
+  return labels[sectionKey] || 'Previous Section';
+}
+
+function saveToolboxReturnState() {
+  toolboxReturnState = {
+    sectionKey: getActiveSectionKey() || 'dashboard',
+    scrollY: window.scrollY,
+    label: getToolboxSourceLabel()
+  };
+}
+
+function returnFromToolboxDestination() {
+  const state = toolboxReturnState;
+  if (!state || !state.sectionKey) {
+    goToSection('dashboard');
+    return;
+  }
+  goToSection(state.sectionKey);
+  setTimeout(() => window.scrollTo({ top: state.scrollY || 0, behavior: 'smooth' }), 160);
+}
+
+function addToolboxReturnHeader(container) {
+  if (!container || !toolboxReturnState) return;
+  container.querySelectorAll(':scope > .toolbox-return-bar').forEach(el => el.remove());
+  const bar = document.createElement('div');
+  bar.className = 'toolbox-return-bar';
+  const safeLabel = String(toolboxReturnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  bar.innerHTML = `<button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button><button class="ghost-btn" type="button" onclick="returnFromToolboxDestination()">Back to ${safeLabel}</button>`;
+  container.prepend(bar);
+}
+
+function openToolboxSection(sectionKey) {
+  saveToolboxReturnState();
+  goToSection(sectionKey);
+  setTimeout(() => {
+    const section = document.querySelector(`.section.active[data-section="${sectionKey}"]`);
+    addToolboxReturnHeader(section);
+  }, 60);
+}
+
+function openToolboxDashboardTarget(targetId, isGroup) {
+  saveToolboxReturnState();
+  goToSection('dashboard');
+  setTimeout(() => {
+    const target = document.getElementById(targetId) || document.querySelector(`[data-dashboard-group="${targetId}"]`);
+    if (target) {
+      addToolboxReturnHeader(target);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 120);
 }
 
 const toolboxNavigationHistory = [];
@@ -6151,18 +6244,23 @@ function init() {
   });
   document.getElementById('forwardFloatBtn').addEventListener('click', goForwardInToolbox);
   document.getElementById('backFloatBtn').addEventListener('click', goBackInToolbox);
-  document.getElementById('selfCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('self-check-section'));
-  document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => jumpToDashboardSubsection('relationship-checkpoint-section'));
-  document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => jumpToDashboardGroup('alignment-clearing-charts'));
-  document.getElementById('powerBlocksFloatBtn').addEventListener('click', () => goToSection('power'));
-  document.getElementById('coreBlocksFloatBtn').addEventListener('click', () => goToSection('core'));
-  document.getElementById('universalChartAFloatBtn').addEventListener('click', () => goToSection('charta'));
-  document.getElementById('universalChartBFloatBtn').addEventListener('click', () => goToSection('chartb'));
-  document.getElementById('systemBlocksFloatBtn').addEventListener('click', () => goToSection('systemlocks'));
-  document.getElementById('locationFloatBtn').addEventListener('click', openLocationFromCurrent);
-  document.getElementById('ageStageFloatBtn').addEventListener('click', () => goToSection('ageself'));
-  document.getElementById('rootBlocksFloatBtn').addEventListener('click', () => goToSection('rootblocks'));
-  document.getElementById('glossaryFloatBtn').addEventListener('click', openGlossaryFromCurrent);
+  document.getElementById('selfCheckFloatBtn').addEventListener('click', () => openToolboxDashboardTarget('self-check-section'));
+  document.getElementById('relationshipCheckFloatBtn').addEventListener('click', () => openToolboxDashboardTarget('relationship-checkpoint-section'));
+  document.getElementById('clearingChartsFloatBtn').addEventListener('click', () => openToolboxDashboardTarget('alignment-clearing-charts', true));
+  document.getElementById('powerBlocksFloatBtn').addEventListener('click', () => openToolboxSection('power'));
+  document.getElementById('coreBlocksFloatBtn').addEventListener('click', () => openToolboxSection('core'));
+  document.getElementById('universalChartAFloatBtn').addEventListener('click', () => openToolboxSection('charta'));
+  document.getElementById('universalChartBFloatBtn').addEventListener('click', () => openToolboxSection('chartb'));
+  document.getElementById('systemBlocksFloatBtn').addEventListener('click', () => openToolboxSection('systemlocks'));
+  document.getElementById('locationFloatBtn').addEventListener('click', () => openToolboxSection('locations'));
+  document.getElementById('ageStageFloatBtn').addEventListener('click', () => openToolboxSection('ageself'));
+  document.getElementById('rootBlocksFloatBtn').addEventListener('click', () => openToolboxSection('rootblocks'));
+  document.getElementById('glossaryFloatBtn').addEventListener('click', () => {
+    saveToolboxReturnState();
+    lastSectionReturnState = { sectionKey: toolboxReturnState.sectionKey };
+    lastGlossaryReturnState = { sectionKey: toolboxReturnState.sectionKey };
+    openGlossaryFromCurrent();
+  });
   const toolsDrawer = document.getElementById('floatingToolsDrawer');
   const toolsToggle = document.getElementById('floatingToolsToggle');
   const closeToolsDrawer = () => {
