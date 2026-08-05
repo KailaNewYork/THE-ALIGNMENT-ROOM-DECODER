@@ -5350,6 +5350,7 @@ function renderSpellsSection() {
         {label:'Soul Blood Bindings (2)',items:['Soul Blood Binding Spell','Soul Binding Blood Spell']},
         {label:'Body Blood Bindings (3)',items:['Body Blood Binding Spell','Body Binding Blood Spell']}
       ],
+      finalLabel:'Blood Binding Spells (5)', finalItems:['Blood Binding Spell'],
       rightBlocks:[
         {label:'',items:['Blood Legacy Binding Spell','Blood Binding Legacy Spell','Blood Legacy Binding Soul Spell','Blood Legacy Soul Binding Spell','Blood Binding Legacy Soul Spell','Blood Binding Soul Legacy Spell','Blood Soul Binding Legacy Spell','Blood Soul Legacy Binding Spell','Blood Legacy Binding Body Spell','Blood Legacy Body Binding Spell','Blood Binding Legacy Body Spell','Blood Binding Body Legacy Spell','Blood Body Binding Legacy Spell','Blood Body Legacy Binding Spell']},
         {label:'',items:['Legacy Blood Binding Spell','Legacy Binding Blood Spell','Legacy Blood Binding Soul Spell','Legacy Blood Soul Binding Spell','Legacy Binding Blood Soul Spell','Legacy Binding Soul Blood Spell','Legacy Soul Binding Blood Spell','Legacy Soul Blood Binding Spell','Legacy Blood Binding Body Spell','Legacy Blood Body Binding Spell','Legacy Binding Blood Body Spell','Legacy Binding Body Blood Spell','Legacy Body Binding Blood Spell','Legacy Body Blood Binding Spell']},
@@ -5364,7 +5365,8 @@ function renderSpellsSection() {
         {label:'',items:['Soul Blood Spell','Blood Soul Spell','Body Blood Spell','Blood Body Spell']},
         {label:'Legacy',items:['Blood Legacy Spell','Blood Legacy Soul Spell','Blood Soul Legacy Spell','Blood Legacy Body Spell','Blood Body Legacy Spell']},
         {label:'',items:['Soul Blood Legacy Spell','Soul Legacy Blood Spell','Body Blood Legacy Spell','Body Legacy Blood Spell']},
-        {label:'',items:['Legacy Blood Spell','Legacy Blood Soul Spell','Legacy Soul Blood Spell','Legacy Blood Body Spell','Legacy Body Blood Spell']}
+        {label:'',items:['Legacy Blood Spell','Legacy Blood Soul Spell','Legacy Soul Blood Spell','Legacy Blood Body Spell','Legacy Body Blood Spell']},
+        {label:'Blood Spells (5)',items:['Blood Spell']}
       ]
     },
     {
@@ -5375,13 +5377,15 @@ function renderSpellsSection() {
         {label:'Soul Bindings (2)',items:['Soul Binding Spell','Binding Soul Spell']},
         {label:'Body Bindings (3)',items:['Body Binding Spell','Binding Body Spell']}
       ],
+      finalLabel:'Binding Spells (5)', finalItems:['Binding Spell'],
       rightBlocks:[
         {label:'',items:['Legacy Binding Spell','Binding Legacy Spell','Legacy Binding Soul Spell','Legacy Soul Binding Spell','Binding Legacy Soul Spell','Binding Soul Legacy Spell','Soul Binding Legacy Spell','Soul Legacy Binding Spell','Legacy Binding Body Spell','Legacy Body Binding Spell','Binding Legacy Body Spell','Binding Body Legacy Spell','Body Binding Legacy Spell','Body Legacy Binding Spell']}
       ]
     },
     {
       title:'Spells Clear 4th', subtitle:'In This Order', single:[
-        {label:'',items:['Lineage Spell','Lineage Soul Spell','Soul Lineage Spell','Lineage Body Spell','Body Lineage Spell','Soul Spell','Body Spell','Legacy Spell','Legacy Soul Spell','Soul Legacy Spell','Legacy Body Spell','Body Legacy Spell']}
+        {label:'',items:['Lineage Spell','Lineage Soul Spell','Soul Lineage Spell','Lineage Body Spell','Body Lineage Spell','Soul Spell','Body Spell','Legacy Spell','Legacy Soul Spell','Soul Legacy Spell','Legacy Body Spell','Body Legacy Spell']},
+        {label:'Spells (5)',items:['Spell']}
       ]
     }
   ];
@@ -5416,7 +5420,7 @@ function renderSpellsSection() {
       ${charts.map((chart, idx)=>`<div class="table-card" data-spell-chart="${idx+1}">
         <div class="table-title">${escapeHtml(chart.title)}</div>
         ${chart.subtitle ? `<div class="table-subtitle">${escapeHtml(chart.subtitle)}</div>` : ''}
-        ${chart.single ? chart.single.map(renderSingleBlock).join('') : `<div class="table-grid">${renderDualCol(chart.leftHeader, chart.leftBlocks)}${renderDualCol(chart.rightHeader, chart.rightBlocks)}</div>`}
+        ${chart.single ? chart.single.map(renderSingleBlock).join('') : `<div class="table-grid">${renderDualCol(chart.leftHeader, chart.leftBlocks)}${renderDualCol(chart.rightHeader, chart.rightBlocks)}</div>${chart.finalItems ? `<div class="table-block-head">${escapeHtml(chart.finalLabel || 'Spells (5)')}</div>${renderRows(chart.finalItems)}` : ''}`}
       </div>`).join('')}
     </div>
   </section>`;
