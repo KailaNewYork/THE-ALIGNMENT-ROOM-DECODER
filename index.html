@@ -3287,6 +3287,41 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
 }
 
+
+/* The Cup navigation */
+.cup-nav-footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.cup-nav-footer .cup-back{margin-bottom:0}
+@media(max-width:700px){.cup-nav-footer{flex-direction:column}.cup-nav-footer .cup-back{width:100%}}
+
+/* The Cup: Relationship Checkpoint */
+.cup-panel{max-width:860px;margin:0 auto;background:linear-gradient(145deg,rgba(216,181,106,.08),rgba(140,108,240,.07));border:1px solid rgba(216,181,106,.24);border-radius:22px;padding:clamp(16px,3vw,28px)}
+.cup-panel h2{font-size:clamp(1.4rem,3.5vw,2rem);line-height:1.16;margin:0 0 18px;color:#f5dfaa}
+.cup-panel h3{font-size:1.13rem;margin:22px 0 10px;color:#f5dfaa}
+.cup-panel p{color:var(--text);line-height:1.65;margin:10px 0}
+.cup-panel .cup-muted{color:var(--muted)}
+.cup-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:22px;border:0;border-radius:14px;background:linear-gradient(180deg,#cda95c,#9b793b);padding:15px 18px;color:#0a0907;font-weight:800;cursor:pointer}
+.cup-back{border:1px solid rgba(216,181,106,.4);border-radius:999px;background:rgba(216,181,106,.08);color:#f5dfaa;cursor:pointer;padding:9px 13px;margin-bottom:18px;font-weight:700}
+.cup-response{border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(7,7,9,.62);overflow:hidden;margin:10px 0}
+.cup-response[open]{border-color:rgba(216,181,106,.48)}
+.cup-response summary{display:flex;align-items:center;gap:12px;padding:13px;cursor:pointer;list-style:none;min-height:68px}
+.cup-response summary::-webkit-details-marker{display:none}
+.cup-icon{width:42px;height:42px;flex:0 0 42px;border-radius:11px;display:grid;place-items:center;font-size:1.3rem;color:#fff}
+.cup-response-title{flex:1;min-width:0;font-weight:750;line-height:1.23}
+.cup-response-title small{display:block;color:var(--muted);font-size:.75rem;margin-top:4px;font-weight:500}
+.cup-chevron{color:var(--muted);font-size:1.3rem;transition:transform .15s}
+.cup-response[open] .cup-chevron{transform:rotate(180deg)}
+.cup-response-body{padding:0 16px 16px;border-top:1px solid rgba(255,255,255,.08)}
+.cup-response-body p{font-size:.96rem;line-height:1.55}
+@media(max-width:650px){.cup-panel{padding:14px}.cup-response summary{padding:11px}.cup-response-title{font-size:.94rem}}
+/* Two direct paths from the Relationship Checkpoint Cup card */
+.cup-dashboard-card{display:flex;flex-direction:column;cursor:default;min-width:0}
+.cup-dashboard-actions{display:flex;flex-direction:column;gap:9px;margin-top:auto;padding-top:18px}
+.cup-dashboard-action{display:block;width:100%;min-height:43px;padding:10px 12px;text-align:center;font-weight:800;font-size:.91rem;cursor:pointer;border-radius:11px;white-space:normal;line-height:1.2}
+.cup-dashboard-intro{border:1px solid rgba(216,181,106,.48);background:rgba(216,181,106,.12);color:#f5dfaa}
+.cup-dashboard-chart{border:1px solid rgba(216,181,106,.45);background:linear-gradient(180deg,#cda95c,#9b793b);color:#0a0907}
+.cup-dashboard-action:hover,.cup-dashboard-action:focus-visible{filter:brightness(1.13);outline:2px solid rgba(216,181,106,.65);outline-offset:2px}
+@media(max-width:650px){.cup-dashboard-actions{padding-top:14px}.cup-dashboard-action{min-height:46px}}
+
 </style>
 </head>
 <body>
@@ -3508,7 +3543,8 @@ const relationshipCheckpointCards = [
   { label: 'Relationship Status Check\nAsk: Play, pause, or stop?', desc: 'Check whether the connection is active, paused, or stopped before deciding what to do.', tab: 'relationshipplay' },
   { label: 'What Do I Need To Do?\nAsk: What does this require?', desc: 'Decide whether the situation needs a boundary, clearing, conversation, time, distance, an ending, or more information.', tab: 'boundaryclearing' },
   { label: 'Am I Being...?\nAsk: Am I being ___?', desc: 'Check what is happening to you in the interaction before you respond.', tab: 'amibeing' },
-  { label: 'Relationship Chessboard\nAsk: Who am I really playing?', desc: 'Scan the board to identify who or what is influencing the relationship dynamic, then choose the piece, objective, and next move.', tab: 'relationshipchess' }
+  { label: 'Relationship Chessboard\nAsk: Who am I really playing?', desc: 'Scan the board to identify who or what is influencing the relationship dynamic, then choose the piece, objective, and next move.', tab: 'relationshipchess' },
+  { label: 'The Cup: What Should You Do With It?', desc: 'Learn when to hold, return, receive, release, or transform what someone hands you.', tab: 'cupintro' },
 ];
 
 const clearingChartCards = originalDashboardCards.slice(9, 18);
@@ -3652,7 +3688,15 @@ function wireJumpButtons() {
 }
 
 function renderQuickStart() {
-  const renderCard = (item) => `
+  const renderCard = (item) => item.tab === 'cupintro' ? `
+          <div class="quick-start-card-static cup-dashboard-card" role="group" aria-label="The Cup: What Should You Do With It?">
+            <div class="quick-start-title">${formatQuickTitle(item.label)}</div>
+            <div class="quick-start-desc">${item.desc}</div>
+            <div class="cup-dashboard-actions">
+              <button type="button" class="cup-dashboard-action cup-dashboard-intro" data-tab="cupintro">Read the Introduction →</button>
+              <button type="button" class="cup-dashboard-action cup-dashboard-chart" data-tab="cupresponses">Open the Cup Chart →</button>
+            </div>
+          </div>` : `
           <button class="quick-start-card-static" data-tab="${item.tab}" data-group="${item.group || ''}">
             <div class="quick-start-title">${formatQuickTitle(item.label)}</div>
             <div class="quick-start-desc">${item.desc}</div>
@@ -3691,8 +3735,15 @@ function renderQuickStart() {
         ${referenceVaultCards.map(renderCard).join('')}
       </div>
     </div>`;
-  document.querySelectorAll('.quick-start-card-static').forEach(btn => {
-    btn.addEventListener('click', () => {
+  // Only navigable dashboard cards receive the card-wide click handler.
+  // The Cup uses a container with two independent actions.
+  document.querySelectorAll('button.quick-start-card-static[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => goToSection(btn.dataset.tab));
+  });
+  document.querySelectorAll('.cup-dashboard-action').forEach(btn => {
+    btn.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
       goToSection(btn.dataset.tab);
     });
   });
@@ -6223,6 +6274,69 @@ function renderGlossarySections() {
 }
 
 
+
+/* The Cup: separate introduction and expandable response screens */
+function returnToCupRelationships(){
+  goToSection('dashboard');
+  const destination = document.getElementById('relationship-checkpoint-section');
+  if (destination) {
+    // After the dashboard is displayed, return to its Relationships checkpoint.
+    requestAnimationFrame(() => destination.scrollIntoView({behavior:'smooth',block:'start'}));
+  }
+}
+
+function renderCupIntroductionSection(){
+  return `<section class="section" data-section="cupintro">
+    <div class="cup-panel">
+      <button class="cup-back" type="button" onclick="returnToCupRelationships()">← Relationships</button>
+      <h2>The Cup: What Should You Do With It?</h2>
+      <h3>Why Is This Here?</h3>
+      <p>Every day, we exchange emotions with other people. Sometimes someone hands us their anger, sadness, frustration, or fear. Other times, they offer love, peace, encouragement, or joy.</p>
+      <p>The question isn't just what's inside the cup. <strong>The question is what you're supposed to do with it.</strong></p>
+      <p>Not every cup belongs to you. Not every cup needs to be held. Some need to be returned, some need to be emptied, and some contain something beautiful that's meant to be received.</p>
+      <p>And sometimes, what was once painful can be transformed into something powerful.</p>
+      <p>This section of The Alignment Room is designed to help you recognize emotional exchanges, understand your responsibility, establish healthy boundaries, and discover when an experience can be transformed into something useful.</p>
+      <h3>How to Use It</h3>
+      <p>Think about a recent interaction or something you're experiencing right now.</p>
+      <p>Ask yourself: <strong>"Whose cup is this, what's inside it, and what should I do with it?"</strong></p>
+      <p>Explore the nine options by tapping the dropdown arrows. Read each explanation and identify which response best fits your situation.</p>
+      <p>Remember, you don't have to accept every cup someone hands you, and you don't have to reject every cup either.</p>
+      <p><strong>The goal isn't to stop feeling. It's to understand what you're feeling, what belongs to you, and what you choose to do with it.</strong></p>
+      <button class="cup-btn" type="button" onclick="goToSection('cupresponses')">Explore the 9 Cup Responses →</button>
+      <div class="cup-nav-footer"><button class="cup-back" type="button" onclick="returnToCupRelationships()">← Back to Relationships</button></div>
+    </div>
+  </section>`;
+}
+const cupResponses = [
+  {title:'Caution: Not Your Problem',icon:'⚠️',color:'#C66D6D',text:"Before you reach for the cup, recognize whether this situation has anything to do with you. Just because someone brings you their emotions doesn't automatically make them your responsibility."},
+  {title:"Don't Take It",icon:'🛡️',color:'#C28A4E',text:"You've recognized what's being offered, and you've decided not to accept it. You have the right to refuse a cup that isn't yours to carry."},
+  {title:'Hold It, But Not Too Long',icon:'⌛',color:'#D0A74D',text:"Someone needs support, and you're willing to hold their cup temporarily. You can listen, offer comfort, and be present without taking ownership of what's inside. Know when it's time to return it."},
+  {title:'Bubbling',icon:'♨️',color:'#C77E43',text:'The contents of the cup are becoming intense. Emotions are building, and something needs attention before it spills over. Notice what is happening before deciding your next move.'},
+  {title:'Give It Back',icon:'↩️',color:'#7199C6',text:"You've held the cup, but now it's time to return it. The contents belong to the person who handed it to you. You can care without carrying."},
+  {title:'Pour It Out',icon:'💧',color:'#5A9FA0',text:"Sometimes someone doesn't need you to hold their cup. They need help emptying it. You can support them in processing and releasing what's inside without absorbing it yourself."},
+  {title:'Drink It: The Gift',icon:'💜',color:'#5A9E73',text:'Someone offers you a cup filled with love, peace, joy, kindness, or encouragement. Not every cup contains pain. When someone offers something beautiful, allow yourself to receive it. Drink that shit! 💜'},
+  {title:'Drink It: Your Cup Returned',icon:'🥤',color:'#A079BC',text:'Someone is handing back a cup you previously asked them to hold. Recognize that the contents are yours. Receive your cup and take responsibility for processing what is inside.'},
+  {title:'Use It',icon:'✨',color:'#B18A3D',text:'What was once pain, frustration, sadness, or confusion can become fuel for something meaningful. Sometimes someone helps you alchemize what is inside your cup and returns it transformed. Other times, you discover how to transform it yourself. Use that energy to create, grow, understand, or build something new. Your difficult morning might become a breakthrough, a lesson, or even a feature in an app. The experience does not have to be wasted.'}
+];
+function renderCupResponsesSection(){
+  return `<section class="section" data-section="cupresponses">
+    <div class="cup-panel">
+      <button class="cup-back" type="button" onclick="goToSection('cupintro')">← Back to Introduction</button>
+      <h2>The Cup: What Should You Do With It?</h2>
+      <p class="cup-muted">Select a response to explore its meaning. Tap again to close it.</p>
+      ${cupResponses.map((cup,i)=>`<details class="cup-response">
+        <summary><span class="cup-icon" style="background:${cup.color}" aria-hidden="true">${cup.icon}</span>
+        <span class="cup-response-title">${escapeHtml(cup.title)}<small>Response ${i+1}</small></span><span class="cup-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="cup-response-body"><p>${escapeHtml(cup.text)}</p></div>
+      </details>`).join('')}
+      <div class="cup-nav-footer">
+        <button class="cup-back" type="button" onclick="goToSection('cupintro')">← Back to Introduction</button>
+        <button class="cup-back" type="button" onclick="returnToCupRelationships()">← Back to Relationships</button>
+      </div>
+    </div>
+  </section>`;
+}
+
 function renderSections() {
   document.getElementById('content').innerHTML = [
     renderDashboard(),
@@ -6235,6 +6349,8 @@ function renderSections() {
     renderChartASection(),
     renderChartBSection(),
     renderRelationshipPlaySection(),
+    renderCupIntroductionSection(),
+    renderCupResponsesSection(),
     renderAmIBeingSection(),
     renderRelationshipChessboardSection(),
     renderBoundaryClearingSection(),
