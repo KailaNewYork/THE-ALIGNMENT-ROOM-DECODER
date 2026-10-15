@@ -3405,6 +3405,23 @@ html, body { max-width: 100%; overflow-x: hidden; }
   #sensory-regulation-areas > * { min-width:0; width:100%; }
 }
 
+/* Sensory Regulation mobile layout: single-column, including every nested method panel. */
+@media screen and (max-width: 900px) {
+  #sensory-regulation-tool #sensory-regulation-areas,
+  #sensory-regulation-tool #sensory-regulation-choices {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-flow: row !important;
+  }
+  #sensory-regulation-tool #sensory-regulation-areas > *,
+  #sensory-regulation-tool #sensory-regulation-choices > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-column: 1 / -1 !important;
+    align-self: start !important;
+  }
+}
+
 /* Clearing charts: consistent source-aware Back and Home navigation */
 .chart-back-actions {display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 @media(max-width:700px){.chart-back-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.chart-back-actions .ghost-btn{width:100%;font-size:.8rem;padding:10px 7px}}
