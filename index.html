@@ -3433,6 +3433,25 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .sensory-question-area .sensory-entry-description[hidden]{display:none!important}
 .sensory-question-area li:has(.sensory-entry-btn[aria-expanded="true"]){border-color:#d8b56a}
 @media(max-width:520px){.sensory-question-area .sensory-entry-description{padding:10px;font-size:.78rem;line-height:1.35}}
+
+/* Assessment: full-width entries on phones only; desktop remains two columns. */
+@media screen and (max-width:700px){
+  #sensory-trigger-tool .sensory-question-area ol,
+  .sensory-trigger-tool .sensory-question-area ol{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  #sensory-trigger-tool .sensory-question-area li,
+  .sensory-trigger-tool .sensory-question-area li{
+    grid-column:1 / -1!important;width:100%;
+  }
+}
+/* Emotion explanations, one open at a time. */
+.sensory-emotion-grid .sensory-emotion-item{min-width:0;align-self:start;overflow:hidden;border:1px solid rgba(216,181,106,.32);border-radius:14px;background:#18191f}
+.sensory-emotion-grid .sensory-emotion-item .sensory-emotion-button{border:0;width:100%;border-radius:0;min-height:58px}
+.sensory-emotion-grid .sensory-emotion-item .sensory-emotion-description{border-top:1px solid rgba(216,181,106,.22);padding:11px 12px;color:var(--muted);line-height:1.42;font-size:.88rem}
+.sensory-emotion-description[hidden]{display:none!important}
+.sensory-emotion-grid .sensory-emotion-item:has(.sensory-emotion-button[aria-expanded="true"]){border-color:#d8b56a;background:rgba(140,108,240,.17)}
+
 </style>
 </head>
 <body>
@@ -4220,20 +4239,52 @@ function renderQuickStart() {
     });
     showRegulationScreen('sensory-regulation-method');
   }
+  const emotionDescriptions = {
+    Anger:'A strong response to something upsetting, unfair, or unwanted.',
+    Fear:'A sense of danger, uncertainty, or needing protection.',
+    Sadness:'Feeling loss, disappointment, or a need for comfort.',
+    Frustration:'Tension when an attempt, need, or expectation is blocked.',
+    Anxiety:'Worry or unease about what is happening or may happen.',
+    Overwhelm:'Experiencing more demands or sensations than feel manageable.',
+    Confusion:'Difficulty making sense of a situation or what is expected.',
+    Disappointment:'An outcome does not match what was hoped for.',
+    Loneliness:'Wanting connection, company, or understanding.',
+    Embarrassment:'Feeling exposed, self-conscious, or uncomfortable about an experience.',
+    Jealousy:'Feeling unsettled about attention, connection, or something another person has.',
+    Resentment:'Lingering upset connected to a perceived unfairness or unmet need.',
+    Guilt:'Concern about something one has done or not done.',
+    Shame:'A painful feeling of being judged or not feeling good enough.',
+    Grief:'An emotional response to a loss or significant change.',
+    Helplessness:'Feeling unable to influence or change what is happening.',
+    Insecurity:'Uncertainty about safety, acceptance, or personal confidence.',
+    Excitement:'Strong anticipation or enthusiasm that can also feel intense.',
+    Happiness:'A sense of pleasure, joy, or satisfaction.',
+    Calm:'A settled state with a sense of ease or steadiness.'
+  };
   function renderEmotions() {
     const box=document.getElementById('sensory-emotion-grid');box.replaceChildren();
     emotionsForRegulation.forEach((name,i)=>{
       const n=i+1;
       if(emotionParity==='odd' && n%2===0)return;
       if(emotionParity==='even' && n%2!==0)return;
+      const item=document.createElement('div');item.className='sensory-emotion-item';
       const button=document.createElement('button');button.type='button';button.className='sensory-emotion-button';
       button.textContent=n+'. '+name;
       button.setAttribute('aria-pressed',String(chosenEmotions.has(i)));
+      button.setAttribute('aria-expanded','false');
+      const description=document.createElement('div');description.className='sensory-emotion-description';
+      description.textContent=emotionDescriptions[name] || 'Explore how this emotion may be experienced.';
+      description.hidden=true;
       button.addEventListener('click',()=>{
+        const opening=description.hidden;
+        box.querySelectorAll('.sensory-emotion-description').forEach(el=>el.hidden=true);
+        box.querySelectorAll('.sensory-emotion-button[aria-expanded="true"]').forEach(el=>el.setAttribute('aria-expanded','false'));
+        description.hidden=!opening;button.setAttribute('aria-expanded',String(opening));
         if(chosenEmotions.has(i))chosenEmotions.delete(i);else chosenEmotions.add(i);
         button.setAttribute('aria-pressed',String(chosenEmotions.has(i)));
         document.getElementById('sensory-emotion-count').textContent=chosenEmotions.size+' emotion(s) selected';
-      });box.appendChild(button);
+      });
+      item.append(button,description);box.appendChild(item);
     });
     document.getElementById('sensory-emotion-count').textContent=chosenEmotions.size+' emotion(s) selected';
     document.querySelectorAll('[data-emotion-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.emotionFilter===emotionParity)));
