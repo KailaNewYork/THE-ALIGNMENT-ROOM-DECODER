@@ -3322,6 +3322,82 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .cup-dashboard-action:hover,.cup-dashboard-action:focus-visible{filter:brightness(1.13);outline:2px solid rgba(216,181,106,.65);outline-offset:2px}
 @media(max-width:650px){.cup-dashboard-actions{padding-top:14px}.cup-dashboard-action{min-height:46px}}
 
+
+/* New Sensory Checks section: additive; all original dashboard components preserved. */
+.sensory-trigger-tool{margin-top:16px;border:1px solid rgba(216,181,106,.28);border-radius:18px;padding:16px;background:rgba(140,108,240,.055)}
+.sensory-trigger-tool[hidden]{display:none!important}
+.sensory-tool-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}
+.sensory-tool-head h3{margin:0 0 6px;color:#f5dfaa;font-size:1.15rem}
+.sensory-tool-head p{margin:0 0 14px;color:var(--muted);line-height:1.45}
+.sensory-close-btn{cursor:pointer}
+.sensory-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 16px}
+.sensory-category{cursor:pointer;padding:12px 8px;font-size:.88rem;font-weight:700;min-width:0;line-height:1.2;background:#14151b;border-color:rgba(216,181,106,.25)}
+.sensory-category.active{background:rgba(140,108,240,.25);border-color:#d8b56a;color:#f5dfaa}
+.sensory-question-area{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;background:rgba(7,7,9,.5)}
+.sensory-question-area h4{margin:0 0 12px;color:#f5dfaa}
+.sensory-question-area ol{margin:0;padding-left:23px;line-height:1.7}
+.sensory-question-area li{padding:3px 0}
+@media(max-width:850px){.sensory-categories{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.sensory-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.sensory-close-btn{width:100%}}
+
+
+/* Sensory Checks: number filters and direct clearing chart navigation */
+.sensory-filter-panel{border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 0 16px;background:rgba(7,7,9,.35)}
+.sensory-filter-search{display:flex;gap:10px;align-items:center}.sensory-filter-search input{width:100%;min-width:0;flex:1}
+.sensory-filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sensory-filter-btn,.sensory-chart-btn{cursor:pointer;border:1px solid rgba(216,181,106,.4);border-radius:999px;padding:9px 13px;background:rgba(216,181,106,.08);color:#f5dfaa;font-weight:700}
+.sensory-filter-btn[aria-pressed="true"]{background:rgba(140,108,240,.26);border-color:#d8b56a}
+.sensory-question-area ol{list-style:none;padding:0;margin:0}.sensory-question-area li{padding:6px 2px}
+.sensory-clearing-panel{border:1px solid rgba(216,181,106,.25);border-radius:16px;padding:16px;margin-top:18px;background:rgba(255,255,255,.025)}
+.sensory-clearing-panel h4{color:#f5dfaa;margin:0 0 7px;font-size:1.12rem}.sensory-clearing-panel p{color:var(--muted);margin:0 0 13px;line-height:1.4}
+.sensory-clearing-panel p.sensory-clearing-question{color:#f5dfaa;font-size:1.15rem;font-weight:700;line-height:1.22;margin:0 0 17px;}
+.sensory-chart-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+/* Space clearing chart choices below the Yes/No controls when revealed. */
+#sensory-source-charts:not([hidden]){margin-top:20px}.sensory-chart-btn{border-radius:12px;min-height:48px;white-space:normal}
+@media(max-width:750px){.sensory-chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.sensory-filter-search{flex-wrap:wrap}.sensory-filter-search input{flex-basis:100%}.sensory-chart-grid{grid-template-columns:1fr 1fr}.sensory-chart-btn{font-size:.8rem;padding:9px 5px}}
+
+/* Sensory trigger entries: balanced two-column layout on desktop and mobile. */
+.sensory-question-area ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;row-gap:5px;align-items:start}
+.sensory-question-area li{min-width:0;overflow-wrap:anywhere;line-height:1.35;padding:7px 8px!important;border-bottom:1px solid rgba(255,255,255,.06)}
+@media(max-width:520px){.sensory-question-area{padding:11px}.sensory-question-area ol{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:8px;row-gap:4px}.sensory-question-area li{font-size:.82rem;padding:7px 4px!important}}
+
+
+/* Sensory identification entries: selectable button tiles, two columns on all devices. */
+.sensory-question-area ol{column-gap:12px;row-gap:10px}
+.sensory-question-area li{padding:0!important;border-bottom:0;list-style:none}
+.sensory-entry-btn{display:flex;align-items:center;width:100%;min-height:63px;text-align:left;padding:12px 14px;border-radius:13px;border:1px solid rgba(216,181,106,.28);background:#17181f;color:#f4f1ea;cursor:pointer;font-size:inherit;font-weight:550;line-height:1.3;overflow-wrap:anywhere;transition:background .15s,border-color .15s}
+.sensory-entry-btn:hover,.sensory-entry-btn:focus-visible{border-color:#d8b56a;background:rgba(216,181,106,.10)}
+.sensory-entry-btn[aria-pressed="true"]{background:rgba(140,108,240,.28);border-color:#d8b56a;color:#f5dfaa;box-shadow:inset 0 0 0 1px rgba(216,181,106,.17)}
+@media(max-width:520px){.sensory-question-area ol{column-gap:8px;row-gap:8px}.sensory-question-area li{padding:0!important}.sensory-entry-btn{min-height:68px;padding:10px 9px;font-size:.79rem}}
+
+
+/* Conditional clearing in every regulation area, including method screens. */
+.sensory-regulation-chart-results[hidden],.sensory-regulation-no-message[hidden]{display:none!important}
+.sensory-regulation-chart-results:not([hidden]){margin-top:20px}
+.sensory-regulation-no-message:not([hidden]){margin-top:14px}
+/* Added Sensory/Energetic Regulation only; original app styles are unchanged. */
+#sensory-regulation-tool section[hidden],#sensory-emotion-charts[hidden],#sensory-emotion-no-message[hidden],#sensory-feeling-charts[hidden],#sensory-feeling-no-message[hidden],#sensory-release-charts[hidden],#sensory-release-no-message[hidden],#sensory-source-charts[hidden],#sensory-source-no-message[hidden]{display:none!important}
+.sensory-regulation-menu-grid,.sensory-regulation-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sensory-regulation-choice,.sensory-emotion-button{cursor:pointer;min-width:0;text-align:left;border:1px solid rgba(216,181,106,.32);border-radius:14px;background:#18191f;color:#f4f1ea;min-height:58px;padding:13px;font-weight:700;line-height:1.3}
+/* Emotional Processing items 4–8 expand inline, matching The Cup pattern. */
+.sensory-emotional-dropdown{min-width:0;border:1px solid rgba(216,181,106,.32);border-radius:14px;background:#18191f;overflow:hidden}
+.sensory-emotional-dropdown summary{list-style:none;cursor:pointer;min-height:58px;padding:13px;display:flex;align-items:center;font-weight:700;line-height:1.3;color:#f4f1ea}
+.sensory-emotional-dropdown summary::-webkit-details-marker{display:none}
+.sensory-emotional-dropdown[open]{border-color:#d8b56a;background:rgba(140,108,240,.19)}
+.sensory-emotional-dropdown[open] summary{color:#f5dfaa}
+.sensory-emotional-dropdown-body{padding:12px 14px 16px;border-top:1px solid rgba(216,181,106,.2);color:var(--muted);line-height:1.45}
+.sensory-emotional-dropdown-body p{margin:0}
+.sensory-regulation-choice[aria-pressed="true"],.sensory-emotion-button[aria-pressed="true"]{background:rgba(140,108,240,.27);border-color:#d8b56a;color:#f5dfaa}
+.sensory-emotion-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.sensory-regulation-help{color:var(--muted);line-height:1.45;margin:10px 0 16px}
+.sensory-sub-back{cursor:pointer;margin:0 0 12px}
+#sensory-regulation-method h3,#sensory-identify-emotion h3{margin:10px 0;color:#f5dfaa}
+@media(max-width:700px){.sensory-emotion-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sensory-emotion-button{padding:10px 8px;font-size:.83rem}.sensory-regulation-menu-grid,.sensory-regulation-choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Clearing charts: consistent source-aware Back and Home navigation */
+.chart-back-actions {display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+@media(max-width:700px){.chart-back-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.chart-back-actions .ghost-btn{width:100%;font-size:.8rem;padding:10px 7px}}
 </style>
 </head>
 <body>
@@ -3714,6 +3790,199 @@ function renderQuickStart() {
           </div>
         </div>
 
+        <div class="checkpoint-split-section" id="sensory-checks-section">
+          <div class="pill dashboard-subsection-pill">Sensory/Energetic Check</div>
+          <div class="quick-check-grid self-check-grid">
+            <button type="button" class="quick-start-card-static" id="sensory-trigger-open" aria-expanded="false" aria-controls="sensory-trigger-tool">
+              <div class="quick-start-title">Sensory &amp; Energetic Assessment</div>
+              <div class="quick-start-title-sub">Identify: What needs attention?</div>
+              <div class="quick-start-desc">Identify physical, sensory, emotional, environmental, communication, and energetic triggers to locate what needs attention or clearing.</div>
+            </button>
+            <button type="button" class="quick-start-card-static" id="sensory-regulation-open" aria-expanded="false" aria-controls="sensory-regulation-tool">
+              <div class="quick-start-title">Sensory/Energetic Regulation</div>
+              <div class="quick-start-title-sub">Identify: Regulation support</div>
+              <div class="quick-start-desc">Explore regulation methods, identify emotions, and choose supportive practices or clearing when needed.</div>
+            </button>
+          </div>
+          <div class="sensory-trigger-tool" id="sensory-regulation-tool" hidden>
+            <div class="sensory-tool-head">
+              <div><h3>Sensory/Energetic Regulation</h3><p>Select a regulation area, then explore the methods available.</p></div>
+              <button type="button" class="ghost-btn sensory-close-btn" id="sensory-regulation-close">Back to Sensory/Energetic Check</button>
+            </div>
+            <section id="sensory-regulation-menu"><div class="sensory-regulation-menu-grid" id="sensory-regulation-areas"></div><div class="sensory-clearing-panel sensory-regulation-clearing-panel" data-regulation-clearing="menu">
+              <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+              <div class="sensory-filter-row" role="group" aria-label="Is clearing needed?">
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="yes" aria-pressed="false">Yes</button>
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="no" aria-pressed="false">No</button>
+              </div>
+              <div class="sensory-chart-grid sensory-regulation-chart-results" hidden role="group" aria-label="Select clearing chart if needed">
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button><button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button><button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button><button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button>
+              </div>
+              <p class="sensory-regulation-no-message" hidden>No clearing indicated. Continue with regulation.</p>
+            </div></section>
+            <section id="sensory-regulation-method" hidden>
+              <button type="button" class="ghost-btn sensory-sub-back" id="sensory-back-regulation">← Back to Sensory/Energetic Regulation</button>
+              <h3 id="sensory-regulation-method-title"></h3>
+              <p class="sensory-regulation-help">Select a regulation method below to learn how it works and how it can help support emotional, sensory, and energetic balance.</p>
+              <div class="sensory-regulation-choices" id="sensory-regulation-choices"></div>
+              <div class="sensory-clearing-panel sensory-regulation-clearing-panel" data-regulation-clearing="method">
+              <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+              <div class="sensory-filter-row" role="group" aria-label="Is clearing needed?">
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="yes" aria-pressed="false">Yes</button>
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="no" aria-pressed="false">No</button>
+              </div>
+              <div class="sensory-chart-grid sensory-regulation-chart-results" hidden role="group" aria-label="Select clearing chart if needed">
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button><button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button><button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button><button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button>
+              </div>
+              <p class="sensory-regulation-no-message" hidden>No clearing indicated. Continue with regulation.</p>
+            </div>
+            </section>
+            <section id="sensory-emotional-guidance" hidden>
+              <button type="button" class="ghost-btn sensory-sub-back" id="sensory-back-from-guidance">← Back to Emotional Processing</button>
+              <h3 id="sensory-emotional-guidance-title"></h3>
+              <p class="sensory-regulation-help" id="sensory-emotional-guidance-description"></p>
+              <div class="sensory-clearing-panel sensory-regulation-clearing-panel" data-regulation-clearing="emotional-guidance">
+              <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+              <div class="sensory-filter-row" role="group" aria-label="Is clearing needed?">
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="yes" aria-pressed="false">Yes</button>
+                <button type="button" class="sensory-filter-btn" data-regulation-answer="no" aria-pressed="false">No</button>
+              </div>
+              <div class="sensory-chart-grid sensory-regulation-chart-results" hidden role="group" aria-label="Select clearing chart if needed">
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button><button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button><button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button><button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button>
+              </div>
+              <p class="sensory-regulation-no-message" hidden>No clearing indicated. Continue with regulation.</p>
+            </div>
+            </section>
+            <section id="sensory-identify-emotion" hidden>
+              <button type="button" class="ghost-btn sensory-sub-back" id="sensory-back-emotional">← Back to Emotional Processing</button>
+              <h3>Identify Emotion</h3>
+              <p class="sensory-regulation-help">Select or test the emotion being experienced. More than one may apply. Use the person's preferred way of communicating whenever possible.</p>
+              <div class="sensory-filter-row" role="group" aria-label="Filter emotions by number">
+                <button type="button" class="sensory-filter-btn" data-emotion-filter="odd" aria-pressed="false">Odd</button>
+                <button type="button" class="sensory-filter-btn" data-emotion-filter="even" aria-pressed="false">Even</button>
+                <button type="button" class="sensory-filter-btn" data-emotion-filter="all" aria-pressed="true">Show All</button>
+              </div>
+              <div class="sensory-emotion-grid" id="sensory-emotion-grid"></div>
+              <p class="sensory-regulation-help" id="sensory-emotion-count">0 selected</p>
+              <div class="sensory-clearing-panel">
+                <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+                <div class="sensory-filter-row">
+                  <button type="button" class="sensory-filter-btn" id="sensory-emotion-clear-yes" aria-pressed="false">Yes</button>
+                  <button type="button" class="sensory-filter-btn" id="sensory-emotion-clear-no" aria-pressed="false">No</button>
+                </div>
+                <div id="sensory-emotion-charts" hidden>
+                  <p>Select the clearing chart if needed.</p>
+                  <div class="sensory-chart-grid" role="group" aria-label="Available clearing charts">
+                                        <button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button>
+                    <button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button>
+                  </div>
+                </div>
+                <p id="sensory-emotion-no-message" hidden>No clearing indicated. Continue with Emotional Processing.</p>
+              </div>
+            </section>
+            <section id="sensory-name-feeling" hidden>
+              <button type="button" class="ghost-btn sensory-sub-back" id="sensory-back-from-feelings">← Back to Emotional Processing</button>
+              <h3>Name the Feeling</h3>
+              <p class="sensory-regulation-help">Identify how the emotion is being experienced, even when it cannot be expressed verbally. Select or test one feeling at a time. More than one may apply.</p>
+              <div class="sensory-filter-row" role="group" aria-label="Filter feelings by number">
+                <button type="button" class="sensory-filter-btn" data-feeling-filter="odd" aria-pressed="false">Odd</button>
+                <button type="button" class="sensory-filter-btn" data-feeling-filter="even" aria-pressed="false">Even</button>
+                <button type="button" class="sensory-filter-btn" data-feeling-filter="all" aria-pressed="true">Show All</button>
+              </div>
+              <div class="sensory-emotion-grid" id="sensory-feeling-grid"></div>
+              <p class="sensory-regulation-help" id="sensory-feeling-count">0 selected</p>
+              <div class="sensory-clearing-panel">
+                <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+                <div class="sensory-filter-row" role="group" aria-label="Is clearing needed for this feeling?">
+                  <button type="button" class="sensory-filter-btn" id="sensory-feeling-clear-yes" aria-pressed="false">Yes</button>
+                  <button type="button" class="sensory-filter-btn" id="sensory-feeling-clear-no" aria-pressed="false">No</button>
+                </div>
+                <div id="sensory-feeling-charts" hidden>
+                  <p>Select the clearing chart if needed.</p>
+                  <div class="sensory-chart-grid" role="group" aria-label="Available clearing charts"><button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button><button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button><button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button><button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button></div>
+                </div>
+                <p id="sensory-feeling-no-message" hidden>No clearing indicated. Continue with Emotional Processing.</p>
+              </div>
+            </section>
+            <section id="sensory-emotional-release" hidden>
+              <button type="button" class="ghost-btn sensory-sub-back" id="sensory-back-from-release">← Back to Emotional Processing</button>
+              <h3>Emotional Release</h3>
+              <p class="sensory-regulation-help">Explore stimming, movement, sensory input, and energetic practices for emotional expression and self-regulation. Choose options that respect the person’s comfort, preferences, and safety.</p>
+              <div class="sensory-filter-row" role="group" aria-label="Filter release methods by number">
+                <button type="button" class="sensory-filter-btn" data-release-filter="odd" aria-pressed="false">Odd</button>
+                <button type="button" class="sensory-filter-btn" data-release-filter="even" aria-pressed="false">Even</button>
+                <button type="button" class="sensory-filter-btn" data-release-filter="all" aria-pressed="true">Show All</button>
+              </div>
+              <div class="sensory-emotion-grid" id="sensory-release-grid"></div>
+              <p class="sensory-regulation-help" id="sensory-release-count">0 selected</p>
+              <div class="sensory-clearing-panel">
+                <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+                <div class="sensory-filter-row" role="group" aria-label="Is clearing needed for this release method?">
+                  <button type="button" class="sensory-filter-btn" id="sensory-release-clear-yes" aria-pressed="false">Yes</button>
+                  <button type="button" class="sensory-filter-btn" id="sensory-release-clear-no" aria-pressed="false">No</button>
+                </div>
+                <div id="sensory-release-charts" hidden>
+                  <p>Select the clearing chart if needed.</p>
+                  <div class="sensory-chart-grid" role="group" aria-label="Available clearing charts"><button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button><button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button><button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button><button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button><button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button></div>
+                </div>
+                <p id="sensory-release-no-message" hidden>No clearing indicated. Continue with Emotional Processing.</p>
+              </div>
+            </section>
+          </div>
+          <div class="sensory-trigger-tool" id="sensory-trigger-tool" hidden>
+            <div class="sensory-tool-head">
+              <div><h3>Sensory &amp; Energetic Assessment</h3><p>Select a category to identify the specific trigger, block, or clearing target. Test each entry directly using your established process.</p></div>
+              <button type="button" class="ghost-btn sensory-close-btn" id="sensory-trigger-close">Back to Sensory/Energetic Check</button>
+            </div>
+            <div class="sensory-categories" role="group" aria-label="Sensory check areas">
+              <button type="button" class="sensory-category active" data-sensory="physical" aria-pressed="true">1. Physical</button>
+              <button type="button" class="sensory-category" data-sensory="sensory" aria-pressed="false">2. Sensory</button>
+              <button type="button" class="sensory-category" data-sensory="emotional" aria-pressed="false">3. Emotional</button>
+              <button type="button" class="sensory-category" data-sensory="environmental" aria-pressed="false">4. Environmental</button>
+              <button type="button" class="sensory-category" data-sensory="communication" aria-pressed="false">5. Communication</button>
+              <button type="button" class="sensory-category" data-sensory="boundaries" aria-pressed="false">6. Boundaries</button>
+              <button type="button" class="sensory-category" data-sensory="clearing" aria-pressed="false">7. Clearing</button>
+            </div>
+            <div class="sensory-filter-panel" aria-label="Narrow sensory choices">
+              <div class="sensory-filter-search"><input type="search" id="sensory-filter-search" placeholder="Search by number or word..." aria-label="Search sensory choices"><button type="button" class="clear-btn" id="sensory-filter-clear">Clear</button></div>
+              <div class="sensory-filter-row" role="group" aria-label="Filter by odd or even number">
+                <button type="button" class="sensory-filter-btn" data-sensory-filter="odd" aria-pressed="false">Odd</button>
+                <button type="button" class="sensory-filter-btn" data-sensory-filter="even" aria-pressed="false">Even</button>
+                <button type="button" class="sensory-filter-btn" data-sensory-filter="all" aria-pressed="true">Show All</button>
+              </div>
+            </div>
+            <div class="sensory-question-area" id="sensory-question-area" aria-live="polite"></div>
+            <div class="sensory-clearing-panel">
+              <p class="sensory-clearing-question">Does anything I've identified need to be cleared?</p>
+              <div class="sensory-filter-row" role="group" aria-label="Is clearing needed?">
+                <button type="button" class="sensory-filter-btn" id="sensory-source-clear-yes" aria-pressed="false">Yes</button>
+                <button type="button" class="sensory-filter-btn" id="sensory-source-clear-no" aria-pressed="false">No</button>
+              </div>
+              <p id="sensory-source-no-message" hidden>No clearing indicated. Continue reviewing or return to Sensory/Energetic Check.</p>
+              <div class="sensory-chart-grid" id="sensory-source-charts" role="group" aria-label="Open existing clearing charts" hidden>
+                                <button type="button" class="sensory-chart-btn" data-sensory-chart="power">Power Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="core">Core Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="wounds">Wound Clearings</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="charta">Universal Chart A</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="chartb">Universal Chart B</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="rootblocks">Root Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="suppression">Suppression Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="spells">Control Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="systemlocks">System Blocks</button>
+                <button type="button" class="sensory-chart-btn" data-sensory-chart="locations">Clearing Location</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="checkpoint-split-section" id="relationship-checkpoint-section">
           <div class="pill dashboard-subsection-pill" id="relationship-checkpoint">Relationship Checkpoint</div>
           <div class="quick-check-grid relationship-check-grid">
@@ -3735,6 +4004,481 @@ function renderQuickStart() {
         ${referenceVaultCards.map(renderCard).join('')}
       </div>
     </div>`;
+  // Sensory/Energetic Regulation — additive. Other regulation branches are starter suggestions pending review.
+  const regulationTool = document.getElementById('sensory-regulation-tool');
+  const regulationOpen = document.getElementById('sensory-regulation-open');
+  const regulationAreas = [
+    'Emotional Processing','Stabilization','Grounding','Nervous System Settling',
+    'Boundary Reinforcement','Recalibration','Pattern Recoding','Regulation',
+    'Sensory Recovery','Completion'
+  ];
+  const emotionalMethods = ['Identify Emotion','Name the Feeling','Emotional Release','Allow Emotional Expression','Use Calming Sounds','Release Through Movement','Practice Self-Compassion','Rest & Reset'];
+  const emotionalGuidance = {
+    3:'Give the person space to express what they are experiencing without pressure to speak, explain, or suppress their emotions.',
+    4:'Explore music, frequencies, nature sounds, or rhythmic audio to support emotional and energetic balance.',
+    5:'Use movement to help release built-up tension, restore comfort, and support regulation.',
+    6:'Encourage patience, acceptance, and emotional safety without judgment or pressure to recover immediately.',
+    7:'Allow time for the body, emotions, and energy to settle before returning to activities or interactions.'
+  };
+  const regulationSuggestions = {
+    1:['Find a comfortable space','Restore a familiar routine','Reduce stimulation','Take a quiet break','Use a calming object'],
+    2:['Feel feet on the floor','Notice things nearby','Walk slowly','Hold a familiar object','Spend time outdoors'],
+    3:['Slow comfortable breathing','Reduce surrounding noise','Gentle movement','Rest in a quiet space','Listen to calming music'],
+    4:['Practice a stop gesture','Communicate no touch','Request personal space','Rehearse respectful refusal','Establish an energetic boundary'],
+    5:['Center attention','Visualize alignment','Use a grounding affirmation','Reconnect with an intention','Check alignment'],
+    6:['Identify an old response','Choose a replacement response','Practice the new response','Reinforce the new pattern','Repeat during calm moments'],
+    7:['Notice early warning signs','Choose a calming strategy','Practice a familiar routine','Use a visual cue','Take a movement break'],
+    8:['Reduce bright light','Reduce loud sounds','Allow quiet time','Change uncomfortable clothing','Rest in a familiar environment'],
+    9:['Check readiness','Review the response','Identify remaining needs','Confirm stabilization','Close the session']
+  };
+  // Plain-language explanations for starter regulation methods; original labels remain unchanged.
+  const regulationExplanations = {
+    1:[
+      'Move to a place where the person feels comfortable and has room to settle.',
+      'Use familiar steps and timing to make what happens next easier to anticipate.',
+      'Lower noise, light, conversation, or activity that feels overwhelming.',
+      'Pause demands and give the person time without pressure to respond.',
+      'Offer an object the person already associates with comfort, if they want it.'
+    ],
+    2:[
+      'Notice the contact between feet and the ground, if comfortable.',
+      'Gently look around and notice familiar objects without needing to speak.',
+      'Take a calm walk at a comfortable pace, with support if needed.',
+      'Hold or touch a familiar object to reconnect with the present moment.',
+      'Spend time in an outdoor space that feels safe and comfortable.'
+    ],
+    3:[
+      'Allow breathing to become slower naturally, without forcing a particular rhythm.',
+      'Move away from loud sound or lower the volume where possible.',
+      'Try easy, comfortable movements such as swaying or stretching.',
+      'Spend time resting somewhere quiet, with fewer demands.',
+      'Offer familiar music at a comfortable volume, or choose silence instead.'
+    ],
+    4:[
+      'Practice a simple hand signal that clearly communicates stop.',
+      'Use words, gestures, or another preferred method to communicate a no-touch boundary.',
+      'Provide a simple way to ask others to move back or give more room.',
+      'Practice saying or signaling no during calm moments so it is easier when needed.',
+      'Use a chosen visualization or intention to reinforce a sense of personal energetic space.'
+    ],
+    5:[
+      'Pause and bring awareness to one comfortable point of focus.',
+      'Picture the energy returning to a centered, balanced state.',
+      'Repeat a short grounding statement, silently or aloud, if helpful.',
+      'Reconnect with a simple intention for how the person wants to feel or respond.',
+      'Pause and reflect on what feels settled and what still needs attention.'
+    ],
+    6:[
+      'Notice the response that keeps repeating, without judging the person for it.',
+      'Choose one safe, realistic action to use instead of the old response.',
+      'Rehearse the replacement while calm, using demonstration or visual support if useful.',
+      'Acknowledge and reinforce small moments when the replacement response is used.',
+      'Practice consistently in low-stress situations before expecting it during difficult ones.'
+    ],
+    7:[
+      'Look for early changes in movement, expression, sound, or comfort.',
+      'Select a technique the person already accepts or finds soothing.',
+      'Follow a predictable sequence of steps that has helped before.',
+      'Use a familiar picture, object, or gesture to signal the next step.',
+      'Offer a chance to walk, stretch, rock, or move in a safe way.'
+    ],
+    8:[
+      'Dim or avoid bright lighting when it feels uncomfortable.',
+      'Move away from loud sounds or use preferred noise-reduction supports.',
+      'Allow a quiet period with minimal requests or conversation.',
+      'Change or adjust clothing that feels scratchy, tight, or otherwise uncomfortable.',
+      'Recover in a familiar place with preferred objects and enough personal space.'
+    ],
+    9:[
+      'Pause and observe whether the person seems ready for the next activity.',
+      'Notice what was helpful and what may need to change next time.',
+      'Consider whether there is any remaining discomfort, support need, or unfinished step.',
+      'Check that the person has had enough time and support to settle.',
+      'Finish the activity calmly, with a predictable transition to what comes next.'
+    ]
+  };
+  const emotionsForRegulation = ['Anger','Fear','Sadness','Frustration','Anxiety','Overwhelm','Confusion','Disappointment','Loneliness','Embarrassment','Jealousy','Resentment','Guilt','Shame','Grief','Helplessness','Insecurity','Excitement','Happiness','Calm'];
+  const feelingsForRegulation = ['Feeling unsafe','Feeling misunderstood','Feeling rejected','Feeling ignored','Feeling trapped','Feeling pressured','Feeling powerless','Feeling disconnected','Feeling threatened','Feeling uncomfortable','Feeling overwhelmed','Feeling restricted','Feeling vulnerable','Feeling unsupported','Feeling unwanted','Feeling uncertain','Feeling overstimulated','Feeling unheard','Feeling helpless','Feeling out of control'];
+  const chosenFeelings = new Set();
+  const releaseMethods = ['Spinning', 'Rocking', 'Hand flapping', 'Body swaying', 'Bouncing', 'Pacing', 'Jumping', 'Stomping', 'Vocal stimming', 'Humming', 'Finger tapping', 'Fidgeting', 'Squeezing a sensory object', 'Deep-pressure input', 'Stretching', 'Dancing', 'Shaking out tension', 'Rhythmic drumming', 'Crying', 'Energetic release'];
+  const chosenRelease = new Set();
+  let releaseParity = 'all';
+
+  let feelingParity = 'all';
+  const chosenRegulationOptions = new Set();
+  const chosenEmotions = new Set();
+  let emotionParity = 'all';
+  let activeRegulationArea = 0;
+  function showRegulationScreen(screen) {
+    ['sensory-regulation-menu','sensory-regulation-method','sensory-identify-emotion','sensory-name-feeling','sensory-emotional-release','sensory-emotional-guidance'].forEach(id => {
+      document.getElementById(id).hidden = id !== screen;
+    });
+    regulationTool.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function renderRegulationAreas() {
+    const box = document.getElementById('sensory-regulation-areas');
+    box.replaceChildren();
+    regulationAreas.forEach((name,i) => {
+      const button = document.createElement('button');
+      button.type='button';button.className='sensory-regulation-choice';
+      button.textContent=(i+1)+'. '+name;
+      button.addEventListener('click',()=>renderRegulationMethod(i));
+      box.appendChild(button);
+    });
+  }
+  function renderRegulationMethod(area) {
+    activeRegulationArea=area;
+    document.getElementById('sensory-regulation-method-title').textContent=regulationAreas[area];
+    const box=document.getElementById('sensory-regulation-choices');box.replaceChildren();
+    const options=area===0?emotionalMethods:regulationSuggestions[area];
+    options.forEach((name,i)=>{
+      if(area===0 && i>=3){
+        const details=document.createElement('details');
+        details.className='sensory-emotional-dropdown';
+        const summary=document.createElement('summary');
+        summary.textContent=(i+1)+'. '+name;
+        const content=document.createElement('div');
+        content.className='sensory-emotional-dropdown-body';
+        const description=document.createElement('p');
+        description.textContent=emotionalGuidance[i];
+        content.appendChild(description);
+        details.append(summary,content);
+        box.appendChild(details);
+        return;
+      }
+      if(area!==0){
+        // Cup-style inline explanation for every regulation suggestion without a nested menu.
+        const details=document.createElement('details');
+        details.className='sensory-emotional-dropdown';
+        const summary=document.createElement('summary');
+        summary.textContent=(i+1)+'. '+name;
+        const content=document.createElement('div');
+        content.className='sensory-emotional-dropdown-body';
+        const description=document.createElement('p');
+        description.textContent=regulationExplanations[area][i];
+        content.appendChild(description);
+        details.append(summary,content);
+        box.appendChild(details);
+        return;
+      }
+      const button=document.createElement('button');button.type='button';button.className='sensory-regulation-choice';
+      button.textContent=(i+1)+'. '+name;
+      button.setAttribute('aria-pressed',String(chosenRegulationOptions.has(area+':'+i)));
+      button.addEventListener('click',()=>{
+        if(area===0 && i===0){renderEmotions();showRegulationScreen('sensory-identify-emotion');return;}
+        if(area===0 && i===1){renderFeelings();showRegulationScreen('sensory-name-feeling');return;}
+        if(area===0 && i===2){renderRelease();showRegulationScreen('sensory-emotional-release');return;}
+        const key=area+':'+i;
+        if(chosenRegulationOptions.has(key))chosenRegulationOptions.delete(key);else chosenRegulationOptions.add(key);
+        button.setAttribute('aria-pressed',String(chosenRegulationOptions.has(key)));
+      });box.appendChild(button);
+    });
+    showRegulationScreen('sensory-regulation-method');
+  }
+  function renderEmotions() {
+    const box=document.getElementById('sensory-emotion-grid');box.replaceChildren();
+    emotionsForRegulation.forEach((name,i)=>{
+      const n=i+1;
+      if(emotionParity==='odd' && n%2===0)return;
+      if(emotionParity==='even' && n%2!==0)return;
+      const button=document.createElement('button');button.type='button';button.className='sensory-emotion-button';
+      button.textContent=n+'. '+name;
+      button.setAttribute('aria-pressed',String(chosenEmotions.has(i)));
+      button.addEventListener('click',()=>{
+        if(chosenEmotions.has(i))chosenEmotions.delete(i);else chosenEmotions.add(i);
+        button.setAttribute('aria-pressed',String(chosenEmotions.has(i)));
+        document.getElementById('sensory-emotion-count').textContent=chosenEmotions.size+' emotion(s) selected';
+      });box.appendChild(button);
+    });
+    document.getElementById('sensory-emotion-count').textContent=chosenEmotions.size+' emotion(s) selected';
+    document.querySelectorAll('[data-emotion-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.emotionFilter===emotionParity)));
+  }
+  function renderFeelings() {
+    const box=document.getElementById('sensory-feeling-grid');box.replaceChildren();
+    feelingsForRegulation.forEach((name,i)=>{
+      const n=i+1;
+      if(feelingParity==='odd' && n%2===0)return;
+      if(feelingParity==='even' && n%2!==0)return;
+      const button=document.createElement('button');button.type='button';button.className='sensory-emotion-button';
+      button.textContent=n+'. '+name;
+      button.setAttribute('aria-pressed',String(chosenFeelings.has(i)));
+      button.addEventListener('click',()=>{
+        if(chosenFeelings.has(i))chosenFeelings.delete(i);else chosenFeelings.add(i);
+        button.setAttribute('aria-pressed',String(chosenFeelings.has(i)));
+        document.getElementById('sensory-feeling-count').textContent=chosenFeelings.size+' feeling(s) selected';
+      });box.appendChild(button);
+    });
+    document.getElementById('sensory-feeling-count').textContent=chosenFeelings.size+' feeling(s) selected';
+    document.querySelectorAll('[data-feeling-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.feelingFilter===feelingParity)));
+  }
+  function renderRelease() {
+    const box=document.getElementById('sensory-release-grid');box.replaceChildren();
+    releaseMethods.forEach((name,i)=>{
+      const n=i+1;
+      if(releaseParity==='odd' && n%2===0)return;
+      if(releaseParity==='even' && n%2!==0)return;
+      const button=document.createElement('button');button.type='button';button.className='sensory-emotion-button';
+      button.textContent=n+'. '+name;
+      button.setAttribute('aria-pressed',String(chosenRelease.has(i)));
+      button.addEventListener('click',()=>{
+        if(chosenRelease.has(i))chosenRelease.delete(i);else chosenRelease.add(i);
+        button.setAttribute('aria-pressed',String(chosenRelease.has(i)));
+        document.getElementById('sensory-release-count').textContent=chosenRelease.size+' option(s) selected';
+      });box.appendChild(button);
+    });
+    document.getElementById('sensory-release-count').textContent=chosenRelease.size+' option(s) selected';
+    document.querySelectorAll('[data-release-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.releaseFilter===releaseParity)));
+  }
+  if(regulationTool && regulationOpen){
+    renderRegulationAreas();
+    regulationOpen.addEventListener('click',()=>{
+      document.getElementById('sensory-trigger-tool').hidden=true;
+      document.getElementById('sensory-trigger-open').setAttribute('aria-expanded','false');
+      regulationTool.hidden=false;regulationOpen.setAttribute('aria-expanded','true');
+      showRegulationScreen('sensory-regulation-menu');
+    });
+    document.getElementById('sensory-regulation-close').addEventListener('click',()=>{
+      regulationTool.hidden=true;regulationOpen.setAttribute('aria-expanded','false');
+      regulationOpen.scrollIntoView({behavior:'smooth',block:'center'});regulationOpen.focus();
+    });
+    document.getElementById('sensory-back-regulation').addEventListener('click',()=>showRegulationScreen('sensory-regulation-menu'));
+    document.getElementById('sensory-back-emotional').addEventListener('click',()=>renderRegulationMethod(0));
+    document.getElementById('sensory-back-from-feelings').addEventListener('click',()=>renderRegulationMethod(0));
+    document.getElementById('sensory-back-from-release').addEventListener('click',()=>renderRegulationMethod(0));
+    document.getElementById('sensory-back-from-guidance').addEventListener('click',()=>renderRegulationMethod(0));
+    document.querySelectorAll('[data-release-filter]').forEach(button=>button.addEventListener('click',()=>{
+      releaseParity=button.dataset.releaseFilter;renderRelease();
+    }));
+    function setReleaseClearResponse(answer){
+      document.getElementById('sensory-release-charts').hidden=answer!=='yes';
+      document.getElementById('sensory-release-no-message').hidden=answer!=='no';
+      document.getElementById('sensory-release-clear-yes').setAttribute('aria-pressed',String(answer==='yes'));
+      document.getElementById('sensory-release-clear-no').setAttribute('aria-pressed',String(answer==='no'));
+    }
+    document.getElementById('sensory-release-clear-yes').addEventListener('click',()=>setReleaseClearResponse('yes'));
+    document.getElementById('sensory-release-clear-no').addEventListener('click',()=>setReleaseClearResponse('no'));
+
+    document.querySelectorAll('[data-feeling-filter]').forEach(button=>button.addEventListener('click',()=>{
+      feelingParity=button.dataset.feelingFilter;renderFeelings();
+    }));
+    function setFeelingClearResponse(answer){
+      document.getElementById('sensory-feeling-charts').hidden=answer!=='yes';
+      document.getElementById('sensory-feeling-no-message').hidden=answer!=='no';
+      document.getElementById('sensory-feeling-clear-yes').setAttribute('aria-pressed',String(answer==='yes'));
+      document.getElementById('sensory-feeling-clear-no').setAttribute('aria-pressed',String(answer==='no'));
+    }
+    document.getElementById('sensory-feeling-clear-yes').addEventListener('click',()=>setFeelingClearResponse('yes'));
+    document.getElementById('sensory-feeling-clear-no').addEventListener('click',()=>setFeelingClearResponse('no'));
+
+    document.querySelectorAll('[data-emotion-filter]').forEach(button=>button.addEventListener('click',()=>{
+      emotionParity=button.dataset.emotionFilter;renderEmotions();
+    }));
+    function setEmotionClearResponse(answer){
+      document.getElementById('sensory-emotion-charts').hidden=answer!=='yes';
+      document.getElementById('sensory-emotion-no-message').hidden=answer!=='no';
+      document.getElementById('sensory-emotion-clear-yes').setAttribute('aria-pressed',String(answer==='yes'));
+      document.getElementById('sensory-emotion-clear-no').setAttribute('aria-pressed',String(answer==='no'));
+    }
+    document.getElementById('sensory-emotion-clear-yes').addEventListener('click',()=>setEmotionClearResponse('yes'));
+    document.getElementById('sensory-emotion-clear-no').addEventListener('click',()=>setEmotionClearResponse('no'));
+    // Each regulation screen has an independent Yes/No clearing gate.
+    regulationTool.querySelectorAll('[data-regulation-clearing]').forEach(panel => {
+      const yes=panel.querySelector('[data-regulation-answer="yes"]');
+      const no=panel.querySelector('[data-regulation-answer="no"]');
+      const charts=panel.querySelector('.sensory-regulation-chart-results');
+      const message=panel.querySelector('.sensory-regulation-no-message');
+      const setAnswer=answer=>{
+        yes.setAttribute('aria-pressed',String(answer==='yes'));
+        no.setAttribute('aria-pressed',String(answer==='no'));
+        charts.hidden=answer!=='yes';
+        message.hidden=answer!=='no';
+      };
+      yes.addEventListener('click',()=>setAnswer('yes'));
+      no.addEventListener('click',()=>setAnswer('no'));
+    });
+    renderEmotions();
+    renderFeelings();
+    renderRelease();
+  }
+
+  // Sensory Checks uses its own inline expandable tool; no existing navigation is changed.
+  const sensoryTool = document.getElementById('sensory-trigger-tool');
+  const sensoryOpen = document.getElementById('sensory-trigger-open');
+  const sensoryQuestionArea = document.getElementById('sensory-question-area');
+  const sensoryGroups = {
+    physical: ['Physical', [
+      'Pain',
+      'Muscle tension',
+      'Fatigue',
+      'Exhaustion',
+      'Hunger',
+      'Thirst',
+      'Sleep disruption',
+      'Digestive discomfort',
+      'Illness',
+      'Limited mobility'
+    ]],
+    sensory: ['Sensory', [
+      'Touch',
+      'Sound',
+      'Light',
+      'Texture',
+      'Smell',
+      'Taste',
+      'Temperature',
+      'Movement',
+      'Pressure',
+      'Vibration'
+    ]],
+    emotional: ['Emotional', [
+      'Fear',
+      'Anger',
+      'Frustration',
+      'Anxiety',
+      'Sadness',
+      'Overwhelm',
+      'Insecurity',
+      'Resentment',
+      'Distress',
+      'Exhaustion'
+    ]],
+    environmental: ['Environmental', [
+      'Crowding',
+      'Unfamiliar surroundings',
+      'Sudden noises',
+      'Bright lighting',
+      'Odors',
+      'Temperature changes',
+      'Unpredictable movement',
+      'Routine changes',
+      'Proximity to others',
+      'Restricted space'
+    ]],
+    communication: ['Communication', [
+      'Expressing discomfort',
+      'Communicating refusal',
+      'Requesting space',
+      'Expressing pain',
+      'Expressing emotions',
+      'Requesting assistance',
+      'Communicating needs',
+      'Being misunderstood',
+      'Frustration',
+      'Initiating communication'
+    ]],
+    boundaries: ['Boundaries', [
+      'Unwanted touch',
+      'Personal space intrusion',
+      'Violation',
+      'Lack of consent',
+      'Unexpected approach',
+      'Forced interaction',
+      'Loss of control',
+      'Someone not respecting “No”',
+      'Unwanted redirection',
+      'Difficulty enforcing personal boundaries'
+    ]],
+    clearing: ['Clearing', [
+      'Stored emotional charge',
+      'Residual energy',
+      'Absorbed emotions',
+      'Attachments',
+      'Fear imprint',
+      'Blocks',
+      'Chakra imbalance',
+      'Auric imbalance',
+      'Repeated unwanted energetic patterns',
+      'Outside energetic interference'
+    ]],
+
+  };
+  let sensoryActiveGroup = 'physical';
+  let sensoryActiveFilter = 'all';
+  const sensorySelectedEntries = new Set();
+  function showSensoryGroup(key) {
+    const group = sensoryGroups[key];
+    if (!group) return;
+    sensoryActiveGroup = key;
+    document.querySelectorAll('.sensory-category').forEach(button => {
+      const selected = button.dataset.sensory === key;
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    const search = (document.getElementById('sensory-filter-search')?.value || '').trim().toLowerCase();
+    sensoryQuestionArea.replaceChildren();
+    const heading = document.createElement('h4');
+    heading.textContent = group[0];
+    const list = document.createElement('ol');
+    let visibleCount = 0;
+    group[1].forEach((entry, index) => {
+      const n = index + 1;
+      if (sensoryActiveFilter === 'odd' && n % 2 === 0) return;
+      if (sensoryActiveFilter === 'even' && n % 2 !== 0) return;
+      if (search && !(String(n).includes(search) || entry.toLowerCase().includes(search))) return;
+      const li = document.createElement('li');
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'sensory-entry-btn';
+      tile.textContent = n + '. ' + entry;
+      const entryId = key + ':' + n;
+      tile.setAttribute('aria-pressed', String(sensorySelectedEntries.has(entryId)));
+      tile.addEventListener('click', () => {
+        if (sensorySelectedEntries.has(entryId)) sensorySelectedEntries.delete(entryId);
+        else sensorySelectedEntries.add(entryId);
+        tile.setAttribute('aria-pressed', String(sensorySelectedEntries.has(entryId)));
+      });
+      li.appendChild(tile);
+      list.appendChild(li);
+      visibleCount++;
+    });
+    sensoryQuestionArea.append(heading);
+    if (visibleCount) sensoryQuestionArea.append(list);
+    else { const empty = document.createElement('p');empty.textContent='No matching entries.';sensoryQuestionArea.append(empty); }
+  }
+  function setSensoryFilter(mode) {
+    sensoryActiveFilter = mode;
+    document.querySelectorAll('[data-sensory-filter]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.sensoryFilter === mode));
+    });
+    showSensoryGroup(sensoryActiveGroup);
+  }
+  if (sensoryTool && sensoryOpen) {
+    function setSourceClearResponse(answer) {
+      document.getElementById('sensory-source-charts').hidden = answer !== 'yes';
+      document.getElementById('sensory-source-no-message').hidden = answer !== 'no';
+      document.getElementById('sensory-source-clear-yes').setAttribute('aria-pressed', String(answer === 'yes'));
+      document.getElementById('sensory-source-clear-no').setAttribute('aria-pressed', String(answer === 'no'));
+    }
+    document.getElementById('sensory-source-clear-yes').addEventListener('click', () => setSourceClearResponse('yes'));
+    document.getElementById('sensory-source-clear-no').addEventListener('click', () => setSourceClearResponse('no'));
+    sensoryOpen.addEventListener('click', () => {
+      sensoryTool.hidden = false;
+      if(regulationTool){regulationTool.hidden=true;regulationOpen.setAttribute('aria-expanded','false');}
+      sensoryOpen.setAttribute('aria-expanded','true');
+      setSourceClearResponse(null);
+      showSensoryGroup('physical');
+      sensoryTool.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('sensory-trigger-close').addEventListener('click', () => {
+      sensoryTool.hidden = true;
+      sensoryOpen.setAttribute('aria-expanded','false');
+      sensoryOpen.scrollIntoView({behavior:'smooth',block:'center'});
+      sensoryOpen.focus();
+    });
+    document.querySelectorAll('.sensory-category').forEach(button => button.addEventListener('click', () => showSensoryGroup(button.dataset.sensory)));
+    document.querySelectorAll('[data-sensory-filter]').forEach(button => button.addEventListener('click', () => setSensoryFilter(button.dataset.sensoryFilter)));
+    document.getElementById('sensory-filter-search').addEventListener('input', () => showSensoryGroup(sensoryActiveGroup));
+    document.getElementById('sensory-filter-clear').addEventListener('click', () => {
+      document.getElementById('sensory-filter-search').value = '';
+      setSensoryFilter('all');
+    });
+    document.querySelectorAll('[data-sensory-chart]').forEach(button => button.addEventListener('click', () => {
+      const target = button.dataset.sensoryChart;
+      if (target === 'charts') openToolboxDashboardTarget('alignment-clearing-charts', true);
+      else openToolboxSection(target);
+    }));
+  }
+
   // Only navigable dashboard cards receive the card-wide click handler.
   // The Cup uses a container with two independent actions.
   document.querySelectorAll('button.quick-start-card-static[data-tab]').forEach(btn => {
@@ -4027,7 +4771,12 @@ function addToolboxReturnHeader(container, returnState) {
   const bar = document.createElement('div');
   bar.className = 'toolbox-return-bar';
   const safeLabel = String(returnState.label || 'Previous Section').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  bar.innerHTML = `<button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button><button class="ghost-btn" type="button" onclick="returnFromToolboxDestination(${stateId})">Back to ${safeLabel}</button>`;
+  // Clearing charts have their own consistent Previous Section + Home controls.
+  if (clearingChartSections.has(container.dataset.section)) return;
+  // Each destination already has its own Back to Home control.
+  // Add only a contextual return button, and never duplicate Back to Home.
+  if (returnState.sectionKey === 'dashboard' || returnState.label === 'Home') return;
+  bar.innerHTML = `<button class="ghost-btn" type="button" onclick="returnFromToolboxDestination(${stateId})">Back to ${safeLabel}</button>`;
   container.prepend(bar);
 }
 
@@ -4114,7 +4863,82 @@ function goForwardInToolbox() {
   }, 160);
 }
 
+// Every clearing-chart destination keeps its own entry point and scroll position.
+const clearingChartSections = new Set([
+  'power', 'core', 'wounds', 'charta', 'chartb', 'rootblocks',
+  'suppression', 'spells', 'systemlocks', 'locations', 'boundaryclearing'
+]);
+const clearingChartOrigins = new Map();
+
+function returnFromClearingChart(sectionKey) {
+  const state = clearingChartOrigins.get(sectionKey);
+  if (!state || !state.sectionKey || state.sectionKey === sectionKey) {
+    goToSection('dashboard');
+    return;
+  }
+  goToSection(state.sectionKey);
+  setTimeout(() => window.scrollTo({ top: state.scrollY || 0, behavior: 'smooth' }), 180);
+}
+
+function updateClearingChartBackButtons(sectionKey) {
+  if (!clearingChartSections.has(sectionKey)) return;
+  const section = document.querySelector(`.section.active[data-section="${sectionKey}"]`);
+  if (!section) return;
+  // Remove old floating contextual return bars; controls belong next to Home.
+  section.querySelectorAll(':scope > .toolbox-return-bar').forEach(el => el.remove());
+  const header = section.querySelector('.section-head');
+  if (!header) return;
+  const home = [...header.querySelectorAll('button')].find(btn => btn.textContent.trim() === 'Back to Home');
+  if (!home) return;
+  // Power Blocks already provides its contextual button in this exact location.
+  if (sectionKey === 'power') return;
+  let back = header.querySelector('.chart-context-back');
+  if (!back) {
+    back = document.createElement('button');
+    back.className = 'ghost-btn chart-context-back';
+    back.type = 'button';
+    back.textContent = 'Back to Previous Section';
+    back.addEventListener('click', () => returnFromClearingChart(sectionKey));
+    home.parentNode.insertBefore(back, home);
+  }
+  // Keep both actions together on narrow screens as well.
+  if (home.parentNode === header) {
+    let group = header.querySelector('.chart-back-actions');
+    if (!group) {
+      group = document.createElement('div');
+      group.className = 'chart-back-actions';
+      header.insertBefore(group, home);
+    }
+    group.append(back, home);
+  }
+}
+
+let powerOriginState = null;
+
+function returnFromPowerBlocks() {
+  const state = powerOriginState;
+  if (!state || !state.sectionKey || state.sectionKey === 'power') {
+    goToSection('dashboard');
+    return;
+  }
+  goToSection(state.sectionKey);
+  setTimeout(() => window.scrollTo({top: state.scrollY || 0, behavior: 'smooth'}), 180);
+}
+
 function goToSection(key) {
+  // Record the entry point separately for every clearing chart, regardless of which link opened it.
+  const fromSection = getActiveSectionKey();
+  if (clearingChartSections.has(key) && fromSection !== key) {
+    clearingChartOrigins.set(key, { sectionKey: fromSection || 'dashboard', scrollY: window.scrollY });
+  }
+  // Capture the actual section and position before every entrance to Power Blocks.
+  // This also works for entry points outside the Toolbox, including dashboard links.
+  if (key === 'power' && getActiveSectionKey() !== 'power') {
+    powerOriginState = {
+      sectionKey: getActiveSectionKey() || 'dashboard',
+      scrollY: window.scrollY
+    };
+  }
   if (!toolboxBackInProgress) {
     rememberToolboxLocation();
     toolboxForwardHistory.length = 0;
@@ -4124,6 +4948,7 @@ function goToSection(key) {
   const target = document.querySelector(`.section[data-section="${key}"]`);
   if (target) {
     target.classList.add('active');
+    updateClearingChartBackButtons(key);
     target.scrollIntoView({behavior:'smooth', block:'start'});
   }
   updateFloatingTopButton();
@@ -4207,7 +5032,8 @@ function renderPowerSection() {
       <div class="pill">Power Blocks</div>
       <div class="power-head-tools">
         <input id="power-search" class="power-search-input" type="text" placeholder="Search Power Blocks..." />
-        <button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button>
+        <button class="ghost-btn" type="button" onclick="returnFromPowerBlocks()">Back to Previous Section</button>
+        <button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button>
       </div>
     </div>
     <div class="locations-jumpbar">
