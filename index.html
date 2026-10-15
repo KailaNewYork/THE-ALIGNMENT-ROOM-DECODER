@@ -3395,6 +3395,16 @@ html, body { max-width: 100%; overflow-x: hidden; }
 #sensory-regulation-method h3,#sensory-identify-emotion h3{margin:10px 0;color:#f5dfaa}
 @media(max-width:700px){.sensory-emotion-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sensory-emotion-button{padding:10px 8px;font-size:.83rem}.sensory-regulation-menu-grid,.sensory-regulation-choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+/* Mobile-only: prevent expandable Regulation cards from stretching adjacent cards. */
+@media (max-width:700px) {
+  #sensory-regulation-areas.sensory-regulation-menu-grid,
+  #sensory-regulation-choices.sensory-regulation-choices {
+    grid-template-columns:minmax(0,1fr) !important;
+  }
+  #sensory-regulation-choices > *,
+  #sensory-regulation-areas > * { min-width:0; width:100%; }
+}
+
 /* Clearing charts: consistent source-aware Back and Home navigation */
 .chart-back-actions {display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 @media(max-width:700px){.chart-back-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.chart-back-actions .ghost-btn{width:100%;font-size:.8rem;padding:10px 7px}}
