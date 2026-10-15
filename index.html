@@ -3398,6 +3398,14 @@ html, body { max-width: 100%; overflow-x: hidden; }
 /* Clearing charts: consistent source-aware Back and Home navigation */
 .chart-back-actions {display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 @media(max-width:700px){.chart-back-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.chart-back-actions .ghost-btn{width:100%;font-size:.8rem;padding:10px 7px}}
+
+/* Assessment target details: same inline expandable style as The Cup. */
+.sensory-question-area li{min-width:0;overflow:hidden;border:1px solid rgba(216,181,106,.28);border-radius:13px;background:#17181f}
+.sensory-question-area .sensory-entry-btn{border:0!important;border-radius:12px;width:100%;min-height:63px}
+.sensory-question-area .sensory-entry-description{padding:12px 14px 15px;border-top:1px solid rgba(216,181,106,.24);color:#b7b0a0;line-height:1.45;font-size:.91rem}
+.sensory-question-area .sensory-entry-description[hidden]{display:none!important}
+.sensory-question-area li:has(.sensory-entry-btn[aria-expanded="true"]){border-color:#d8b56a}
+@media(max-width:520px){.sensory-question-area .sensory-entry-description{padding:10px;font-size:.78rem;line-height:1.35}}
 </style>
 </head>
 <body>
@@ -4126,6 +4134,16 @@ function renderQuickStart() {
       box.appendChild(button);
     });
   }
+  // Keep regulation explanations mutually exclusive, like the Assessment accordion.
+  // The container is reused as people switch regulation areas, so delegate once.
+  document.getElementById('sensory-regulation-choices').addEventListener('toggle', (event) => {
+    const opened = event.target;
+    const container = document.getElementById('sensory-regulation-choices');
+    if (!(opened instanceof HTMLDetailsElement) || !opened.open || !container.contains(opened)) return;
+    container.querySelectorAll('details.sensory-emotional-dropdown[open]').forEach(other => {
+      if (other !== opened) other.open = false;
+    });
+  }, true);
   function renderRegulationMethod(area) {
     activeRegulationArea=area;
     document.getElementById('sensory-regulation-method-title').textContent=regulationAreas[area];
@@ -4392,6 +4410,92 @@ function renderQuickStart() {
     ]],
 
   };
+  const sensoryDescriptions = {
+  "physical": [
+    "Physical discomfort or soreness that may affect comfort, movement, or responses.",
+    "Tight or contracted muscles that make the body feel tense or uncomfortable.",
+    "Low energy that makes ordinary activities feel harder than usual.",
+    "An intense depletion of energy that may call for extended rest.",
+    "The body needs food; discomfort may increase when a meal is delayed.",
+    "The body needs fluids; dryness or dehydration may affect comfort.",
+    "Difficulty falling asleep, staying asleep, or getting restful sleep.",
+    "Discomfort related to the stomach, intestines, or digestion.",
+    "Feeling unwell or experiencing symptoms that need physical attention.",
+    "Difficulty moving freely or comfortably in the available space."
+  ],
+  "sensory": [
+    "A response to being touched, including unexpected or prolonged contact.",
+    "A response to noise, volume, tone, or repeated sounds.",
+    "A response to brightness, glare, flickering, or changes in lighting.",
+    "A response to how clothing, surfaces, or objects feel against the skin.",
+    "A response to strong, unfamiliar, or lingering scents.",
+    "A response to flavors or how food and drinks feel in the mouth.",
+    "A response to heat, cold, or changes in body or room temperature.",
+    "A response to motion, changes in position, or balance sensations.",
+    "A response to firm contact, tightness, weight, or compression.",
+    "A response to vibrating surfaces, devices, or repeated physical sensations."
+  ],
+  "emotional": [
+    "A sense of danger, threat, or concern about what may happen.",
+    "A strong emotional reaction to something upsetting or unwanted.",
+    "Tension when a need, goal, or attempt to communicate is blocked.",
+    "Worry or unease about an uncertain event or situation.",
+    "A feeling of loss, unhappiness, or emotional heaviness.",
+    "Having more emotions or demands than feel manageable at once.",
+    "Feeling uncertain about safety, acceptance, or personal ability.",
+    "Lingering hurt or anger connected with a perceived unfair experience.",
+    "An intense state of upset that is difficult to settle.",
+    "Feeling emotionally drained after sustained effort or stimulation."
+  ],
+  "environmental": [
+    "Too many people nearby, reducing comfort or available personal space.",
+    "An unfamiliar place or setup that makes it hard to anticipate what comes next.",
+    "Unexpected sound changes that may cause surprise or discomfort.",
+    "Lighting in the setting that may feel harsh or difficult to tolerate.",
+    "Smells in the surroundings that may be unpleasant or distracting.",
+    "Sudden shifts from warm to cold or cold to warm in the surroundings.",
+    "People or objects moving in ways that are difficult to anticipate.",
+    "A change to a familiar schedule, sequence, or expected activity.",
+    "Other people standing, sitting, or moving closer than feels comfortable.",
+    "Having too little room to move, reposition, or step away."
+  ],
+  "communication": [
+    "Difficulty letting others know that something feels uncomfortable.",
+    "Difficulty communicating “no,” “stop,” or an unwanted choice.",
+    "Difficulty asking others to step back or allow more personal space.",
+    "Difficulty indicating where or when something hurts.",
+    "Difficulty sharing feelings through speech, gestures, signs, or another method.",
+    "Difficulty showing that help or support is needed.",
+    "Difficulty indicating basic wants, preferences, or immediate needs.",
+    "When a message is expressed but interpreted differently by another person.",
+    "Upset associated with trying to communicate without being understood.",
+    "Difficulty starting an interaction or getting another person’s attention."
+  ],
+  "boundaries": [
+    "Physical contact that the person does not want or has not welcomed.",
+    "Another person moving into a distance that feels too close.",
+    "A personal limit being crossed despite the person’s discomfort.",
+    "Contact or interaction occurring without an opportunity to agree or refuse.",
+    "Someone approaching suddenly, without enough warning or space.",
+    "Pressure to interact when the person does not want to participate.",
+    "Feeling unable to make choices about one’s own body, space, or actions.",
+    "A spoken, gestured, or otherwise communicated “no” being disregarded.",
+    "Being redirected in a way that feels intrusive or unwelcome.",
+    "Needing support to communicate and maintain a personal limit consistently."
+  ],
+  "clearing": [
+    "An emotional experience that still feels charged when revisited.",
+    "Energy experienced as lingering after a previous interaction or event.",
+    "Emotional feelings perceived as taken on from people nearby.",
+    "An energetic connection or attachment identified for further exploration.",
+    "A persistent fear-related association with an earlier experience.",
+    "A sense of resistance or blockage identified within the clearing framework.",
+    "A chakra area identified for balancing within the energetic practice.",
+    "An auric-field area identified for attention within the energetic practice.",
+    "An unwanted energetic theme perceived to repeat across situations.",
+    "An outside energetic influence identified for further exploration."
+  ]
+};
   let sensoryActiveGroup = 'physical';
   let sensoryActiveFilter = 'all';
   const sensorySelectedEntries = new Set();
@@ -4421,13 +4525,31 @@ function renderQuickStart() {
       tile.className = 'sensory-entry-btn';
       tile.textContent = n + '. ' + entry;
       const entryId = key + ':' + n;
-      tile.setAttribute('aria-pressed', String(sensorySelectedEntries.has(entryId)));
+      const description = document.createElement('div');
+      description.className = 'sensory-entry-description';
+      description.textContent = sensoryDescriptions[key][index];
+      const initiallyOpen = sensorySelectedEntries.has(entryId);
+      description.hidden = !initiallyOpen;
+      tile.setAttribute('aria-pressed', String(initiallyOpen));
+      tile.setAttribute('aria-expanded', String(initiallyOpen));
       tile.addEventListener('click', () => {
-        if (sensorySelectedEntries.has(entryId)) sensorySelectedEntries.delete(entryId);
-        else sensorySelectedEntries.add(entryId);
-        tile.setAttribute('aria-pressed', String(sensorySelectedEntries.has(entryId)));
+        const opened = tile.getAttribute('aria-expanded') !== 'true';
+        // Accordion: selecting another target closes every previously open target.
+        sensorySelectedEntries.clear();
+        list.querySelectorAll('.sensory-entry-btn').forEach(otherTile => {
+          otherTile.setAttribute('aria-expanded', 'false');
+          otherTile.setAttribute('aria-pressed', 'false');
+          const otherDescription = otherTile.nextElementSibling;
+          if (otherDescription?.classList.contains('sensory-entry-description')) otherDescription.hidden = true;
+        });
+        if (opened) {
+          sensorySelectedEntries.add(entryId);
+          description.hidden = false;
+          tile.setAttribute('aria-expanded', 'true');
+          tile.setAttribute('aria-pressed', 'true');
+        }
       });
-      li.appendChild(tile);
+      li.append(tile, description);
       list.appendChild(li);
       visibleCount++;
     });
