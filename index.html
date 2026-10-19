@@ -3452,6 +3452,19 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .sensory-emotion-description[hidden]{display:none!important}
 .sensory-emotion-grid .sensory-emotion-item:has(.sensory-emotion-button[aria-expanded="true"]){border-color:#d8b56a;background:rgba(140,108,240,.17)}
 
+
+/* Glossary-specific search, matching the existing app controls. */
+.glossary-search-panel{margin:16px 0 20px;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(17,18,22,.82)}
+.glossary-search-row{display:flex;gap:10px;align-items:center}
+.glossary-search-row input{min-width:0;width:100%;flex:1}
+.glossary-search-results{margin-top:10px;max-height:340px;overflow-y:auto}
+.glossary-search-results:empty{display:none}
+.glossary-search-hit{display:block;width:100%;text-align:left;margin-top:7px;padding:12px 14px;border:1px solid rgba(216,181,106,.28);border-radius:12px;background:rgba(255,255,255,.035);cursor:pointer}
+.glossary-search-hit strong{color:#f5dfaa}
+.glossary-search-hit small{display:block;color:var(--muted);margin-top:5px;font-size:.88rem;line-height:1.35}
+.glossary-search-feedback{color:var(--muted);margin-top:8px;font-size:.9rem}
+@media(max-width:700px){.glossary-search-row{align-items:stretch}.glossary-search-row input{min-width:0}.glossary-search-row button{flex:0 0 auto;padding:10px}}
+
 </style>
 </head>
 <body>
@@ -4838,6 +4851,8 @@ function returnToPreviousFromGlossary() {
   if (lastGlossaryReturnState && lastGlossaryReturnState.sectionKey) {
     lastSectionReturnState = lastGlossaryReturnState;
     returnToPreviousSection();
+    const restoreY = lastGlossaryReturnState.scrollY;
+    if (typeof restoreY === 'number') setTimeout(() => window.scrollTo({top:restoreY,behavior:'smooth'}),180);
     lastSectionReturnState = savedLocationState || lastGlossaryReturnState;
     return;
   }
@@ -4848,7 +4863,7 @@ function updateBackToLastFromGlossaryButton() {
   const buttons = Array.from(document.querySelectorAll('.back-to-last-from-glossary-btn, #back-to-last-from-glossary-btn'));
   if (!buttons.length) return;
   const sectionKey = getActiveSectionKey && getActiveSectionKey();
-  const show = sectionKey && (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) && lastGlossaryReturnState && lastGlossaryReturnState.sectionKey;
+  const show = sectionKey && (sectionKey === 'glossary' || sectionKey.startsWith('glossary-')) && lastGlossaryReturnState && lastGlossaryReturnState.sectionKey && lastGlossaryReturnState.sectionKey !== 'dashboard';
   buttons.forEach(btn => {
     if (show) {
       const savedLocationState = lastSectionReturnState;
@@ -5126,6 +5141,11 @@ function returnFromPowerBlocks() {
 }
 
 function goToSection(key) {
+  const enteringGlossary = key === 'glossary' || key.startsWith('glossary-');
+  const priorGlossarySection = getActiveSectionKey();
+  if (enteringGlossary && priorGlossarySection && priorGlossarySection !== 'glossary' && !priorGlossarySection.startsWith('glossary-')) {
+    lastGlossaryReturnState = { sectionKey: priorGlossarySection, scrollY: window.scrollY };
+  }
   // Record the entry point separately for every clearing chart, regardless of which link opened it.
   const fromSection = getActiveSectionKey();
   if (clearingChartSections.has(key) && fromSection !== key) {
@@ -5148,6 +5168,14 @@ function goToSection(key) {
   const target = document.querySelector(`.section[data-section="${key}"]`);
   if (target) {
     target.classList.add('active');
+    if (key === 'glossary') {
+      target.querySelectorAll(':scope > .toolbox-return-bar').forEach(bar => bar.remove());
+      const header = target.querySelector('.section-head');
+      if (header) {
+        const homes = Array.from(header.querySelectorAll('button')).filter(button => button.textContent.trim() === 'Back to Home');
+        homes.slice(1).forEach(button => button.remove());
+      }
+    }
     updateClearingChartBackButtons(key);
     target.scrollIntoView({behavior:'smooth', block:'start'});
   }
@@ -7226,6 +7254,10 @@ function scrollToGlossaryGroup(sectionKey, groupKey) {
 function renderGlossaryHomeSection() {
   return `<section class="section" data-section="glossary">
     <div class="section-head"><div class="pill">Glossary</div><div class="power-head-tools"><button class="ghost-btn" id="back-to-last-from-glossary-btn" onclick="returnToPreviousFromGlossary()" style="display:none;">Back to Last Section</button><button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button></div></div>
+    <div class="glossary-search-panel" role="search" aria-label="Search glossary">
+      <div class="glossary-search-row"><input type="search" id="glossary-search-input" placeholder="Search glossary by word, term, or code..." aria-label="Search glossary by word, term, or code" oninput="searchGlossary()" autocomplete="off"><button class="clear-btn" type="button" onclick="clearGlossarySearch()">Clear</button></div>
+      <div id="glossary-search-results" class="glossary-search-results" aria-live="polite"></div>
+    </div>
     <p class="glossary-help">How to use the glossary: first choose the section you want to work in, like Power Blocks, Core Blocks, Universal Chart A, or Universal Chart B. Once you open that section, use the letter buttons at the top to jump directly to that chart column. Then scroll in chart order to find the exact code and definition you need. Example: in Universal Chart A, tap B to go straight to the B section, then find B2 Divine Delay Loop without having to scroll through the whole page.</p>
     <div class="glossary-grid">
       ${glossaryData.map(section => `
@@ -7236,6 +7268,55 @@ function renderGlossaryHomeSection() {
       `).join('')}
     </div>
   </section>`;
+}
+
+// Search only the glossary, including definition and restore text.
+let glossaryMatchingEntries = [];
+function searchGlossary() {
+  const field = document.getElementById('glossary-search-input');
+  const output = document.getElementById('glossary-search-results');
+  if (!field || !output) return;
+  const query = field.value.trim().toLocaleLowerCase();
+  glossaryMatchingEntries = [];
+  if (!query) { output.replaceChildren(); return; }
+  for (const section of glossaryData) {
+    section.entries.forEach((entry, entryIndex) => {
+      const haystack = [entry.code, entry.name, entry.definition, entry.restore, entry.restoreDefinition, section.label].filter(Boolean).join(' ').toLocaleLowerCase();
+      if (haystack.includes(query)) glossaryMatchingEntries.push({ sectionKey:section.key, sectionLabel:section.label, entry, entryIndex });
+    });
+  }
+  const count = glossaryMatchingEntries.length;
+  if (!count) { output.innerHTML = '<div class="glossary-search-feedback">No glossary matches found.</div>'; return; }
+  const shown = glossaryMatchingEntries.slice(0, 60);
+  output.innerHTML = `<div class="glossary-search-feedback">${count} matching ${count === 1 ? 'entry' : 'entries'}${count > shown.length ? ' (showing first 60)' : ''}</div>` + shown.map((hit, i) =>
+    `<button type="button" class="glossary-search-hit" onclick="openGlossarySearchMatch(${i})"><strong>${escapeHtml(hit.entry.name || hit.entry.code || 'Glossary entry')}</strong> · ${escapeHtml(hit.entry.code || '')}<small>${escapeHtml(hit.sectionLabel)}${hit.entry.definition ? ' · ' + escapeHtml(hit.entry.definition.slice(0,120)) : ''}</small></button>`
+  ).join('');
+}
+function clearGlossarySearch() {
+  const field = document.getElementById('glossary-search-input');
+  if (field) field.value = '';
+  searchGlossary();
+  if (field) field.focus();
+}
+function openGlossarySearchMatch(index) {
+  const hit = glossaryMatchingEntries[index];
+  if (!hit) return;
+  goToSection(hit.sectionKey);
+  setTimeout(() => {
+    const active = document.querySelector(`.section.active[data-section="${hit.sectionKey}"]`);
+    if (!active) return;
+    const candidates = Array.from(active.querySelectorAll('.glossary-entry'));
+    const target = candidates.find(el => {
+      const name = el.querySelector('h3');
+      const code = el.querySelector('.glossary-entry-code');
+      return name && name.textContent.trim() === String(hit.entry.name || '').trim()
+        && (!hit.entry.code || (code && code.textContent.trim() === String(hit.entry.code).trim()));
+    }) || candidates.find(el => {
+      const name = el.querySelector('h3');
+      return name && name.textContent.trim() === String(hit.entry.name || '').trim();
+    });
+    if (target) { target.scrollIntoView({behavior:'smooth',block:'center'}); flashSearchHit(target); }
+  }, 180);
 }
 
 function renderGlossaryDetailSection(section) {
