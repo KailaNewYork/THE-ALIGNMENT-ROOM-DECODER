@@ -1,3 +1,4 @@
+
 // Cloudflare Pages Functions: password gate for the whole Alignment Room app.
 // Configure ALIGNMENT_ROOM_PASSWORD as an encrypted secret in Cloudflare Pages.
 // Never put the password in this file or in index.html.
@@ -20,7 +21,7 @@ export async function onRequest(context) {
         const username = decoded.slice(0, colon);
         const enteredPassword = decoded.slice(colon + 1);
         // Shared account name; the password is the only secret.
-        valid = username === 'client' && enteredPassword === password;
+        valid = username === 'Student Access' && enteredPassword === password;
       }
     } catch (_) {
       valid = false;
