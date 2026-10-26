@@ -8077,6 +8077,14 @@ function init() {
   updateFloatingTopButton();
 }
 
+// Always start at the top on a fresh open or browser return.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('pageshow', () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+window.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => window.scrollTo(0, 0));
+});
 window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
