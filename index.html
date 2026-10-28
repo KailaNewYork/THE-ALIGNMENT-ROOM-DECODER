@@ -3630,6 +3630,108 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .site-nav-footer .site-nav-tabs {grid-template-columns:1fr;gap:10px;}
   .site-nav-footer .site-nav-tab {width:100%;min-height:54px;padding:14px 16px;font-size:.92rem !important;}
 }
+
+/* Standalone Muscle Testing Prompt Library */
+.prompt-library-landing{border:1px solid rgba(216,181,106,.26);border-radius:24px;background:#121318;padding:clamp(18px,3vw,30px);margin:22px 0}
+.prompt-library-landing h2{margin:0 0 12px;font-size:clamp(1.5rem,3vw,2.1rem);color:#f4f1ea}
+.prompt-library-landing p{color:#d5d0c6;line-height:1.55;margin:0 0 18px}
+.prompt-library-actions{display:grid;gap:10px;max-width:760px}
+.prompt-library-button{display:block;width:100%;border:1px solid rgba(216,181,106,.55);border-radius:14px;background:rgba(216,181,106,.12);color:#f5dfaa;font-weight:800;cursor:pointer;padding:14px 16px;text-align:center}
+.prompt-library-button.gold{background:linear-gradient(180deg,#cda95c,#9b793b);color:#080807}
+.prompt-library-wrap{max-width:1050px;margin:0 auto;border:1px solid rgba(216,181,106,.32);border-radius:24px;padding:clamp(16px,3vw,28px);background:#121318}
+.prompt-library-wrap h2{margin:4px 0 10px;color:#f5dfaa;font-size:clamp(1.5rem,3vw,2rem)}
+.prompt-library-wrap p{line-height:1.5;color:#cfc8ba}
+.prompt-library-search{width:100%;margin:14px 0 18px;min-width:0}
+.prompt-category{border:1px solid rgba(216,181,106,.3);border-radius:15px;margin:10px 0;background:#1a1b20;overflow:hidden}
+.prompt-category summary{cursor:pointer;list-style:none;padding:17px;color:#f5dfaa;font-weight:800}
+.prompt-category summary::-webkit-details-marker{display:none}
+.prompt-category summary::after{content:'+';float:right;font-size:1.3rem}
+.prompt-category[open] summary::after{content:'−'}
+.prompt-category-body{border-top:1px solid rgba(216,181,106,.23);padding:16px}
+.prompt-category-body p{margin:0 0 12px}
+.prompt-entry{display:block;width:100%;text-align:left;border:1px solid rgba(216,181,106,.3);border-radius:12px;background:#262522;padding:13px 14px;color:#f4f1ea;cursor:pointer;margin:8px 0}
+.prompt-entry:disabled{cursor:default;color:#aaa49a;opacity:.7}
+.prompt-question-box{background:#222329;border:1px solid rgba(216,181,106,.28);border-radius:18px;padding:24px 18px;text-align:center;margin:15px 0}
+.prompt-question-box h3{font-size:clamp(1.2rem,2.6vw,1.65rem);margin:10px 0;color:white}
+.prompt-answer-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prompt-step-meter{display:flex;gap:6px;margin:12px 0}.prompt-step-meter span{height:5px;background:#3c3a34;border-radius:10px;flex:1}.prompt-step-meter span.active{background:#d8b56a}
+.prompt-utility{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.prompt-disclaimer{border-top:1px solid rgba(216,181,106,.23);padding-top:13px;font-size:.85rem;color:#aaa49a!important}
+[hidden].prompt-view{display:none!important}
+@media(max-width:650px){.prompt-library-wrap{padding:14px}.prompt-answer-row{gap:8px}.prompt-library-button{padding:12px 9px}}
+
+/* Compact, directly accessible Prompt Library, before Relationship Checkpoint */
+#prompt-library-home.prompt-library-landing{margin:0;padding:16px;border-radius:20px;background:rgba(255,255,255,.025);border:1px solid rgba(216,181,106,.18);max-width:none}
+#prompt-library-home .dashboard-subsection-pill{margin:0 0 10px}
+#prompt-library-home .prompt-library-tagline{margin:0 0 12px;color:var(--muted);line-height:1.4;font-size:.96rem}
+.prompt-library-inline-intro{border:1px solid rgba(216,181,106,.30);background:rgba(216,181,106,.07);border-radius:12px;margin:0 0 12px}
+.prompt-library-inline-intro summary{list-style:none;cursor:pointer;color:#f5dfaa;font-weight:750;padding:10px 13px;font-size:.93rem;display:flex;align-items:center;justify-content:space-between}
+.prompt-library-inline-intro summary::-webkit-details-marker{display:none}
+.prompt-library-inline-content{padding:0 13px 12px;border-top:1px solid rgba(216,181,106,.17)}
+.prompt-library-inline-content p{margin:10px 0 0;color:var(--muted);line-height:1.45;font-size:.92rem}
+.prompt-library-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.prompt-library-home-category{min-width:0;min-height:49px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border-radius:12px;background:#17181f;border:1px solid rgba(216,181,106,.30);color:var(--text);font-weight:750;font-size:.9rem;line-height:1.22;cursor:pointer}
+.prompt-library-home-category span{font-size:1.3rem;color:#f5dfaa;flex:0 0 auto}
+.prompt-library-home-category:hover,.prompt-library-home-category:focus-visible{background:rgba(216,181,106,.12);border-color:#d8b56a}
+@media(max-width:850px){.prompt-library-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#prompt-library-home.prompt-library-landing{padding:12px}.prompt-library-home-grid{gap:7px}.prompt-library-home-category{padding:10px 9px;font-size:.78rem;min-height:54px}}
+
+/* Prompt Library: clearer introduction and easy-to-read category covers */
+#prompt-library-home [hidden]{display:none!important}
+#prompt-library-dashboard-intro{max-width:none;margin:8px 0 0}
+#prompt-library-home .prompt-library-tagline{color:#fff;font-size:1.05rem;line-height:1.5;margin-bottom:12px}
+.prompt-library-intro-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:11px 15px;margin:0 0 12px;border:1px solid rgba(216,181,106,.40);border-radius:12px;background:rgba(216,181,106,.10);color:#f5dfaa;font-size:1rem;font-weight:800;text-align:left;cursor:pointer}
+.prompt-library-intro-link:hover,.prompt-library-intro-link:focus-visible{border-color:#d8b56a;background:rgba(216,181,106,.17)}
+.prompt-library-home-category{min-height:90px;align-items:center;padding:13px 15px;gap:10px}
+.prompt-library-home-category-copy{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.prompt-library-home-category-copy strong{display:block;color:#fff;font-size:1.02rem;line-height:1.24;font-weight:800}
+.prompt-library-home-category-copy small{display:block;color:#fff;font-size:.94rem;font-weight:450;line-height:1.36}
+.prompt-library-home-category .prompt-library-arrow{color:#f5dfaa;font-size:1.35rem}
+.prompt-intro-page{max-width:790px}
+.prompt-intro-page h2{color:#f5dfaa}
+.prompt-intro-page h3{color:#f5dfaa}
+.prompt-intro-page p{color:#fff;font-size:1.03rem;line-height:1.65}
+@media(max-width:520px){#prompt-library-home .prompt-library-tagline{font-size:1rem}.prompt-library-home-category{min-height:94px;padding:12px 11px}.prompt-library-home-category-copy strong{font-size:.94rem}.prompt-library-home-category-copy small{font-size:.85rem}.prompt-library-intro-link{font-size:.96rem}}
+/* Prompt Library category details display in place of their cover. */
+.prompt-finder-item{display:block;width:100%;text-align:left;cursor:pointer;color:#fff;font:inherit}
+.prompt-finder-item:hover,.prompt-finder-item:focus-visible{border-color:#d8b56a;background:rgba(216,181,106,.12)}
+#prompt-library-inline-results[hidden]{display:none!important}
+#prompt-library-inline-results{margin-top:12px}
+#prompt-library-inline-results .prompt-library-wrap{margin:0;max-width:none;padding:0;background:transparent;border:0;box-shadow:none}
+#prompt-library-inline-results .prompt-library-search{margin:9px 0 12px}
+#prompt-library-inline-results .prompt-category{margin:8px 0}
+#prompt-library-inline-results .prompt-category summary{padding:12px 14px}
+#prompt-library-inline-results .cup-back{margin-bottom:10px}
+
+/* Question list visible inside each selected library category */
+#prompt-library-inline-results .prompt-category{display:block;margin:0;background:transparent;border:0;}
+#prompt-library-inline-results .prompt-category[hidden]{display:none!important}
+#prompt-library-inline-results .prompt-category-heading{font-size:1.24rem;color:#f5dfaa;font-weight:800;margin:6px 0 9px}
+#prompt-library-inline-results .prompt-category-body{border:0;padding:0}
+#prompt-library-inline-results .prompt-category-body p{color:#fff;font-size:1rem}
+#prompt-library-inline-results .prompt-entry{color:#fff;font-size:1rem;font-weight:600}
+#prompt-library-inline-results .prompt-entry:hover{border-color:#d8b56a;background:rgba(216,181,106,.15)}
+
+/* Person identification guidance for relationship checks and prompt guide */
+.identify-person-note{margin:12px 0 16px;padding:13px 15px;border:1px solid rgba(216,181,106,.38);border-radius:14px;background:rgba(216,181,106,.08);color:#fff;line-height:1.5}
+.identify-person-note>strong{display:block;color:#f5dfaa;font-size:1.02rem}
+.identify-person-note p{margin:6px 0 0;color:#fff;font-size:.98rem;line-height:1.5}
+
+/* Prompt Library category cards: prevent long descriptions from overflowing */
+.prompt-library-home-category > .prompt-library-home-category-copy {
+  flex:1 1 0;
+  min-width:0;
+  width:0;
+  white-space:normal;
+}
+.prompt-library-home-category-copy strong,
+.prompt-library-home-category-copy small {
+  white-space:normal;
+  overflow-wrap:break-word;
+  word-break:normal;
+  max-width:100%;
+}
+.prompt-library-home-category > .prompt-library-arrow {flex:0 0 auto;}
 </style>
 </head>
 <body>
@@ -3652,6 +3754,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
       <div class="dashboard-jump-tabs" aria-label="Dashboard group shortcuts">
         <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('alignment-checkpoint')">Alignment Checkpoint</button>
         <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('sensory-checks-section')">Sensory/Energetic Check</button>
+        <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('prompt-library-home')">Muscle Testing Prompts</button>
         <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('relationship-checkpoint')">Relationship Checkpoint</button>
         <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('alignment-clearing-charts')">Alignment Clearing Charts</button>
         <button class="dashboard-jump-tab" type="button" onclick="jumpToDashboardGroup('alignment-reference-vault')">Alignment Reference Vault</button>
@@ -4217,6 +4320,31 @@ function renderQuickStart() {
           </div>
         </div>
 
+        <div class="prompt-library-landing" id="prompt-library-home">
+          <div class="pill dashboard-subsection-pill">Muscle Testing Prompt Library</div>
+          <p class="prompt-library-tagline">Not sure what to ask? Find an everyday question, then use the same numbered Odd / Even chart system to locate your Quick Link and chart.</p>
+          <button type="button" class="prompt-library-intro-link" onclick="openPromptLibraryIntroduction()">Read the Introduction <span aria-hidden="true">→</span></button>
+          <div id="prompt-library-dashboard-intro" class="cup-panel prompt-intro-page" hidden>
+            <button class="cup-back" type="button" onclick="closePromptLibraryIntroduction()">← Back to Prompt Library</button>
+            <h2>When You Don't Know What to Ask</h2>
+            <p>You may know what is bothering you, but not know how to begin asking questions. That's why I made this library: to give you real-life questions you can start with and help you locate the chart you want to work with.</p>
+            <h3>How to Use the Prompt Library</h3>
+            <p>Pick a category. The questions are numbered, exactly like the entries in our charts. Use your usual muscle-testing practice to ask whether your question is on an odd or even number. Tap Odd or Even to narrow your list, and select the question.</p>
+            <p>Next, ask whether the Quick Link you need is odd or even. Choose that numbered Quick Link. Repeat for the numbered sections inside it. Once you've located your section, open the existing chart and work with it there.</p>
+            <p>The library does not decide the answer or choose the chart for you. It simply makes it easier to find your way using the same framework already in the app.</p>
+            <h3>An Important Reminder</h3>
+            <p>This is a personal reflection tool. Muscle testing and clearing charts cannot establish medical causes or replace medical evaluation. New, severe, or concerning physical symptoms deserve appropriate medical attention.</p>
+            <button class="cup-btn" type="button" onclick="closePromptLibraryIntroduction()">← Return to Categories</button>
+          </div>
+          <div id="prompt-library-inline-results" hidden>
+            <button type="button" class="cup-back" onclick="closePromptLibraryCategory()">← Back to Prompt Library</button>
+            <div id="prompt-library-inline-content"></div>
+          </div>
+          <div class="prompt-library-home-grid" aria-label="Muscle Testing Prompt Library categories">
+            ${promptCategories.map((c,i)=>`<button type="button" class="prompt-library-home-category" onclick="openPromptLibraryCategory(${i})"><span class="prompt-library-home-category-copy"><strong>${c[0]}</strong><small>${c[1]}</small></span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>`).join('')}
+          </div>
+        </div>
+
         <div class="checkpoint-split-section" id="relationship-checkpoint-section">
           <div class="pill dashboard-subsection-pill" id="relationship-checkpoint">Relationship Checkpoint</div>
           <div class="quick-check-grid relationship-check-grid">
@@ -4237,6 +4365,7 @@ function renderQuickStart() {
       <div class="main-section-grid more-section-grid">
         ${referenceVaultCards.map(renderCard).join('')}
       </div>
+
     </div>`;
   // Sensory/Energetic Regulation — additive. Other regulation branches are starter suggestions pending review.
   const regulationTool = document.getElementById('sensory-regulation-tool');
@@ -5307,6 +5436,276 @@ function returnFromPowerBlocks() {
   setTimeout(() => window.scrollTo({top: state.scrollY || 0, behavior: 'smooth'}), 180);
 }
 
+
+// Muscle Testing Prompt Library: first approved pathway, with room for additional prompts.
+const promptCategories = [
+  ['General Body Awareness','Balance, comfort, and physical awareness'],
+  ['Discomfort & Sensation','Explore discomfort and sensation patterns'],
+  ['Energy & Fatigue','Rest and everyday energy experiences'],
+  ['Emotional Connection','Feelings and emotional patterns'],
+  ['Environmental Awareness','Surroundings and sensory experiences'],
+  ['Awareness & Monitoring','Observation and repeating patterns'],
+  ['Relationships & Family','Partners, spouses, friendships, children, and family connections'],
+  ['Business & Entrepreneurship','Leadership, clients, decisions, money, and business growth'],
+  ['Personal Growth & Life Decisions','Identity, direction, habits, choices, and life changes']
+];
+const discomfortPrompt = {
+  question:'Have I noticed physical discomfort today?',
+  yes:{question:'Can I identify where I noticed the discomfort?',
+    yes:{question:'Have I noticed discomfort in this same area before?'},
+    no:{question:'Have I noticed the discomfort in more than one area?'}},
+  no:{question:'Have I noticed any unusual physical sensations today?',
+    yes:{question:'Have I experienced this sensation before?'},
+    no:{question:'Do I feel physically comfortable right now?'}}
+};
+let promptAnswers = [];
+const promptPathways = [{"category":0,"question":"Do I feel balanced in my body right now?","yes":{"question":"Has this feeling of balance been consistent today?","yes":{"question":"Have I noticed this same sense of balance during different activities?"},"no":{"question":"Have I noticed a change in how I feel during the day?"}},"no":{"question":"Can I identify a specific sensation that feels uncomfortable?","yes":{"question":"Is this sensation noticeable in one specific area?"},"no":{"question":"Do I feel generally unsettled without a specific sensation?"}}},{"category":0,"question":"Is there a physical sensation I want to explore right now?","yes":{"question":"Can I clearly identify where I notice it?","yes":{"question":"Has this sensation occurred in this area before?"},"no":{"question":"Would using the Clearing Location chart help me describe where I feel it?"}},"no":{"question":"Have I noticed any physical changes today?","yes":{"question":"Did I notice this change during a particular activity?"},"no":{"question":"Would I prefer to end this check-in for now?"}}},{"category":0,"question":"Do I feel physically comfortable right now?","yes":{"question":"Has this comfort remained consistent during my recent activities?","yes":{"question":"Have I felt this comfortable throughout most of the day?"},"no":{"question":"Have I noticed that my comfort changes with my surroundings?"}},"no":{"question":"Am I aware of a specific source of discomfort?","yes":{"question":"Is the discomfort noticeable when I move or change position?"},"no":{"question":"Am I noticing an overall sense of restlessness?"}}},{"category":0,"question":"Have I been paying attention to how my body feels today?","yes":{"question":"Have I noticed any changes in my physical sensations?","yes":{"question":"Have I noticed these changes more than once?"},"no":{"question":"Have my physical sensations felt familiar today?"}},"no":{"question":"Have I been occupied with other responsibilities?","yes":{"question":"Have I had a quiet moment to check in with myself?"},"no":{"question":"Would taking a quiet moment help me describe how I feel?"}}},{"category":0,"question":"Am I noticing tension anywhere in my body?","yes":{"question":"Can I identify one area where the tension is noticeable?","yes":{"question":"Have I noticed this tension during a specific activity?"},"no":{"question":"Does the tension feel spread across more than one area?"}},"no":{"question":"Have I felt physically relaxed today?","yes":{"question":"Have I noticed this relaxed feeling during different parts of the day?"},"no":{"question":"Am I finding it difficult to describe my physical state?"}}},{"category":0,"question":"Have I noticed a repeating pattern in how my body feels?","yes":{"question":"Does this pattern occur around the same time of day?","yes":{"question":"Have I noticed it during similar activities?"},"no":{"question":"Does this pattern occur during different times of day?"}},"no":{"question":"Have I noticed a sensation that feels new to me?","yes":{"question":"Can I remember when I first noticed it?"},"no":{"question":"Would I prefer to explore another category?"}}},{"category":0,"question":"Have my daily activities influenced how comfortable I feel?","yes":{"question":"Have I noticed a difference after periods of activity?","yes":{"question":"Does this difference also occur after similar activities?"},"no":{"question":"Have I noticed a difference after periods of inactivity?"}},"no":{"question":"Have I experienced similar comfort levels throughout the day?","yes":{"question":"Have I noticed that consistency on other days?"},"no":{"question":"Have I had difficulty identifying a pattern?"}}},{"category":0,"question":"Have I noticed a difference in how my body feels after resting?","yes":{"question":"Do I notice greater comfort after rest?","yes":{"question":"Has that difference happened more than once?"},"no":{"question":"Do I notice less comfort after resting?"}},"no":{"question":"Have I paid attention to how I feel after movement?","yes":{"question":"Have I noticed a consistent pattern after moving?"},"no":{"question":"Would observing my normal routine help me describe my experience?"}}},{"category":0,"question":"Am I noticing any sensory discomfort right now?","yes":{"question":"Is the discomfort associated with something I can identify in my surroundings?","yes":{"question":"Have I noticed a similar response in this environment before?"},"no":{"question":"Does the discomfort remain noticeable in different surroundings?"}},"no":{"question":"Have I experienced sensory discomfort earlier today?","yes":{"question":"Was it associated with a particular environment?"},"no":{"question":"Do my surroundings feel comfortable to me right now?"}}},{"category":0,"question":"Do I feel comfortable continuing this self-reflection session?","yes":{"question":"Do I have a specific experience I want to explore?","yes":{"question":"Would exploring a related category help me reflect further?"},"no":{"question":"Would I prefer to finish this session now?"}},"no":{"question":"Am I feeling mentally or emotionally distracted?","yes":{"question":"Would taking a break feel supportive?"},"no":{"question":"Would ending this session feel more comfortable?"}}},{"category":1,"question":"Have I noticed physical discomfort today?","yes":{"question":"Can I identify where I noticed the discomfort?","yes":{"question":"Have I noticed discomfort in this same area before?"},"no":{"question":"Have I noticed the discomfort in more than one area?"}},"no":{"question":"Have I noticed any unusual physical sensations today?","yes":{"question":"Have I experienced this sensation before?"},"no":{"question":"Do I feel physically comfortable right now?"}}},{"category":1,"question":"Did I notice this sensation after an activity?","yes":{"question":"Have I noticed it after that activity before?","yes":{"question":"Have I noticed it during similar activities?"},"no":{"question":"Did it change after the activity ended?"}},"no":{"question":"Did I first notice it while resting?","yes":{"question":"Have I noticed a similar feeling during rest before?"},"no":{"question":"Can I recall when I first noticed it?"}}},{"category":1,"question":"Have I experienced this sensation before?","yes":{"question":"Do I remember when it happened previously?","yes":{"question":"Was I doing something similar at the time?"},"no":{"question":"Has it felt similar each time?"}},"no":{"question":"Is this sensation unfamiliar to me?","yes":{"question":"Can I describe what makes it feel unfamiliar?"},"no":{"question":"Would noting when it happens help me describe it?"}}},{"category":2,"question":"Have I felt unusually tired today?","yes":{"question":"Did I notice this tiredness after a busy period?","yes":{"question":"Have I felt similarly tired after busy periods before?"},"no":{"question":"Did a period of rest change how I felt?"}},"no":{"question":"Did I wake up feeling tired?","yes":{"question":"Have I noticed this on other mornings?"},"no":{"question":"Has my energy changed during the day?"}}},{"category":2,"question":"Have I noticed changes in my energy during the day?","yes":{"question":"Can I identify when the change occurred?","yes":{"question":"Has a similar change happened around the same time before?"},"no":{"question":"Did the change follow a particular activity?"}},"no":{"question":"Has my energy felt consistent today?","yes":{"question":"Has this consistency been typical for me lately?"},"no":{"question":"Would I like to observe it again tomorrow?"}}},{"category":2,"question":"Has my routine felt draining recently?","yes":{"question":"Can I identify one part of my routine that feels demanding?","yes":{"question":"Has that part felt demanding more than once?"},"no":{"question":"Would I like to reflect on how I pace that activity?"}},"no":{"question":"Have I noticed low energy outside my usual routine?","yes":{"question":"Did this feeling occur on a less busy day?"},"no":{"question":"Have I had a chance to notice my energy patterns?"}}},{"category":3,"question":"Am I aware of an emotion that needs my attention?","yes":{"question":"Can I name the emotion I have noticed?","yes":{"question":"Have I felt this emotion more than once today?"},"no":{"question":"Would a quiet moment help me describe it?"}},"no":{"question":"Am I finding it hard to identify how I feel?","yes":{"question":"Have I felt similarly unsure before?"},"no":{"question":"Would I prefer to return to this later?"}}},{"category":3,"question":"Have I been feeling overwhelmed?","yes":{"question":"Can I identify a situation that felt overwhelming?","yes":{"question":"Have similar situations felt overwhelming before?"},"no":{"question":"Did I notice the feeling during that situation?"}},"no":{"question":"Have I felt unsettled or distracted instead?","yes":{"question":"Did the feeling change during the day?"},"no":{"question":"Would taking a pause help me check in?"}}},{"category":3,"question":"Have I noticed a connection between my feelings and physical sensations?","yes":{"question":"Did I notice both at about the same time?","yes":{"question":"Have I noticed this timing before?"},"no":{"question":"Did the sensation change as my feelings shifted?"}},"no":{"question":"Have I noticed the sensation when I felt calm?","yes":{"question":"Have I noticed the sensation in other situations?"},"no":{"question":"Would it help to observe both separately?"}}},{"category":4,"question":"Have I noticed discomfort in my surroundings?","yes":{"question":"Can I identify something around me that feels uncomfortable?","yes":{"question":"Have I felt similarly in this setting before?"},"no":{"question":"Would a small change in the setting feel supportive?"}},"no":{"question":"Have my surroundings felt comfortable today?","yes":{"question":"Has this environment felt comfortable on other days?"},"no":{"question":"Would I like to reflect on a different setting?"}}},{"category":4,"question":"Have noise or lighting affected my comfort?","yes":{"question":"Have I noticed a specific sound or light that bothers me?","yes":{"question":"Have I noticed it in this environment before?"},"no":{"question":"Does the feeling change when the sound or light changes?"}},"no":{"question":"Have noise and lighting felt comfortable today?","yes":{"question":"Have I been comfortable in similar conditions before?"},"no":{"question":"Would I prefer to focus on another sensory experience?"}}},{"category":4,"question":"Do I feel more comfortable in a different environment?","yes":{"question":"Can I identify what is different about that environment?","yes":{"question":"Have I noticed this preference before?"},"no":{"question":"Does the difference involve sound, light, or activity?"}},"no":{"question":"Do I feel comfortable where I am?","yes":{"question":"Has my comfort stayed consistent today?"},"no":{"question":"Would observing my surroundings help me describe it?"}}},{"category":5,"question":"Have I noticed a repeating pattern?","yes":{"question":"Can I describe when this pattern repeats?","yes":{"question":"Has it happened more than twice?"},"no":{"question":"Does it happen in a familiar situation?"}},"no":{"question":"Have my experiences felt different each time?","yes":{"question":"Have I noticed any shared details?"},"no":{"question":"Would observing another occurrence help me describe it?"}}},{"category":5,"question":"Has my experience changed over time?","yes":{"question":"Can I identify when I first noticed a change?","yes":{"question":"Did I notice a specific event around that time?"},"no":{"question":"Has the change happened gradually?"}},"no":{"question":"Has my experience felt consistent?","yes":{"question":"Has that consistency lasted more than a day?"},"no":{"question":"Would I prefer to explore a different question?"}}},{"category":5,"question":"Would recording my observations help me recognize a pattern?","yes":{"question":"Would I feel comfortable keeping brief notes?","yes":{"question":"Could I write down the time and what I noticed?"},"no":{"question":"Would I prefer a short check-in rather than detailed notes?"}},"no":{"question":"Would I rather simply reflect without writing?","yes":{"question":"Would a quiet moment be enough for now?"},"no":{"question":"Would it help to revisit these prompts another day?"}}}];
+let activePromptPathway = promptPathways[10];
+
+function renderPromptLibrarySection(){
+  return `<section class="section" data-section="prompt-library">
+    <div class="section-head"><span class="pill">Muscle Testing Prompt Library</span><button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button></div>
+    <div class="prompt-library-wrap">
+      <div id="prompt-library-intro" class="prompt-view" hidden>
+        <div class="cup-panel prompt-intro-page">
+          <button class="cup-back" type="button" onclick="goToSection('dashboard')">← Back to Prompt Library</button>
+          <h2>When You Don't Know What to Ask</h2>
+          <p>Sometimes you know something feels different, but you don't know where to begin. You may be uncomfortable, tired, overwhelmed, or simply trying to understand what you've been noticing. The hardest part can be finding the first question.</p>
+          <p>That's why I created this guide. The Muscle Testing Prompt Library gives you a place to start. It doesn't tell you what your experience means, and it doesn't decide anything for you. It helps you put what you're noticing into simple questions so you can explore it for yourself.</p>
+          <h3>How to Use This Guide</h3>
+          <p>Choose the category that feels closest to what you're experiencing. Pick a starting question and follow the YES or NO response to the next question. There are three guided levels. When you reach the end, you can continue asking your own questions, choose another prompt, or finish your check-in. There's no need to force an answer.</p>
+          <p>If you want to explore where you're feeling something, use the app's Clearing Location section and return to your prompts. The charts are additional reference tools, not explanations of a medical condition.</p>
+          <h3>An Important Reminder</h3>
+          <p>This library is for personal reflection and self-awareness. Muscle testing is subjective and cannot diagnose illness, determine the cause of discomfort, rule out a condition, or tell you whether medical care is needed. Never delay or replace professional medical care based on a testing response.</p>
+          <button class="cup-btn" type="button" onclick="goToSection('dashboard')">← Return to the Prompt Library Categories</button>
+        </div>
+      </div>
+      <div id="prompt-library-categories" class="prompt-view">
+        <h2>Choose a Category</h2>
+        <p>Find a starting question for your own reflection.</p>
+        <input class="prompt-library-search" id="prompt-library-search" type="search" placeholder="Search categories or questions..." oninput="filterPromptLibrary(this.value)" />
+        <div id="prompt-library-category-list">
+          ${promptCategories.map((c,i)=>`<div class="prompt-category" data-prompt-search="${(c[0]+' '+c[1]+' '+promptPathways.filter(p=>p.category===i).map(p=>p.question).join(' ')).toLowerCase()}">
+            <div class="prompt-category-heading">${c[0]}</div>
+            <div class="prompt-category-body"><p>${c[1]}</p>
+              ${promptPathways.map((p,j)=>({p,j})).filter(x=>x.p.category===i).map(x=>`<button type="button" class="prompt-entry" onclick="beginLibraryPrompt(${x.j})">${x.p.question} →</button>`).join('')}
+            </div></div>`).join('')}
+        </div>
+        <p class="prompt-disclaimer">For self-reflection only. Muscle testing cannot diagnose or rule out health conditions.</p>
+      </div>
+      <div id="prompt-library-question" class="prompt-view" hidden>
+        <button class="cup-back" type="button" onclick="backToLibraryCategory()">← Back to Questions</button>
+        <p id="prompt-active-category" style="color:#f5dfaa;font-weight:800;margin:0">Discomfort &amp; Sensation</p>
+        <p id="prompt-level" style="margin-bottom:6px">Level 1 of 3</p>
+        <div class="prompt-step-meter" id="prompt-meter"><span class="active"></span><span></span><span></span></div>
+        <div class="prompt-question-box"><small id="prompt-question-label">MAIN QUESTION</small><h3 id="prompt-question-text">Have I noticed physical discomfort today?</h3></div>
+        <div class="prompt-answer-row">
+          <button class="prompt-library-button gold" type="button" onclick="answerDiscomfortPrompt('yes')">YES</button>
+          <button class="prompt-library-button" type="button" onclick="answerDiscomfortPrompt('no')">NO</button>
+        </div>
+        <div id="prompt-completion" hidden><h3 style="color:#f5dfaa;margin:18px 0 8px">Suggested Next Step</h3><p id="prompt-next-step" style="color:#fff;line-height:1.55"></p><p style="color:#fff;font-size:.9rem;line-height:1.45">These prompts are for reflection, not for determining the cause or seriousness of a symptom. Seek medical advice for health concerns regardless of your responses.</p>
+          <button class="prompt-library-button" type="button" onclick="goToSection('locations')">Open Clearing Location →</button>
+          <button class="prompt-library-button gold" type="button" onclick="backToLibraryCategory()">Explore Another Prompt →</button>
+        </div>
+        <div class="prompt-utility"><button class="cup-back" type="button" onclick="backDiscomfortPrompt()">← Back</button><button class="cup-back" type="button" onclick="restartLibraryPrompt()">Restart</button></div>
+      </div>
+    </div>
+  </section>`;
+}
+function openPromptLibraryIntroduction(){
+  const intro=document.getElementById('prompt-library-dashboard-intro');
+  const landing=document.getElementById('prompt-library-home');
+  if(!intro||!landing)return;
+  intro.hidden=false;
+  const tagline=landing.querySelector('.prompt-library-tagline');
+  const openButton=landing.querySelector('.prompt-library-intro-link');
+  const categoryGrid=landing.querySelector('.prompt-library-home-grid');
+  if(tagline)tagline.hidden=true;
+  if(openButton)openButton.hidden=true;
+  if(categoryGrid)categoryGrid.hidden=true;
+}
+function closePromptLibraryIntroduction(){
+  const intro=document.getElementById('prompt-library-dashboard-intro');
+  const landing=document.getElementById('prompt-library-home');
+  if(!intro||!landing)return;
+  intro.hidden=true;
+  for(const selector of ['.prompt-library-tagline','.prompt-library-intro-link','.prompt-library-home-grid']){
+    const el=landing.querySelector(selector);
+    if(el)el.hidden=false;
+  }
+}
+function closePromptLibraryCategory(){
+  const landing=document.getElementById('prompt-library-home');
+  const inline=document.getElementById('prompt-library-inline-results');
+  const content=document.getElementById('prompt-library-inline-content');
+  const original=document.querySelector('.section[data-section="prompt-library"]');
+  const wrap=content && content.querySelector('.prompt-library-wrap');
+  if(wrap && original) original.appendChild(wrap);
+  if(inline)inline.hidden=true;
+  if(landing){
+    for(const selector of ['.prompt-library-tagline','.prompt-library-intro-link','.prompt-library-home-grid']){
+      const el=landing.querySelector(selector);
+      if(el)el.hidden=false;
+    }
+  }
+  promptAnswers=[];
+}
+function openPromptLibraryCategory(index){
+  // The categories appear in place of their cover, like The Cup introduction.
+  closePromptLibraryIntroduction();
+  const landing=document.getElementById('prompt-library-home');
+  const inline=document.getElementById('prompt-library-inline-results');
+  const content=document.getElementById('prompt-library-inline-content');
+  const original=document.querySelector('.section[data-section="prompt-library"]');
+  const wrap=document.querySelector('.section[data-section="prompt-library"] .prompt-library-wrap') || content.querySelector('.prompt-library-wrap');
+  if(!landing||!inline||!content||!wrap||!original)return;
+  content.appendChild(wrap);
+  inline.hidden=false;
+  for(const selector of ['.prompt-library-tagline','.prompt-library-intro-link','.prompt-library-home-grid']){
+    const el=landing.querySelector(selector);
+    if(el)el.hidden=true;
+  }
+  showPromptLibraryView('categories');
+  const categories=document.querySelectorAll('#prompt-library-category-list .prompt-category');
+  categories.forEach((element,i)=>{element.hidden=i!==index;});
+  const search=document.getElementById('prompt-library-search');
+  if(search)search.value='';
+}
+function backToLibraryCategory(){showPromptLibraryView('categories');}
+function showPromptLibraryView(view){
+  for(const name of ['intro','categories','question']){
+    const el=document.getElementById('prompt-library-'+name);
+    if(el)el.hidden=name!==view;
+  }
+  if(view==='categories')promptAnswers=[];
+  // Deliberately avoid scrollIntoView: keep readers at the library's own location.
+}
+function filterPromptLibrary(query){
+  document.querySelectorAll('#prompt-library-category-list .prompt-category').forEach(el=>{
+    const match=el.dataset.promptSearch.includes(query.trim().toLowerCase());
+    el.hidden=!match;
+
+  });
+}
+function beginLibraryPrompt(index){activePromptPathway=promptPathways[index];promptAnswers=[];showPromptLibraryView('question');updateDiscomfortPrompt();}
+function beginDiscomfortPrompt(){beginLibraryPrompt(10);}
+function restartLibraryPrompt(){promptAnswers=[];showPromptLibraryView('question');updateDiscomfortPrompt();}
+function answerDiscomfortPrompt(answer){
+  if(promptAnswers.length<3)promptAnswers.push(answer);
+  else promptAnswers[2]=answer;
+  updateDiscomfortPrompt();
+}
+function backDiscomfortPrompt(){
+  if(promptAnswers.length)promptAnswers.pop();
+  else {backToLibraryCategory();return;}
+  updateDiscomfortPrompt();
+}
+function updateDiscomfortPrompt(){
+  let node=activePromptPathway;
+  for(const answer of promptAnswers.slice(0,2))node=node[answer];
+  const level=Math.min(promptAnswers.length+1,3);
+  document.getElementById('prompt-active-category').textContent=promptCategories[activePromptPathway.category][0];
+  document.getElementById('prompt-level').textContent='Level '+level+' of 3';
+  document.getElementById('prompt-question-label').textContent=['MAIN QUESTION','FOLLOW-UP QUESTION','FINAL GUIDED QUESTION'][level-1];
+  document.getElementById('prompt-question-text').textContent=node.question;
+  document.querySelectorAll('#prompt-meter span').forEach((el,i)=>el.classList.toggle('active',i<level));
+  document.getElementById('prompt-completion').hidden=promptAnswers.length!==3;
+  if(promptAnswers.length===3){
+    const category=activePromptPathway.category;
+    const question=activePromptPathway.question.toLowerCase();
+    const branch=promptAnswers[0];
+    let suggestion='Take a moment to notice what you learned, then choose another starting question if you want to continue reflecting.';
+    if(category===0){
+      suggestion=branch==='yes'?'Reflect on when you noticed this feeling during your day. If a particular body area came to mind, you can visit Clearing Location to identify it.':'Explore another General Body Awareness prompt about comfort, tension, or daily patterns. You can use Clearing Location if you noticed a specific area.';
+    } else if(category===1){
+      suggestion=branch==='yes'?'If you can identify the area you noticed, use Clearing Location to name it. To reflect on whether the experience repeats, explore Awareness & Monitoring.':'If you noticed another sensation, choose a related Discomfort & Sensation prompt. Otherwise, you can end this check-in and return if you notice something you want to describe.';
+    } else if(category===2){
+      suggestion='Consider noting the time, activities, and rest periods you remember. Explore Awareness & Monitoring if you want to look for patterns in your observations.';
+    } else if(category===3){
+      suggestion='Consider which feeling or situation came to mind. Continue with another Emotional Connection prompt, or explore Environmental Awareness if your surroundings seemed relevant.';
+    } else if(category===4){
+      suggestion='Reflect on the surroundings you noticed, such as sound, lighting, or activity. Try another Environmental Awareness prompt to describe your experience in more detail.';
+    } else if(category===5){
+      suggestion='If a recurring pattern stood out, you can make a short note about when you noticed it and what was happening. Choose another prompt if you want to explore it further.';
+    }
+    const answerLabel=promptAnswers.map(a=>a.toUpperCase()).join(' → ');
+    document.getElementById('prompt-next-step').textContent=suggestion;
+  }
+}
+
+
+// The question library uses the app's ORIGINAL numbered Odd / Even / Show All filter.
+const promptFinderQuestions = [["Why am I feeling pain?", "Why am I feeling uncomfortable in my body?", "Why do I keep getting tense?", "Why am I having trouble sleeping?", "Why do I feel restless?", "Why is my body feeling heavy?", "Why am I feeling physically unsettled?", "Why do I feel different today?", "Why does this sensation keep returning?", "Why do I feel uncomfortable in certain places?", "Why do I feel so sensitive today?", "Why am I having trouble relaxing?", "Why am I holding tension?", "Why am I feeling physically overwhelmed?", "Why am I noticing this change in my body?", "Why am I having trouble getting comfortable?"], ["Why am I noticing this discomfort?", "Why does this area feel tense?", "Why does this sensation keep coming back?", "Why am I uncomfortable after certain activities?", "Why do I notice discomfort in certain surroundings?", "Why do I feel tightness when I am stressed?", "Why do I notice this sensation at night?", "Why does my stomach feel uneasy?", "Why am I having trouble settling down?", "Why does my back feel tense?", "Why does my neck feel tight?", "Why do I feel sensitive to touch?", "Why do I keep noticing this physical pattern?", "Why am I feeling out of balance?", "Why is this feeling getting my attention?", "Why does my body react this way when I am upset?"], ["Why am I always so tired?", "Why does my energy change around certain people?", "Why do I feel drained after conversations?", "Why am I struggling to feel motivated?", "Why do I feel exhausted after resting?", "Why do I feel energized at the wrong time?", "Why do I have trouble slowing down?", "Why does my energy drop during the day?", "Why do I feel stuck in the same routine?", "Why am I having trouble focusing?", "Why am I taking on too much?", "Why do I feel stretched too thin?", "Why does my mood affect my energy?", "Why am I not making time to rest?", "Why do I wake up feeling overwhelmed?", "Why do I feel depleted after certain activities?"], ["Why can't I find love?", "Why do I keep choosing the same kind of relationship?", "Why am I afraid to trust someone?", "Why do I feel rejected?", "Why do I keep putting other people first?", "Why do I feel emotionally unavailable?", "Why do I keep repeating the same argument?", "Why am I holding on to the past?", "Why do I feel lonely around other people?", "Why is it hard for me to accept love?", "Why do I feel guilty setting boundaries?", "Why am I afraid to ask for what I need?", "Why do I keep overthinking this connection?", "Why am I struggling to forgive?", "Why do I feel responsible for everyone's feelings?", "Why am I afraid of being vulnerable?"], ["Why do I feel uneasy in this room?", "Why does noise bother me today?", "Why am I overwhelmed?", "Why does the atmosphere feel tense?", "Why do I feel comfortable in negative surroundings?", "Why am I sensitive to bright lights?", "Why do I have trouble focusing?", "Why does this place overwhelm me?", "Why am I affected by changes in my space?", "Why does this environment feel draining?", "Why do I feel on edge around certain people?", "Why do I need more space from this person?", "Why do I feel uncomfortable with unexpected touch?", "Why do I feel restless in this place?", "Why does my energy change in this environment?", "Why am I distracted?"], ["Why does this keep happening to me?", "Why am I repeating the same pattern?", "Why do I keep postponing my goals?", "Why do I feel stuck?", "Why do I keep doubting myself?", "Why am I afraid to make this decision?", "Why do I feel like I am waiting for something?", "Why am I not following through?", "Why do I keep attracting the same situations?", "Why does this issue return after I think it is resolved?", "Why am I avoiding this conversation?", "Why do I keep second-guessing myself?", "Why do I feel blocked creatively?", "Why is it hard for me to move forward?", "Why do I keep changing my mind?", "Why do I feel disconnected from my priorities?"], ["Why do I keep attracting the same kind of partner?", "Why am I having difficulty connecting with my spouse?", "Why do I feel distant from my partner?", "Why do I struggle to communicate what I need in a relationship?", "Why am I having difficulty trusting this person?", "Why does this friendship feel one-sided?", "Why am I having trouble maintaining friendships?", "Why do I feel obligated to keep this friendship?", "Why am I struggling with this family member?", "Why do I feel responsible for everyone in my family?", "Why am I having difficulty setting boundaries with my relatives?", "Why am I having trouble understanding my child's behavior?", "Why am I struggling to communicate with my child?", "Why does parenting feel overwhelming right now?", "Why am I holding on to this relationship?", "Why is it difficult for me to let this relationship change?"], ["Why is my business not growing the way I expected?", "Why am I having trouble attracting clients?", "Why am I struggling to keep customers?", "Why am I hesitant to raise my prices?", "Why do I feel uncomfortable asking to be paid?", "Why do I keep undercharging for my work?", "Why am I having trouble making a business decision?", "Why am I afraid to launch this idea?", "Why do I keep delaying this project?", "Why am I struggling to delegate responsibilities?", "Why do I feel overwhelmed running my business?", "Why am I having trouble trusting my business partner?", "Why am I struggling with this client?", "Why am I having trouble leading my team?", "Why do I feel stuck financially in my business?", "Why am I afraid of my business becoming successful?"], ["Why do I feel stuck in my life?", "Why am I afraid to make a change?", "Why do I keep putting myself last?", "Why am I struggling to make a decision?", "Why do I keep second-guessing myself?", "Why am I afraid to try something new?", "Why am I holding on to an old version of myself?", "Why do I feel disconnected from my goals?", "Why do I keep procrastinating?", "Why am I struggling to stay consistent?", "Why do I feel guilty choosing myself?", "Why do I have trouble saying no?", "Why am I afraid to speak up for myself?", "Why do I compare my progress to others?", "Why am I having trouble accepting this life transition?", "Why do I feel unsure about what comes next?"]];
+const promptFinderQuickLinks = [
+  {label:'Alignment Checkpoint',cards:selfCheckCards},
+  {label:'Sensory/Energetic Check',cards:[]},
+  {label:'Relationship Checkpoint',cards:relationshipCheckpointCards},
+  {label:'Alignment Clearing Charts',cards:[
+    {label:'Universal Chart A',tab:'charta'},{label:'Universal Chart B',tab:'chartb'},
+    ...clearingChartCards.filter(x=>!['charta','chartb'].includes(x.tab))
+  ]}
+];
+let promptFinderCategory = 0;
+let promptFinderQuestion = 0;
+let promptFinderLink = 0;
+function promptFinderButtons(group){return `<div class="locations-jumpbar" style="margin:10px 0 12px"><button class="locations-jumpchip" onclick="filterOddEvenItems('${group}','odd')">Odd</button><button class="locations-jumpchip" onclick="filterOddEvenItems('${group}','even')">Even</button><button class="locations-jumpchip" onclick="filterOddEvenItems('${group}','all')">Show All</button></div>`;}
+function promptFinderFilter(group){filterPrecheckGroup(group);}
+function promptFinderOpenCategory(index){
+  promptFinderCategory=index;
+  const dest=document.getElementById('prompt-library-inline-content');
+  const landing=document.getElementById('prompt-library-home');
+  const inline=document.getElementById('prompt-library-inline-results');
+  if(!dest||!landing||!inline)return;
+  closePromptLibraryIntroduction();
+  for(const selector of ['.prompt-library-tagline','.prompt-library-intro-link','.prompt-library-home-grid']){const el=landing.querySelector(selector);if(el)el.hidden=true;}
+  inline.hidden=false;
+  const group='prompt-finder-questions';precheckFilterModes[group]='all';
+  dest.innerHTML=`<div class="prompt-library-wrap" style="max-width:none;border:0;padding:0;background:transparent"><h2>${escapeHtml(promptCategories[index][0])}</h2><p>Ask which numbered question you want to explore. Use the same Odd / Even filters used throughout the charts, then select your question.</p>${(index===3||index===6)?`<div class="identify-person-note"><strong>Not sure who this is about? Identify the Person.</strong><p>Think of the first names that come to mind. Muscle test each name individually by asking: <strong>“Is this about [first name]?”</strong> Continue until you get a YES. If none tests YES, leave the person unidentified for now rather than forcing an answer.</p></div>`:''}<div class="search-panel" style="margin:10px 0"><div class="search-row"><input id="${group}-section-search" type="search" placeholder="Search by number or question..." oninput="filterPrecheckGroup('${group}')"><button class="clear-btn" onclick="clearGroupSearch('${group}')">Clear</button></div>${promptFinderButtons(group)}</div><div class="precheck-grid"><div class="precheck-column">${promptFinderQuestions[index].slice(0,8).map((q,i)=>promptFinderQuestionHtml(q,i+1,group)).join('')}</div><div class="precheck-column">${promptFinderQuestions[index].slice(8).map((q,i)=>promptFinderQuestionHtml(q,i+9,group)).join('')}</div></div></div>`;
+}
+function promptFinderQuestionHtml(q,n,group){return `<button type="button" class="precheck-item prompt-finder-item" data-filter-group="${group}" data-filter-number="${n}" data-filter-search="${escapeHtml((n+' '+q).toLowerCase())}" onclick="promptFinderChooseQuestion(${n-1})"><strong>${n}. ${escapeHtml(q)}</strong></button>`;}
+function promptFinderChooseQuestion(n){promptFinderQuestion=n;promptFinderRenderLinks();}
+function promptFinderRenderLinks(){
+  const dest=document.getElementById('prompt-library-inline-content');if(!dest)return;
+  const group='prompt-finder-links';precheckFilterModes[group]='all';
+  dest.innerHTML=`<div class="prompt-library-wrap" style="max-width:none;border:0;padding:0;background:transparent"><button class="cup-back" onclick="promptFinderOpenCategory(promptFinderCategory)">← Back to Questions</button><p style="color:white"><strong>${escapeHtml(promptFinderQuestions[promptFinderCategory][promptFinderQuestion])}</strong></p><h2>Find Your Quick Link</h2>${(promptFinderCategory===3||promptFinderCategory===6)?`<div class="identify-person-note"><strong>Not sure who this is about? Identify the Person.</strong><p>Think of the first names that come to mind. Muscle test each name individually by asking: <strong>“Is this about [first name]?”</strong> Continue until you get a YES. If none tests YES, leave the person unidentified for now rather than forcing an answer.</p></div>`:''}<p>Ask: “Is the Quick Link on an odd or even number?” Filter as you normally would, then choose the numbered Quick Link.</p><div class="search-panel" style="margin:10px 0">${promptFinderButtons(group)}</div><div class="precheck-grid"><div class="precheck-column">${promptFinderQuickLinks.slice(0,3).map((x,i)=>promptFinderLinkHtml(x,i+1,group)).join('')}</div><div class="precheck-column">${promptFinderQuickLinks.slice(3).map((x,i)=>promptFinderLinkHtml(x,i+4,group)).join('')}</div></div></div>`;
+}
+function promptFinderLinkHtml(x,n,group){return `<button type="button" class="precheck-item prompt-finder-item" data-filter-group="${group}" data-filter-number="${n}" data-filter-search="${escapeHtml((n+' '+x.label).toLowerCase())}" onclick="promptFinderOpenLink(${n-1})"><strong>${n}. ${escapeHtml(x.label)}</strong></button>`;}
+function promptFinderOpenLink(n){
+  promptFinderLink=n;const dest=document.getElementById('prompt-library-inline-content');if(!dest)return;
+  const link=promptFinderQuickLinks[n];const group='prompt-finder-charts';precheckFilterModes[group]='all';
+  const options=link.cards.length?link.cards: [{label:'Sensory/Energetic Assessment',tab:'dashboard',special:'sensory-assessment'},{label:'Sensory/Energetic Regulation',tab:'dashboard',special:'sensory-regulation'}];
+  const middle=Math.ceil(options.length/2);
+  dest.innerHTML=`<div class="prompt-library-wrap" style="max-width:none;border:0;padding:0;background:transparent"><button class="cup-back" onclick="promptFinderRenderLinks()">← Back to Quick Links</button><p style="color:white"><strong>${escapeHtml(promptFinderQuestions[promptFinderCategory][promptFinderQuestion])}</strong></p><h2>${escapeHtml(link.label)}</h2><p>Ask whether the section is odd or even, use the existing chart filters, and choose the section you need.</p><div class="search-panel" style="margin:10px 0">${promptFinderButtons(group)}</div><div class="precheck-grid"><div class="precheck-column">${options.slice(0,middle).map((x,i)=>promptFinderChartHtml(x,i+1,group)).join('')}</div><div class="precheck-column">${options.slice(middle).map((x,i)=>promptFinderChartHtml(x,i+middle+1,group)).join('')}</div></div></div>`;
+}
+function promptFinderChartHtml(x,n,group){return `<button type="button" class="precheck-item prompt-finder-item" data-filter-group="${group}" data-filter-number="${n}" data-filter-search="${escapeHtml((n+' '+x.label).toLowerCase())}" onclick="promptFinderOpenChart('${x.tab}','${x.special||''}')"><strong>${n}. ${escapeHtml(x.label.split('\n')[0])}</strong></button>`;}
+function promptFinderOpenChart(tab,special){
+  // Open the actual target, including inline Sensory tools that do not have their own section.
+  if(special === 'sensory-assessment' || special === 'sensory-regulation'){
+    const targetId = special === 'sensory-assessment' ? 'sensory-trigger-open' : 'sensory-regulation-open';
+    const target = document.getElementById(targetId);
+    if(!target)return;
+    // Save the Prompt Library as the origin using the existing toolbox navigation.
+    const returnState = saveToolboxReturnState();
+    goToSection('dashboard');
+    // The app's own click handler activates the corresponding inline tool.
+    target.click();
+    const openPanel = document.getElementById(special === 'sensory-assessment' ? 'sensory-trigger-tool' : 'sensory-regulation-tool');
+    if(openPanel && !openPanel.hidden){
+      addToolboxReturnHeader(openPanel, returnState);
+      setTimeout(()=>openPanel.scrollIntoView({behavior:'smooth',block:'start'}),90);
+    }
+    return;
+  }
+  // All other section destinations use the app's existing section navigation.
+  const target=document.querySelector(`.section[data-section="${tab}"]`);
+  if(target)openToolboxSection(tab);
+}
+function closePromptLibraryCategory(){
+  const inline=document.getElementById('prompt-library-inline-results');if(inline)inline.hidden=true;
+  const landing=document.getElementById('prompt-library-home');if(landing)for(const selector of ['.prompt-library-tagline','.prompt-library-intro-link','.prompt-library-home-grid']){const el=landing.querySelector(selector);if(el)el.hidden=false;}
+}
+function openPromptLibraryCategory(index){promptFinderOpenCategory(index);}
+
 function goToSection(key) {
   const enteringGlossary = key === 'glossary' || key.startsWith('glossary-');
   const priorGlossarySection = getActiveSectionKey();
@@ -5728,6 +6127,7 @@ function renderRelationshipPlayCheck() {
     <div class="relationship-play-kicker">Decision Check</div>
     <h2 class="relationship-play-title">Relationship Status Check</h2>
     <p class="relationship-play-sub">Before you clear, restore, repair, or release, identify the current state of the relationship. Ask: <strong>Is this relationship on Play, Pause, or Stop?</strong></p>
+    <div class="identify-person-note"><strong>Not sure who this is about? Identify the Person.</strong><p>Think of the first names that come to mind. Muscle test each name individually by asking: <strong>“Is this about [first name]?”</strong> Continue until you get a YES. If none tests YES, leave the person unidentified for now rather than forcing an answer.</p></div>
 
     <div class="relationship-flow-row" aria-label="Relationship decision flow">
       <div class="relationship-flow-step"><span>① Play Check</span>Find the state first.</div>
@@ -6274,7 +6674,7 @@ function renderRelationshipChessboardSection() {
 
 function renderRelationshipPlaySection() {
   return `<section class="section" data-section="relationshipplay">
-    <div class="section-head"><div class="pill">Relationship Status Check</div><button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button></div>
+    <div class="section-head"><div class="pill">Relationship Status Check</div><div class="chart-back-actions"><button class="ghost-btn" type="button" onclick="if(toolboxNavigationHistory.length) goBackInToolbox(); else goToSection('dashboard');">← Back</button><button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button></div></div>
     ${renderRelationshipPlayCheck()}
   </section>`;
 }
@@ -7614,6 +8014,7 @@ function renderCupResponsesSection(){
 function renderSections() {
   document.getElementById('content').innerHTML = [
     renderDashboard(),
+    renderPromptLibrarySection(),
     renderVersionOfSelfAgeLocationSection(),
     renderGlossarySections(),
     renderTutorialsSection(),
