@@ -4062,6 +4062,72 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .sensory-eight-clearing h3{color:#f5dfaa;margin:0 0 15px;font-size:1.12rem}
 .sensory-eight-clearing .prompt-answer-row{justify-content:flex-start}
 @media(max-width:700px){.sensory-eight-focus{padding:15px}}
+
+/* Power Blocks redesign — confined to Power Blocks only */
+[data-section="power"] .power-modern-shell{border:1px solid rgba(216,181,106,.25);border-radius:20px;background:#101116;padding:clamp(16px,2.2vw,28px)}
+[data-section="power"] .power-modern-shell h2{font-size:clamp(1.5rem,2.6vw,2rem);color:#f5dfaa;margin:0 0 6px}
+[data-section="power"] .power-modern-subtitle{color:#bfbab0;margin:0 0 22px}
+[data-section="power"] .power-modern-search{display:flex;gap:10px;margin:0 0 20px}
+[data-section="power"] .power-modern-search input{flex:1;min-width:0;background:#0c0e13;color:#fff;border:1px solid #45414a;border-radius:12px;padding:14px;font:inherit}
+[data-section="power"] .power-modern-section-title{color:#f5dfaa;font-weight:800;letter-spacing:.04em;margin:12px 0 16px}
+[data-section="power"] .power-modern-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+[data-section="power"] .power-modern-choice{position:relative;min-height:78px;border:1px solid rgba(216,181,106,.34);border-radius:14px;background:#1a1a20;color:#fff;text-align:left;padding:16px 38px 16px 18px;cursor:pointer;font:inherit;display:flex;flex-direction:column;justify-content:center;gap:5px}
+[data-section="power"] .power-modern-choice:hover,[data-section="power"] .power-modern-choice:focus-visible{border-color:#d8b56a;background:#26231f}
+[data-section="power"] .power-modern-number{color:#f5dfaa;font-weight:700;font-size:.82rem}
+[data-section="power"] .power-modern-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#f5dfaa;font-size:25px}
+[data-section="power"] .power-modern-category{text-align:center;align-items:center}
+[data-section="power"] .power-modern-category-number{position:static;display:block;color:#f5dfaa;font-weight:700;font-size:.82rem;line-height:1;text-align:center}
+[data-section="power"] .power-modern-section-view h3,[data-section="power"] .power-modern-detail h3{color:#f5dfaa;font-size:1.45rem;margin:20px 0}
+[data-section="power"] .power-modern-filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+[data-section="power"] .power-modern-active{border-color:#d8b56a!important;background:rgba(216,181,106,.18)!important;color:#f5dfaa!important}
+[data-section="power"] .power-modern-detail{border:1px solid rgba(216,181,106,.32);border-radius:18px;padding:clamp(16px,2.5vw,28px);background:#17171d}
+[data-section="power"] .power-modern-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0}
+[data-section="power"] .power-modern-value{background:#242220;border:1px solid #554733;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;min-height:124px}
+[data-section="power"] .power-modern-value span{color:#d0b67d;font-size:.78rem;font-weight:800;letter-spacing:.07em}
+[data-section="power"] .power-modern-value strong{font-size:1.2rem;color:#fff;line-height:1.35}
+@media(max-width:850px){[data-section="power"] .power-modern-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){[data-section="power"] .power-modern-grid,[data-section="power"] .power-modern-pair{grid-template-columns:1fr}}
+
+
+/* Power Blocks: origin + location + remove / restore drill-down */
+[data-section="power"] .power-flow-panel{margin:20px 0;border:1px solid rgba(216,181,106,.35);border-radius:16px;background:#14151b;padding:20px}
+[data-section="power"] .power-flow-panel h4{color:#f5dfaa;font-size:1.1rem;margin:0 0 10px}
+[data-section="power"] .power-flow-panel p{color:#c8c2b7;line-height:1.5;margin:0 0 16px}
+[data-section="power"] .power-flow-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+[data-section="power"] .power-flow-option{cursor:pointer;border:1px solid rgba(216,181,106,.48);border-radius:12px;background:#222126;color:#f5dfaa;padding:14px 10px;font:inherit;font-weight:750}
+[data-section="power"] .power-flow-option.is-selected{border-color:#e0bf73;background:rgba(216,181,106,.18)}
+[data-section="power"] .power-flow-location{border-top:1px solid rgba(216,181,106,.22);margin-top:20px;padding-top:20px}
+[data-section="power"] .power-flow-location>label{display:block;color:#f5dfaa;font-weight:700;margin:18px 0 8px}
+[data-section="power"] #power-location-input{width:100%;box-sizing:border-box;border:1px solid #504735;background:#0e1016;border-radius:10px;color:#fff;padding:13px;font:inherit}
+[data-section="power"] .power-flow-script{border:1px solid rgba(216,181,106,.25);border-radius:12px;padding:18px;margin-top:20px;background:#1c1b20}
+[data-section="power"] .power-flow-script h4{font-size:.9rem;margin:0 0 7px}
+[data-section="power"] .power-flow-script p{color:#fff;font-weight:650;font-size:1.05rem;margin-bottom:18px}
+[data-section="power"] .power-flow-script p:last-child{margin-bottom:0}
+.power-location-guide{background:#211f20;border:1px solid #8c7343;border-radius:14px;padding:18px;margin:15px 0;color:#fff}
+.power-location-guide strong{color:#f5dfaa}.power-location-guide p{margin:9px 0 12px}
+.section[data-section="locations"]:has(#power-location-return-guide) .location-item{cursor:pointer;border-radius:6px}
+.section[data-section="locations"]:has(#power-location-return-guide) .location-item:hover{background:rgba(216,181,106,.15);color:#f5dfaa}
+@media(max-width:600px){[data-section="power"] .power-flow-choices{grid-template-columns:1fr}}
+
+
+/* Clearing Location: dark Haven navigation, independent numbered locations */
+[data-section="locations"] .locations-modern-shell{border:1px solid rgba(216,181,106,.30);border-radius:20px;background:#101116;padding:clamp(16px,2.2vw,28px)}
+[data-section="locations"] .locations-modern-shell h2{color:#f5dfaa;margin:0 0 8px;font-size:clamp(1.5rem,2.5vw,2rem)}
+[data-section="locations"] .locations-modern-shell p{color:#bfbab0;line-height:1.55;margin:0 0 18px}
+[data-section="locations"] .locations-modern-shell .power-modern-search{display:flex;gap:10px;margin-bottom:20px}
+[data-section="locations"] .locations-modern-shell .power-modern-search input{flex:1;min-width:0;background:#0c0e13;color:#fff;border:1px solid #45414a;border-radius:12px;padding:14px;font:inherit}
+[data-section="locations"] #clearing-location-modern-panel.locations-grid{display:block}
+[data-section="locations"] .location-modern-heading{color:#f5dfaa;font-size:1.14rem;font-weight:800;margin:15px 0}
+[data-section="locations"] .location-modern-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+[data-section="locations"] .location-modern-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+[data-section="locations"] .location-modern-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;min-height:72px;padding:12px 33px;border:1px solid rgba(216,181,106,.35);border-radius:15px;background:#1a1a20;color:#fff;font:inherit;font-weight:750;cursor:pointer}
+[data-section="locations"] .location-modern-card:hover,[data-section="locations"] .location-modern-card.is-selected{background:#292621;border-color:#d8b56a}
+[data-section="locations"] .location-modern-number{display:block;color:#f5dfaa;font-size:.84rem;font-weight:800;line-height:1;margin:0}
+[data-section="locations"] .location-modern-card strong{display:block;line-height:1.25}
+[data-section="locations"] .location-modern-arrow{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#f5dfaa;font-size:1.5rem}
+@media(max-width:850px){[data-section="locations"] .location-modern-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){[data-section="locations"] .location-modern-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -6320,68 +6386,200 @@ function renderDashboard() {
   return `<section class="section active" data-section="dashboard"></section>`;
 }
 
-function wirePowerSearch() {
-  const input = document.getElementById('power-search');
-  if (!input) return;
-  const run = () => {
-    const term = input.value.trim().toLowerCase();
-    document.querySelectorAll('[data-power-group]').forEach(group => {
-      let visibleCount = 0;
-      group.querySelectorAll('.paired-row').forEach(row => {
-        const text = row.textContent.toLowerCase();
-        const show = !term || text.includes(term);
-        row.style.display = show ? 'grid' : 'none';
-        if (show) visibleCount++;
-      });
-      group.style.display = visibleCount ? 'block' : 'none';
-    });
-  };
-  input.addEventListener('input', run);
-}
+const powerBlocksUI = { letter:'', code:'', parity:'all', sectionParity:'all', origin:'', location:'', locationPicking:false };
 
 function renderPowerSection() {
-  const letterOrder = [...new Set(appData.powerPairs.map(p => String(p.code || '').charAt(0)).filter(Boolean))];
-  const groups = letterOrder.map(letter => ({
-    letter,
-    pairs: appData.powerPairs.filter(p => String(p.code || '').startsWith(letter))
-  }));
-
-  setTimeout(() => wirePowerSearch(), 0);
-
+  const letters = [...new Set(appData.powerPairs.map(p => String(p.code || '').charAt(0)).filter(Boolean))];
+  setTimeout(renderPowerModern, 0);
   return `<section class="section" data-section="power">
     <div class="section-head power-head">
       <div class="pill">Power Blocks</div>
       <div class="power-head-tools">
-        <input id="power-search" class="power-search-input" type="text" placeholder="Search Power Blocks..." />
         <button class="ghost-btn" type="button" onclick="returnFromPowerBlocks()">Back to Previous Section</button>
         <button class="ghost-btn" type="button" onclick="goToSection('dashboard')">Back to Home</button>
       </div>
     </div>
-    <div class="locations-jumpbar">
-      ${groups.map(g => `<button class="locations-jumpchip" onclick="scrollToSectionGroup('power', '${g.letter}')">Section ${g.letter}</button>`).join('')}
-    </div>
-    <div class="grid" style="grid-template-columns:1fr;">
-      ${groups.map(g => `
-        <div class="table-card paired-card" data-power-group="${g.letter}">
-          <div class="table-title">Section ${g.letter}</div>
-          <div class="paired-head">
-            <div class="paired-head-cell">What to Remove</div>
-            <div class="paired-head-cell">What to Restore</div>
-          </div>
-          <div class="paired-body">
-            ${g.pairs.map(p => `
-              <div class="paired-row">
-                <div class="paired-idx">${escapeHtml(p.code || '')}</div>
-                <div class="paired-text">${escapeHtml(p.remove || '')}</div>
-                <div class="paired-idx">${escapeHtml(p.code || '')}</div>
-                <div class="paired-text">${escapeHtml(p.restore || '')}</div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `).join('')}
+    <div class="power-modern-shell">
+      <h2>Power Blocks</h2>
+      <p class="power-modern-subtitle">Identify what needs to be removed, then find its corresponding restoration code.</p>
+      <div class="power-modern-search">
+        <input id="power-search" type="search" placeholder="Search Power Blocks by word or code..." oninput="filterPowerModern(this.value)" />
+        <button class="clear-btn" onclick="clearPowerModern()">Clear</button>
+      </div>
+      <div id="power-modern-panel"></div>
     </div>
   </section>`;
+}
+
+function powerModernPairs() {
+  return appData.powerPairs || [];
+}
+
+function renderPowerModern() {
+  const panel = document.getElementById('power-modern-panel');
+  if (!panel) return;
+  const input = document.getElementById('power-search');
+  const query = (input ? input.value : '').trim().toLowerCase();
+  const all = powerModernPairs();
+  const letters = [...new Set(all.map(p => String(p.code || '').charAt(0)).filter(Boolean))];
+  const matches = p => [p.code,p.remove,p.restore].some(v => String(v||'').toLowerCase().includes(query));
+  const cards = arr => arr.map((p,i) => `<button type="button" class="power-modern-choice" onclick="showPowerModernPair('${escapeHtml(p.code)}')"><span class="power-modern-number">${escapeHtml(p.code)}</span><strong>${escapeHtml(p.remove||'')}</strong><span aria-hidden="true" class="power-modern-arrow">›</span></button>`).join('');
+  if (powerBlocksUI.code) {
+    const pair = all.find(p => String(p.code)===powerBlocksUI.code);
+    if (!pair) { powerBlocksUI.code=''; renderPowerModern(); return; }
+    const originLabel = {you:'You',absorbed:'Absorbed',inherited:'Inherited'}[powerBlocksUI.origin] || '';
+    const block = pair.remove || '';
+    const restore = pair.restore || '';
+    const place = powerBlocksUI.location.trim();
+    const possessiveLocation = place ? (/^my\s/i.test(place) ? place : 'my ' + place) : 'my ______';
+    const removePhrase = powerBlocksUI.origin === 'you'
+      ? `I remove my ${block} from ${possessiveLocation}.`
+      : `I remove the ${powerBlocksUI.origin || '______'} ${block} from ${possessiveLocation}.`;
+    const restorePhrase = `I restore the ${restore} in ${possessiveLocation}.`;
+    panel.innerHTML = `<div class="power-modern-detail">
+      <button type="button" class="ghost-btn" onclick="backPowerModern()">← Back to Blocks</button>
+      <h3>${escapeHtml(pair.code)}. ${escapeHtml(block)}</h3>
+      <div class="power-modern-pair"><div class="power-modern-value"><span>WHAT TO REMOVE</span><strong>${escapeHtml(block)}</strong></div><div class="power-modern-value"><span>WHAT TO RESTORE</span><strong>${escapeHtml(restore)}</strong></div></div>
+      <div class="power-flow-panel">
+        <h4>Is this yours, absorbed, or inherited?</h4>
+        <p>Select one to identify where the block is coming from.</p>
+        <div class="power-flow-choices">${[['you','You'],['absorbed','Absorbed'],['inherited','Inherited']].map(([value,label])=>`<button type="button" class="power-flow-option ${powerBlocksUI.origin===value?'is-selected':''}" aria-pressed="${powerBlocksUI.origin===value}" onclick="setPowerOrigin('${value}')">${label}</button>`).join('')}</div>
+        ${powerBlocksUI.origin ? `<div class="power-flow-location">
+          <h4>Find its location</h4>
+          <p>Open the existing Clearing Location chart and select where this block is located.</p>
+          <button type="button" class="ghost-btn" onclick="openPowerClearingLocation()">Open Clearing Location Chart →</button>
+          <label for="power-location-input">Location found</label>
+          <input id="power-location-input" type="text" value="${escapeHtml(powerBlocksUI.location)}" placeholder="Enter the location found in the chart" oninput="updatePowerLocation(this.value)" />
+          <div id="power-flow-script" class="power-flow-script">
+            <h4>Say this to remove it</h4>
+            <p id="power-remove-phrase">“${escapeHtml(removePhrase)}”</p>
+            <h4>Then add the restore code by saying</h4>
+            <p id="power-restore-phrase">“${escapeHtml(restorePhrase)}”</p>
+          </div>
+        </div>` : ''}
+      </div>
+      <button type="button" class="ghost-btn" onclick="returnToPowerModernRoot()">← Return to Power Blocks</button>
+    </div>`;
+    return;
+  }
+  if (query) {
+    const results = all.filter(matches);
+    panel.innerHTML = `<div class="power-modern-section-title">Search Results · ${results.length} match${results.length===1?'':'es'}</div>
+      <div class="power-modern-grid">${cards(results)}</div>
+      ${results.length?'':'<p>No matching blocks found.</p>'}`;
+    return;
+  }
+  if (!powerBlocksUI.letter) {
+    const shownLetters = letters.filter((letter, i) => powerBlocksUI.sectionParity==='all' || (powerBlocksUI.sectionParity==='odd' ? (i+1)%2===1 : (i+1)%2===0));
+    panel.innerHTML = `<div class="power-modern-section-title">Choose a Section</div>
+      <div class="power-modern-filters" aria-label="Filter Power Blocks sections">${[['odd','Odd'],['even','Even'],['all','Show All']].map(([mode,label])=>`<button type="button" class="locations-jumpchip ${powerBlocksUI.sectionParity===mode?'power-modern-active':''}" aria-pressed="${powerBlocksUI.sectionParity===mode}" onclick="filterPowerSectionParity('${mode}')">${label}</button>`).join('')}</div>
+      <div class="power-modern-grid">${shownLetters.map(letter=>{ const sectionNumber = letters.indexOf(letter) + 1; return `<button type="button" class="power-modern-choice power-modern-category" onclick="showPowerModernSection('${escapeHtml(letter)}')"><span class="power-modern-category-number">${sectionNumber}</span><strong>Section ${escapeHtml(letter)}</strong><span aria-hidden="true" class="power-modern-arrow">›</span></button>`; }).join('')}</div>`;
+    return;
+  }
+  const list = all.filter(p=>String(p.code||'').startsWith(powerBlocksUI.letter));
+  const visible = list.filter((p,i)=>powerBlocksUI.parity==='all'||(powerBlocksUI.parity==='odd'?(i+1)%2===1:(i+1)%2===0));
+  panel.innerHTML = `<div class="power-modern-section-view">
+    <button type="button" class="ghost-btn" onclick="backPowerModern()">← Back to Sections</button>
+    <h3>Section ${escapeHtml(powerBlocksUI.letter)}</h3>
+    <div class="power-modern-filters">${[['odd','Odd'],['even','Even'],['all','Show All']].map(([mode,label])=>`<button type="button" class="locations-jumpchip ${powerBlocksUI.parity===mode?'power-modern-active':''}" onclick="filterPowerParity('${mode}')">${label}</button>`).join('')}</div>
+    <div class="power-modern-grid">${cards(visible)}</div>
+  </div>`;
+}
+
+function showPowerModernSection(letter) {
+  powerBlocksUI.letter = letter;
+  powerBlocksUI.code = '';
+  powerBlocksUI.parity = 'all';
+  renderPowerModern();
+}
+function showPowerModernPair(code) {
+  powerBlocksUI.code = code;
+  powerBlocksUI.origin = '';
+  powerBlocksUI.location = '';
+  renderPowerModern();
+}
+function setPowerOrigin(origin) {
+  powerBlocksUI.origin = origin;
+  powerBlocksUI.location = '';
+  renderPowerModern();
+}
+function updatePowerLocation(value) {
+  powerBlocksUI.location = value;
+  const pair = powerModernPairs().find(p => String(p.code) === powerBlocksUI.code);
+  if (!pair) return;
+  const place = String(value || '').trim();
+  const loc = place ? (/^my\s/i.test(place) ? place : 'my ' + place) : 'my ______';
+  const remove = powerBlocksUI.origin === 'you'
+    ? `I remove my ${pair.remove} from ${loc}.`
+    : `I remove the ${powerBlocksUI.origin} ${pair.remove} from ${loc}.`;
+  const restore = `I restore the ${pair.restore} in ${loc}.`;
+  const removal = document.getElementById('power-remove-phrase');
+  const reinstallation = document.getElementById('power-restore-phrase');
+  if (removal) removal.textContent = `“${remove}”`;
+  if (reinstallation) reinstallation.textContent = `“${restore}”`;
+}
+function openPowerClearingLocation() {
+  powerBlocksUI.locationPicking = true;
+  goToSection('locations');
+  const section = document.querySelector('.section[data-section="locations"]');
+  if (!section) return;
+  let prompt = document.getElementById('power-location-return-guide');
+  if (!prompt) {
+    prompt = document.createElement('div');
+    prompt.id = 'power-location-return-guide';
+    prompt.className = 'power-location-guide';
+    const slot = section.querySelector('#power-location-return-guide-slot');
+    if (slot) slot.appendChild(prompt);
+  }
+  prompt.innerHTML = '<strong>Power Blocks · Select a Location</strong><p>Click the location where you found the block. You will return to your selected Power Block and its removal and restore wording.</p><button type="button" class="ghost-btn" onclick="returnFromPowerLocation()">← Return to Power Blocks</button>';
+}
+function returnFromPowerLocation(location) {
+  if (location) powerBlocksUI.location = location;
+  powerBlocksUI.locationPicking = false;
+  const prompt = document.getElementById('power-location-return-guide');
+  if (prompt) prompt.remove();
+  goToSection('power');
+  renderPowerModern();
+}
+function returnToPowerModernRoot() {
+  powerBlocksUI.code = '';
+  powerBlocksUI.letter = '';
+  powerBlocksUI.origin = '';
+  powerBlocksUI.location = '';
+  const search = document.getElementById('power-search');
+  if (search) search.value = '';
+  renderPowerModern();
+}
+document.addEventListener('click', function powerLocationClick(event) {
+  if (!powerBlocksUI.locationPicking) return;
+  if (event.target.closest('#clearing-location-modern-panel')) return;
+  const target = event.target.closest('.section[data-section="locations"] .location-item');
+  if (!target) return;
+  event.preventDefault();
+  returnFromPowerLocation(target.textContent.trim());
+});
+function filterPowerSectionParity(mode) {
+  powerBlocksUI.sectionParity = mode;
+  renderPowerModern();
+}
+function filterPowerParity(mode) {
+  powerBlocksUI.parity = mode;
+  renderPowerModern();
+}
+function backPowerModern() {
+  if (powerBlocksUI.code) powerBlocksUI.code='';
+  else powerBlocksUI.letter='';
+  renderPowerModern();
+}
+function filterPowerModern() {
+  powerBlocksUI.code='';
+  renderPowerModern();
+}
+function clearPowerModern() {
+  const input=document.getElementById('power-search');
+  if (input) input.value='';
+  powerBlocksUI.code='';
+  renderPowerModern();
 }
 
 function wireCoreSearch() {
@@ -8149,7 +8347,9 @@ function renderVersionOfSelfAgeLocationSection() {
   </section>`;
 }
 
-function renderLocationsSection() {
+const clearingLocationUI = {category:null, parity:'all', itemParity:'all', search:''};
+
+function getClearingLocationGroups() {
   const groups = [
     { number:1, items:['Heart','Small Intestine'] },
     { number:2, items:['Stomach','Spleen'] },
@@ -8176,50 +8376,68 @@ function renderLocationsSection() {
     { number:23, title:'Auric Field / Biofield', items:['Astral Body','Causal Body (Ketheric Template)','Celestial Body','Emotional Body','Etheric Body','Etheric Template','Mental Body'] },
     { number:24, title:'Energy Gates & Portals', items:['Jaw Joint (TMJ)','Elbow','Finger Joints','Hip Joint','Knee','Shoulder Joint','Wrist'] }
   ];
-  setTimeout(() => wireLocationSearch(), 0);
+  const entries = [];
+  let number = 1;
+  for (const g of groups) {
+    if (g.number <= 9) {
+      for (const item of g.items) entries.push({ number:number++, title:item, items:[item], direct:true });
+    } else {
+      entries.push({ number:number++, title:g.title || ({10:'Head & Face',11:'Torso, Back & Neck',12:'Arms & Hands',13:'Legs & Feet'}[g.number] || `Location Group ${g.number}`), items:g.items, direct:false });
+    }
+  }
+  return entries;
+}
+function renderLocationsSection() {
+  setTimeout(() => renderClearingLocationUI(), 0);
   return `<section class="section" data-section="locations">
     <div class="section-head power-head">
       <div class="pill">Clearing Location</div>
       <div class="power-head-tools">
-        <input id="location-search" class="power-search-input" type="text" placeholder="Search Clearing Location..." />
         <button class="ghost-btn" id="back-to-last-section-btn" onclick="returnToPreviousSection()" style="display:none;">Back to Last Section</button>
         <button class="ghost-btn" onclick="goToSection('dashboard')">Back to Home</button>
       </div>
     </div>
-    <div class="locations-jumpbar">
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '1')">1</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '2')">2</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '3')">3</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '4')">4</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '5')">5</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '6')">6</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '7')">7</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '8')">8</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '9')">9</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '10')">10</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '11')">11</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '12')">12</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '13')">13</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '14')">14</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '15')">15</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '16')">16</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '17')">17</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '18')">18</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '19')">19</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '20')">20</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '21')">21</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '22')">22</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '23')">23</button>
-      <button class="locations-jumpchip" onclick="scrollToSectionGroup('location', '24')">24</button>
-    </div>
-    <div class="locations-grid">
-      ${groups.map(g=>`<div class="location-card" data-location-group="${g.number}">
-        <div class="location-num">${g.number}</div>
-        ${g.title ? `<div class="location-title">${escapeHtml(g.title)}</div>` : ''}
-        ${g.items.map(item=>`<div class="location-item">${escapeHtml(item)}</div>`).join('')}
-      </div>`).join('')}
+    <div class="locations-modern-shell">
+      <h2>Clearing Location</h2>
+      <p>Identify where the block is located. Select Odd, Even, or Show All to find your location. Choose a larger group to view its individual locations.</p>
+      <div class="power-modern-search"><input id="location-search" type="search" placeholder="Search location by name or number..." oninput="searchClearingLocations(this.value)"/><button class="clear-btn" onclick="clearClearingLocationSearch()">Clear</button></div>
+      <div id="power-location-return-guide-slot"></div>
+      <div class="locations-grid" id="clearing-location-modern-panel"></div>
     </div>
   </section>`;
+}
+function renderClearingLocationUI() {
+  const panel = document.getElementById('clearing-location-modern-panel');
+  if (!panel) return;
+  const groups = getClearingLocationGroups();
+  const query = clearingLocationUI.search.trim().toLowerCase();
+  const filterUI = (mode, fn) => `<div class="location-modern-filters">${[['odd','Odd'],['even','Even'],['all','Show All']].map(([v,t])=>`<button type="button" class="locations-jumpchip ${v===mode?'power-modern-active':''}" onclick="${fn}('${v}')">${t}</button>`).join('')}</div>`;
+  const itemCard = (item,i) => `<button type="button" class="location-modern-card location-item" data-location-group="${i+1}" onclick="selectClearingLocationItem(this)"><span class="location-modern-number">${i+1}</span><strong>${escapeHtml(item)}</strong><span class="location-modern-arrow">›</span></button>`;
+  if (query) {
+    const found = groups.flatMap(group=>group.items.map((item,i)=>({group,item,index:i+1}))).filter(x=>x.item.toLowerCase().includes(query)||String(x.group.number)===query||x.group.title.toLowerCase().includes(query));
+    panel.innerHTML=`<div class="location-modern-heading">Search Results · ${found.length}</div><div class="location-modern-grid">${found.map(x=>`<button type="button" class="location-modern-card location-item" onclick="selectClearingLocationItem(this)"><span class="location-modern-number">${x.group.number} · ${x.index}</span><strong>${escapeHtml(x.item)}</strong><span class="location-modern-arrow">›</span></button>`).join('')}</div>`;
+    return;
+  }
+  if (clearingLocationUI.category!==null) {
+    const g=groups.find(x=>x.number===clearingLocationUI.category);
+    if(!g){clearingLocationUI.category=null;renderClearingLocationUI();return;}
+    const items=g.items.map((item,i)=>({item,i})).filter(x=>clearingLocationUI.itemParity==='all'||(clearingLocationUI.itemParity==='odd'?x.i%2===0:x.i%2===1));
+    panel.innerHTML=`<button type="button" class="ghost-btn" onclick="returnToClearingLocationGroups()">← Back to Locations</button><h3 class="location-modern-heading">${g.number}. ${escapeHtml(g.title)}</h3>${filterUI(clearingLocationUI.itemParity,'setClearingLocationItemParity')}<div class="location-modern-grid">${items.map(x=>itemCard(x.item,x.i)).join('')}</div>`;
+    return;
+  }
+  const visible = groups.filter(g=>clearingLocationUI.parity==='all'||(clearingLocationUI.parity==='odd'?g.number%2===1:g.number%2===0));
+  panel.innerHTML=`<div class="location-modern-heading">Choose a Location or Group</div>${filterUI(clearingLocationUI.parity,'setClearingLocationParity')}<div class="location-modern-grid">${visible.map(g=>`<button type="button" class="location-modern-card ${g.direct?'location-item':''}" data-location-group="${g.number}" onclick="${g.direct?'selectClearingLocationItem(this)':`openClearingLocationGroup(${g.number})`}"><span class="location-modern-number">${g.number}</span><strong>${escapeHtml(g.title)}</strong><span class="location-modern-arrow">›</span></button>`).join('')}</div>`;
+}
+function openClearingLocationGroup(number) {clearingLocationUI.category=number;clearingLocationUI.itemParity='all';renderClearingLocationUI();}
+function returnToClearingLocationGroups() {clearingLocationUI.category=null;renderClearingLocationUI();}
+function setClearingLocationParity(mode) {clearingLocationUI.parity=mode;renderClearingLocationUI();}
+function setClearingLocationItemParity(mode) {clearingLocationUI.itemParity=mode;renderClearingLocationUI();}
+function searchClearingLocations(value) {clearingLocationUI.search=String(value||'');renderClearingLocationUI();}
+function clearClearingLocationSearch() {clearingLocationUI.search='';const el=document.getElementById('location-search');if(el)el.value='';renderClearingLocationUI();}
+function selectClearingLocationItem(btn) {
+  document.querySelectorAll('#clearing-location-modern-panel .location-modern-card').forEach(b=>b.classList.remove('is-selected'));
+  btn.classList.add('is-selected');
+  if(powerBlocksUI.locationPicking) returnFromPowerLocation(btn.querySelector('strong').textContent.trim());
 }
 
 function renderSuppressionSection() {
