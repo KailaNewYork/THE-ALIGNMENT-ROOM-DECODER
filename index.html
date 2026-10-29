@@ -3827,6 +3827,9 @@ html, body { max-width: 100%; overflow-x: hidden; }
 
 /* Eight Parts: first collection, consistent app gold/black theme */
 .haven-eight-collection{scroll-margin-top:14px}
+/* Add clear separation below the Software/Hardware selection cards. */
+#haven-eight-workspace:not([hidden]){margin-top:72px;}
+@media(max-width:650px){#haven-eight-workspace:not([hidden]){margin-top:48px;}}
 .haven-eight-entry{width:100%;min-height:76px}
 .haven-eight-entry[hidden]{display:none!important}
 #haven-eight-workspace[hidden],#haven-eight-workspace [hidden]{display:none!important}
@@ -4048,6 +4051,17 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .section[data-section="cupresponses"] .cup-panel {
   width:100%; max-width:none; box-sizing:border-box;
 }
+
+/* Eight Parts: focused drill-down matching the Sensory Assessment detail view */
+.sensory-eight-focus{border:1px solid rgba(216,181,106,.35);border-radius:18px;padding:24px;margin-top:18px;background:rgba(255,255,255,.012)}
+.sensory-eight-focus>.ghost-btn{margin-bottom:18px}
+.sensory-eight-main{color:#f5dfaa;font-size:1.2rem;line-height:1.45;margin:0 0 14px;text-align:left}
+.sensory-eight-subtitle{color:var(--muted);line-height:1.6;margin:0 0 16px}
+.sensory-eight-desc{border:1px solid rgba(216,181,106,.27);background:rgba(216,181,106,.05);color:var(--muted);padding:15px 18px;border-radius:13px;margin-bottom:18px;line-height:1.55}
+.sensory-eight-clearing{border:1px solid rgba(216,181,106,.32);border-radius:15px;padding:20px;margin-top:16px}
+.sensory-eight-clearing h3{color:#f5dfaa;margin:0 0 15px;font-size:1.12rem}
+.sensory-eight-clearing .prompt-answer-row{justify-content:flex-start}
+@media(max-width:700px){.sensory-eight-focus{padding:15px}}
 </style>
 </head>
 <body>
@@ -9453,7 +9467,7 @@ function havenEightChoosePart(i){havenEightState.part=i;havenEightState.parity=n
 function havenEightChooseParity(p){havenEightState.parity=p;havenEightRender();}
 function havenEightQuestion(i){havenEightState.question=i;havenEightState.whyParity='all';havenEightState.whySelected=null;havenEightGoto(i===12?'permission':'question');}
 function havenEightWhyParity(v){havenEightState.whyParity=v;havenEightRender();}
-function havenEightWhySelect(i){havenEightState.whySelected=i;havenEightRender();}
+function havenEightWhySelect(i){havenEightState.whySelected=i;havenEightGoto('whyDetail');}
 function havenEightWhyClear(){havenEightState.chartParity=null;havenEightNativeCharts();}
 function havenEightButtons(items){return '<div class="haven-eight-grid">'+items.map(([label,call])=>'<button class="haven-eight-card" type="button" onclick="'+call+'">'+havenEightEsc(label)+'</button>').join('')+'</div>';}
 function havenEightBackControls(){return '<div class="haven-eight-actions"><button type="button" class="prompt-library-button" onclick="havenEightBack()">← Go Back</button><button type="button" class="prompt-library-button" onclick="havenEightClose()">Return to Library</button></div>';}
@@ -9479,7 +9493,7 @@ function havenEightRender(){
  const partName=p?havenEightEsc(p.name):'';
  const card=(title,subtitle,onclick)=>'<button type="button" class="prompt-library-home-category" onclick="'+onclick+'"><span class="prompt-library-home-category-copy"><strong>'+title+'</strong>'+(subtitle?'<small>'+subtitle+'</small>':'')+'</span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>';
  const btn=(label,call)=>'<button type="button" class="prompt-library-button" onclick="'+call+'">'+label+'</button>';
- let html='<div class="prompt-library-wrap" style="max-width:none;border:0;padding:0;background:transparent"><h2>The Eight Parts of Me Check In</h2>';
+ let html='<div class="prompt-library-wrap" style="max-width:none;border:0;padding:0;background:transparent">';
  if(s.screen==='intro'){
   html+='<h3>The Complete Interactive Check-In Library</h3><p>By now, you should have identified and named all eight parts of yourself. Each part has its own responsibilities, experiences, communication patterns, and needs.</p><p>We check in because communication is part of alignment. Sometimes a part needs attention, acknowledgment, or further exploration. Sometimes everything is fine. The goal is to listen to each part individually.</p><p>Select Software or Hardware, choose a part, and use the same numbered Odd / Even question system as the rest of the Prompt Library.</p><p class="prompt-disclaimer">For personal and spiritual reflection, not diagnosis. Muscle testing is not a scientifically established method of identifying medical causes or verifying facts.</p>';
   html+=btn('Open the Check-In Library','havenEightGoto(\'groups\')');
@@ -9498,16 +9512,22 @@ function havenEightRender(){
   p.questions.forEach((q,i)=>{html+='<button type="button" class="precheck-item prompt-finder-item" data-filter-group="'+group+'" data-filter-number="'+(i+1)+'" onclick="havenEightQuestion('+i+')"><strong>'+(i+1)+'. '+havenEightEsc(q)+'</strong></button>';});
   html+='</div>';
  }else if(s.screen==='question'){
-  const why=havenEightInvestigations[p.name][s.question],group='haven-eight-why-'+s.part+'-'+s.question;
+  const why=havenEightInvestigations[p.name][s.question];
   if(!s.whyParity)s.whyParity='all';
-  html+='<p><strong>'+partName+' · Question '+(s.question+1)+' of 13</strong></p><div class="prompt-question-box"><h3>'+havenEightEsc(p.questions[s.question])+'</h3></div>';
-  html+='<h3 style="color:#f5dfaa">Investigate Why</h3><p>Explore the possible influences behind this response. Select the numbered prompts to identify what may need attention.</p>';
-  html+='<div class="locations-jumpbar">'+['all','odd','even'].map(v=>'<button type="button" class="locations-jumpchip" aria-pressed="'+(s.whyParity===v)+'" onclick="havenEightWhyParity(\''+v+'\')">'+(v==='all'?'All':v==='odd'?'Odd':'Even')+'</button>').join('')+'</div>';
+  html+='<div class="sensory-eight-focus"><button type="button" class="ghost-btn" onclick="havenEightBack()">← Back to Check-In Questions</button>';
+  html+='<h3 class="sensory-eight-main">'+(s.question+1)+'. '+havenEightEsc(p.questions[s.question])+'</h3>';
+  html+='<p class="sensory-eight-subtitle">Investigate Why — Select a question below to explore what may be contributing to this response.</p>';
+  html+='<div class="locations-jumpbar">'+['all','odd','even'].map(v=>'<button type="button" class="locations-jumpchip" aria-pressed="'+(s.whyParity===v)+'" onclick="havenEightWhyParity(\''+v+'\')">'+(v==='all'?'Show All':v==='odd'?'Odd':'Even')+'</button>').join('')+'</div>';
   html+='<div class="haven-question-grid">';
-  why.forEach((q,i)=>{if(s.whyParity!=='all'&&((i+1)%2===1)!==(s.whyParity==='odd'))return;html+='<button type="button" class="precheck-item prompt-finder-item" onclick="havenEightWhySelect('+i+')" aria-pressed="'+(s.whySelected===i)+'"><strong>'+(i+1)+'. '+havenEightEsc(q)+'</strong></button>';});
-  html+='</div>';
-  if(s.whySelected!==null)html+='<div class="prompt-question-box"><h3>'+havenEightEsc(why[s.whySelected])+'</h3></div>';
-  html+='<div class="prompt-question-box"><h3>Does something need to be cleared?</h3><div class="prompt-answer-row">'+btn('Yes','havenEightWhyClear()')+btn('No','havenEightGoto(\'whyStop\')')+'</div></div>';
+  why.forEach((q,i)=>{if(s.whyParity!=='all'&&((i+1)%2===1)!==(s.whyParity==='odd'))return;html+='<button type="button" class="precheck-item prompt-finder-item" onclick="havenEightWhySelect('+i+')"><strong>'+(i+1)+'. '+havenEightEsc(q)+'</strong></button>';});
+  html+='</div></div>';
+ }else if(s.screen==='whyDetail'){
+  const why=havenEightInvestigations[p.name][s.question];
+  const followup=why[s.whySelected];
+  html+='<div class="sensory-eight-focus"><button type="button" class="ghost-btn" onclick="havenEightBack()">← Back to Investigate Why</button>';
+  html+='<h3 class="sensory-eight-main">'+(s.whySelected+1)+'. '+havenEightEsc(followup)+'</h3>';
+  html+='<div class="sensory-eight-desc">'+havenEightEsc(p.questions[s.question])+'</div>';
+  html+='<div class="sensory-eight-clearing"><h3>Does something need to be cleared?</h3><div class="prompt-answer-row">'+btn('Yes','havenEightWhyClear()')+btn('No','havenEightGoto(\'whyStop\')')+'</div></div></div>';
  }else if(s.screen==='whyStop'){
   html+='<div class="prompt-question-box haven-eight-end-message" role="status"><h3>Go No Further</h3><p>You have your answer. No additional questions or clearing are needed for this check-in. Leave it here.</p></div>';
  }else if(['permission','should','clear','chartParity','charts','stop','proceed'].includes(s.screen)){
