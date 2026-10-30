@@ -4623,6 +4623,10 @@ html, body { max-width: 100%; overflow-x: hidden; }
   margin-left:10px;
 }
 
+
+/* Hidden Patterns return control: hidden by default, compact when activated. */
+#haven-hidden-return[hidden]{display:none!important;}
+#haven-hidden-return:not([hidden]){display:inline-flex!important;width:auto!important;max-width:min(320px,calc(100% - 36px))!important;align-items:center;justify-content:center;}
 </style>
 <style id="haven-hidden-styles">
 #haven-hidden-cover{margin-top:14px}#haven-hidden-cover[hidden],#haven-hidden-workspace[hidden],#haven-hidden-intro[hidden]{display:none!important}
