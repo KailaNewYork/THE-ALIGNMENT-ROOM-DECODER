@@ -4597,6 +4597,32 @@ html, body { max-width: 100%; overflow-x: hidden; }
 #check-detail-outcome-stable,#check-detail-outcome-ami,#check-detail-outcome-mission,#check-detail-outcome-person{margin-top:20px}
 .check-detail-stop{text-align:center;padding:18px 6px}
 @media(max-width:600px){.check-detail-charts{grid-template-columns:1fr}.check-detail-view{padding:16px}.check-detail-inner h2{font-size:1.25rem}}
+
+/* Gold introduction buttons: separate lines, readable on desktop and mobile. */
+#prompt-library-home .prompt-library-intro-link .haven-intro-two-line {
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:4px !important;
+  flex:1 1 auto;
+  min-width:0;
+  text-align:left;
+}
+#prompt-library-home .prompt-library-intro-link .haven-intro-two-line > span {
+  display:block !important;
+  white-space:normal !important;
+  overflow-wrap:normal;
+  word-break:normal;
+  line-height:1.35;
+}
+#prompt-library-home .prompt-library-intro-link .haven-intro-two-line > span + span {
+  font-weight:650;
+}
+#prompt-library-home .prompt-library-intro-link > span[aria-hidden="true"] {
+  flex:0 0 auto;
+  margin-left:10px;
+}
+
 </style>
 </head>
 <body>
@@ -5365,7 +5391,7 @@ function renderQuickStart() {
                 ${promptCategories.slice(0,6).map((c,i)=>`<button type="button" class="prompt-library-home-category" onclick="openPromptLibraryCategory(${i})"><span class="prompt-library-home-category-copy"><strong>${c[0]}</strong><small>${c[1]}</small></span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>`).join('')}
               </div>
             </div>
-            ${[9,10].map(index=>`<div class="prompt-library-group haven-collection-section" aria-label="${escapeHtml(promptCategories[index][0])}">
+            ${[9].map(index=>`<div class="prompt-library-group haven-collection-section" aria-label="${escapeHtml(promptCategories[index][0])}">
               <h2 class="prompt-library-group-title">${escapeHtml(promptCategories[index][0])}</h2>
               <p class="prompt-library-group-description">${escapeHtml(promptCategories[index][1])}</p>
               <div class="haven-collection-actions">
@@ -5375,6 +5401,34 @@ function renderQuickStart() {
                 ${Object.keys(havenFindItGroups[promptCategories[index][0]]).map((name,i)=>`<button class="prompt-library-home-category" type="button" onclick="havenFindItSelectSubcategory(${index},${i})"><span class="prompt-library-home-category-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(havenFindItDescriptions[name] || 'Explore this experience through focused questions')}</small></span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>`).join('')}
               </div>
             </div>`).join('')}
+            ${[10].map(index=>`<div class="prompt-library-group haven-collection-section" aria-label="${escapeHtml(promptCategories[index][0])}">
+              <h2 class="prompt-library-group-title">${escapeHtml(promptCategories[index][0])}</h2>
+              <p class="prompt-library-group-description">${escapeHtml(promptCategories[index][1])}</p>
+              <div class="haven-collection-actions">
+                <button type="button" class="prompt-library-intro-link" onclick="openPromptLibraryIntroduction('${index===9?'emotional':'physical'}')"><span class="haven-intro-two-line"><span>Read the Introduction</span><span>${escapeHtml(promptCategories[index][0])}</span></span> <span aria-hidden="true">→</span></button>
+              </div>
+              <div class="haven-subgrid" aria-label="${escapeHtml(promptCategories[index][0])} topics">
+                ${Object.keys(havenFindItGroups[promptCategories[index][0]]).map((name,i)=>`<button class="prompt-library-home-category" type="button" onclick="havenFindItSelectSubcategory(${index},${i})"><span class="prompt-library-home-category-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(havenFindItDescriptions[name] || 'Explore this experience through focused questions')}</small></span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>`).join('')}
+              </div>
+            </div>`).join('')}
+            <div class="prompt-library-group haven-collection-section" id="haven-location-collection">
+              <h2 class="prompt-library-group-title">Location &amp; Space Clearing</h2>
+              <p class="prompt-library-group-description">Explore homes, rooms, workplaces, vehicles, venues, and other places through location-specific questions.</p>
+              <button type="button" class="prompt-library-intro-link" onclick="havenLocationIntro(true)"><span class="haven-intro-two-line"><span>Read the Introduction</span><span>Location &amp; Space Clearing</span></span><span aria-hidden="true">→</span></button>
+              <div id="haven-location-intro" class="cup-panel prompt-intro-page" hidden>
+                <button type="button" class="cup-back" onclick="havenLocationIntro(false)">← Back to Locations</button>
+                <h2>Location &amp; Space Clearing — Introduction</h2>
+                <h3>Exploring the Spaces We Enter</h3>
+                <p>Our surroundings can shape how we feel, rest, work, connect, and move through daily life. Use these questions to reflect on a specific location, the people and experiences connected with it, and anything that may need your attention.</p>
+                <h3>How to Use This Library</h3>
+                <p>Select a location category, choose the exact space, and work through its own twelve numbered questions. Use Odd, Even, or Show All to narrow the list. Questions 1–11 can follow the existing Quick Link and Clearing Chart pathway.</p>
+                <p><strong>Question 12 is always the final permission check.</strong> Ask whether you are allowed to go, be, enter, stay, or travel there, as appropriate. Yes or No both conclude that check: no follow-up questions, no drill-down, and no clearing pathway from this final question.</p>
+                <p class="prompt-disclaimer">This library supports personal reflection and spiritual discernment. A muscle-testing response cannot independently establish a location's safety, accessibility, or permission to enter. Follow applicable laws, venue rules, professional advice, and practical safety information.</p>
+                <button type="button" class="cup-btn" onclick="havenLocationIntro(false)">← Return to Locations</button>
+              </div>
+              <div class="haven-subgrid" id="haven-location-category-cover" aria-label="Location and Space Clearing categories"></div>
+              <div id="haven-location-workspace" hidden></div>
+            </div>
 
           </div>
           <div id="prompt-library-dashboard-intro" class="cup-panel prompt-intro-page" hidden>
@@ -6691,7 +6745,7 @@ function openPromptLibraryIntroduction(section='everyday'){
   closePromptLibraryIntroduction();
   const suffixes={everyday:'dashboard-intro',emotional:'emotional-intro',physical:'physical-intro'};
   const intro=document.getElementById('prompt-library-'+(suffixes[section]||'dashboard-intro'));
-  const groupIndex={everyday:1,emotional:2,physical:3}[section] ?? 1;
+  const groupIndex={everyday:1,emotional:3,physical:4}[section] ?? 1;
   const groups=landing.querySelectorAll('#prompt-library-group-list > .prompt-library-group');
   const group=groups[groupIndex];
   if(!intro||!group)return;
@@ -6868,7 +6922,7 @@ function havenFindItChooseQuestion(i){
   promptFinderRenderLinks();
 }
 function havenCurrentPromptQuestion(){return havenFindItQuestion || promptFinderQuestions[promptFinderCategory][promptFinderQuestion];}
-function havenReturnToQuestions(){if(window.havenEightUsingNativeLinks){window.havenEightUsingNativeLinks=false;havenFindItQuestion='';const inline=document.getElementById('prompt-library-inline-results');if(inline)inline.hidden=true;const list=document.getElementById('prompt-library-group-list');if(list)list.hidden=false;havenEightState.screen='questions';havenEightRender();return;}if(havenFindItQuestion){havenFindItOpenSubcategory(havenFindItSubcategory);}else{promptFinderOpenCategory(promptFinderCategory);}}
+function havenReturnToQuestions(){if(window.havenLocationNativeLinks){window.havenLocationNativeLinks=false;havenFindItQuestion='';havenLocationQuestions();return;}if(window.havenEightUsingNativeLinks){window.havenEightUsingNativeLinks=false;havenFindItQuestion='';const inline=document.getElementById('prompt-library-inline-results');if(inline)inline.hidden=true;const list=document.getElementById('prompt-library-group-list');if(list)list.hidden=false;havenEightState.screen='questions';havenEightRender();return;}if(havenFindItQuestion){havenFindItOpenSubcategory(havenFindItSubcategory);}else{promptFinderOpenCategory(promptFinderCategory);}}
 
 // The question library uses the app's ORIGINAL numbered Odd / Even / Show All filter.
 const promptFinderQuestions = [["Why am I feeling pain?", "Why am I feeling uncomfortable in my body?", "Why do I keep getting tense?", "Why am I having trouble sleeping?", "Why do I feel restless?", "Why is my body feeling heavy?", "Why am I feeling physically unsettled?", "Why do I feel different today?", "Why does this sensation keep returning?", "Why do I feel uncomfortable in certain places?", "Why do I feel so sensitive today?", "Why am I having trouble relaxing?", "Why am I holding tension?", "Why am I feeling physically overwhelmed?", "Why am I noticing this change in my body?", "Why am I having trouble getting comfortable?"], ["Why am I noticing this discomfort?", "Why does this area feel tense?", "Why does this sensation keep coming back?", "Why am I uncomfortable after certain activities?", "Why do I notice discomfort in certain surroundings?", "Why do I feel tightness when I am stressed?", "Why do I notice this sensation at night?", "Why does my stomach feel uneasy?", "Why am I having trouble settling down?", "Why does my back feel tense?", "Why does my neck feel tight?", "Why do I feel sensitive to touch?", "Why do I keep noticing this physical pattern?", "Why am I feeling out of balance?", "Why is this feeling getting my attention?", "Why does my body react this way when I am upset?"], ["Why am I always so tired?", "Why does my energy change around certain people?", "Why do I feel drained after conversations?", "Why am I struggling to feel motivated?", "Why do I feel exhausted after resting?", "Why do I feel energized at the wrong time?", "Why do I have trouble slowing down?", "Why does my energy drop during the day?", "Why do I feel stuck in the same routine?", "Why am I having trouble focusing?", "Why am I taking on too much?", "Why do I feel stretched too thin?", "Why does my mood affect my energy?", "Why am I not making time to rest?", "Why do I wake up feeling overwhelmed?", "Why do I feel depleted after certain activities?"], ["Why can't I find love?", "Why do I keep choosing the same kind of relationship?", "Why am I afraid to trust someone?", "Why do I feel rejected?", "Why do I keep putting other people first?", "Why do I feel emotionally unavailable?", "Why do I keep repeating the same argument?", "Why am I holding on to the past?", "Why do I feel lonely around other people?", "Why is it hard for me to accept love?", "Why do I feel guilty setting boundaries?", "Why am I afraid to ask for what I need?", "Why do I keep overthinking this connection?", "Why am I struggling to forgive?", "Why do I feel responsible for everyone's feelings?", "Why am I afraid of being vulnerable?"], ["Why do I feel uneasy in this room?", "Why does noise bother me today?", "Why am I overwhelmed?", "Why does the atmosphere feel tense?", "Why do I feel comfortable in negative surroundings?", "Why am I sensitive to bright lights?", "Why do I have trouble focusing?", "Why does this place overwhelm me?", "Why am I affected by changes in my space?", "Why does this environment feel draining?", "Why do I feel on edge around certain people?", "Why do I need more space from this person?", "Why do I feel uncomfortable with unexpected touch?", "Why do I feel restless in this place?", "Why does my energy change in this environment?", "Why am I distracted?"], ["Why does this keep happening to me?", "Why am I repeating the same pattern?", "Why do I keep postponing my goals?", "Why do I feel stuck?", "Why do I keep doubting myself?", "Why am I afraid to make this decision?", "Why do I feel like I am waiting for something?", "Why am I not following through?", "Why do I keep attracting the same situations?", "Why does this issue return after I think it is resolved?", "Why am I avoiding this conversation?", "Why do I keep second-guessing myself?", "Why do I feel blocked creatively?", "Why is it hard for me to move forward?", "Why do I keep changing my mind?", "Why do I feel disconnected from my priorities?"], ["Why do I keep attracting the same kind of partner?", "Why am I having difficulty connecting with my spouse?", "Why do I feel distant from my partner?", "Why do I struggle to communicate what I need in a relationship?", "Why am I having difficulty trusting this person?", "Why does this friendship feel one-sided?", "Why am I having trouble maintaining friendships?", "Why do I feel obligated to keep this friendship?", "Why am I struggling with this family member?", "Why do I feel responsible for everyone in my family?", "Why am I having difficulty setting boundaries with my relatives?", "Why am I having trouble understanding my child's behavior?", "Why am I struggling to communicate with my child?", "Why does parenting feel overwhelming right now?", "Why am I holding on to this relationship?", "Why is it difficult for me to let this relationship change?"], ["Why is my business not growing the way I expected?", "Why am I having trouble attracting clients?", "Why am I struggling to keep customers?", "Why am I hesitant to raise my prices?", "Why do I feel uncomfortable asking to be paid?", "Why do I keep undercharging for my work?", "Why am I having trouble making a business decision?", "Why am I afraid to launch this idea?", "Why do I keep delaying this project?", "Why am I struggling to delegate responsibilities?", "Why do I feel overwhelmed running my business?", "Why am I having trouble trusting my business partner?", "Why am I struggling with this client?", "Why am I having trouble leading my team?", "Why do I feel stuck financially in my business?", "Why am I afraid of my business becoming successful?"], ["Why do I feel stuck in my life?", "Why am I afraid to make a change?", "Why do I keep putting myself last?", "Why am I struggling to make a decision?", "Why do I keep second-guessing myself?", "Why am I afraid to try something new?", "Why am I holding on to an old version of myself?", "Why do I feel disconnected from my goals?", "Why do I keep procrastinating?", "Why am I struggling to stay consistent?", "Why do I feel guilty choosing myself?", "Why do I have trouble saying no?", "Why am I afraid to speak up for myself?", "Why do I compare my progress to others?", "Why am I having trouble accepting this life transition?", "Why do I feel unsure about what comes next?"]];
@@ -11297,5 +11351,108 @@ function havenEightSetChartParity(v){havenEightState.chartParity=v;havenEightRen
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 </script>
+
+<script>
+/* Location & Space Clearing — standalone addition to the existing Prompt Library. */
+const havenLocationCategories=[
+ {name:'Home & Residential Spaces',desc:'The home and the rooms within it',places:['Entire home','Front entrance / foyer','Living room','Dining room','Kitchen','Primary bedroom','Child’s bedroom','Guest bedroom','Bathroom','Home office','Basement','Attic','Hallway','Closet / storage room','Laundry room','Garage','Backyard','Front yard','Patio / balcony','Apartment building common area'],permission:'be',focus:['comfort and belonging','household routines','rest or activity','family interactions','personal boundaries','memories connected to the space','items and furnishings','privacy and security','changes in use','the surrounding home','the needs of the people here']},
+ {name:'Office & Workplace',desc:'Workstations, meeting areas and shared facilities',places:['Entire workplace','Personal office','Desk / workstation','Conference room','Break room','Reception area','Waiting area','Workplace hallway','Workplace restroom','Elevator','Shared workspace','Executive office','Staff area','Supply / storage room','Building entrance'],permission:'be',focus:['work-related stress','concentration','communication between colleagues','workplace expectations','shared boundaries','meetings held here','previous workplace experiences','comfort and ergonomics','privacy and confidentiality','workflow and organization','work-related relationships']},
+ {name:'Vehicles & Transportation',desc:'Vehicles, shared rides and transit spaces',places:['Personal car','Someone else’s car','Rental car','Work vehicle','Bus','Train','Subway car','Airplane','Taxi / rideshare','Boat / cruise ship','Transportation terminal','Parking garage / lot'],permission:'travel',focus:['driver readiness','passenger comfort','route planning','travel-related stress','objects carried inside','past journeys','noise and crowding','maintenance concerns','weather and road conditions','boarding and exiting','the intended destination']},
+ {name:'Friends’, Family & Other People’s Homes',desc:'Visiting, gathering or staying in another home',places:['Entire home','Room where I’m staying','Guest bedroom','Living / gathering area','Kitchen','Bathroom','Outdoor area','Temporary sleeping space','Someone’s personal room','Family gathering home'],permission:'be',focus:['the host relationship','visit expectations','hospitality and comfort','personal boundaries','group dynamics','past visits','privacy','shared activities','belonging','the reason for visiting','timing and length of the visit']},
+ {name:'Healthcare & Healing Spaces',desc:'Care settings, waiting rooms and healing practices',places:['Hospital','Emergency room','Hospital patient room','Hospital waiting area','Doctor’s office','Examination room','Dental office','Therapy office','Rehabilitation facility','Nursing facility','Clinic','Treatment room','Wellness center','Healing / practitioner space'],permission:'be',focus:['anticipation of care','communication with staff','patient comfort','privacy and consent','waiting and uncertainty','past healthcare experiences','sensory needs','support person arrangements','treatment information','accessibility','care-related boundaries']},
+ {name:'Event & Speaking Venues',desc:'Arenas, conferences, stages and audience areas',places:['Entire venue','Arena','Stadium','Theater','Auditorium','Conference center','Convention center','Ballroom','Banquet hall','Meeting room','Stage','Backstage','Green room','Vendor area','Exhibition floor','Audience seating area','Entrance / registration area'],permission:'go',focus:['event expectations','audience dynamics','performer or speaker preparation','crowd comfort','seating or placement','sound and lighting','arrival and entry','past events at this venue','exits and movement','event staff communication','departure and recovery']},
+ {name:'Business & Entrepreneur Spaces',desc:'Client, retail, production and networking locations',places:['Storefront','Business office','Studio','Salon','Treatment room','Warehouse','Vendor booth','Pop-up shop','Market space','Networking venue','Client meeting location','Workshop space','Production space','Coworking space'],permission:'be',focus:['business intentions','client experience','staff communication','pricing or transactions','workflow','professional boundaries','past business dealings','brand presentation','equipment and inventory','business partnerships','decisions connected to this space']},
+ {name:'Retail & Shopping',desc:'Shops, malls, markets and fitting areas',places:['Clothing store','Grocery store','Mall','Department store','Beauty store','Furniture store','Specialty shop','Dressing room','Checkout area','Shopping center','Flea market / marketplace'],permission:'go',focus:['shopping intentions','spending decisions','store atmosphere','crowds and sensory input','staff interactions','fit and personal comfort','product selection','privacy','waiting in line','time pressure','the decision to purchase']},
+ {name:'Entertainment & Recreation',desc:'Concerts, dining, sports and leisure outings',places:['Concert','Movie theater','Theater performance','Nightclub','Bar / lounge','Restaurant','Museum','Amusement park','Arcade','Casino','Sporting event','Gym','Spa','Park','Recreation center'],permission:'go',focus:['the purpose of the outing','companions','crowd dynamics','music or sound levels','light and sensory needs','personal boundaries','past experiences in similar places','timing','cost and expectations','rest and comfort','traveling home']},
+ {name:'Travel & Hospitality',desc:'Hotels, rentals, resorts and travel facilities',places:['Hotel','Hotel room','Airbnb / vacation rental','Resort','Hotel lobby','Hotel restaurant','Hotel pool','Hotel spa','Airport','Train station','Bus terminal','Cruise cabin','Vacation property'],permission:'stay',focus:['arrival arrangements','lodging comfort','travel fatigue','sleep and rest','shared facilities','personal belongings','privacy and security','past travel experiences','staff or host communication','accessibility','departure arrangements']},
+ {name:'Schools & Learning Spaces',desc:'Classrooms, campuses and learning facilities',places:['School','Classroom','College / university','Lecture hall','Library','Cafeteria','Gymnasium','School bus','Playground','Administrative office','Therapy room','Training room','Workshop / class venue'],permission:'be',focus:['learning readiness','classroom routines','teacher or instructor communication','peer relationships','noise and stimulation','accessibility','expectations and rules','past learning experiences','safety and supervision','transitions','the learner’s individual needs']},
+ {name:'Public, Community & Outdoor Spaces',desc:'Neighborhoods, community buildings and open areas',places:['Street','Neighborhood','Park','Playground','Community center','Government building','Courthouse','Library','Religious / spiritual building','Beach','Trail','Public restroom','Public gathering space','Outdoor event area'],permission:'go',focus:['the reason for visiting','surrounding activity','crowd comfort','weather and environment','public interactions','accessibility','signage and rules','past visits','time of day','available exits or routes','companions and personal boundaries']}
+];
+let havenLocationState={category:-1,place:-1,permission:null};
+window.havenLocationNativeLinks=false;
+const havenLocationEscape=v=>typeof escapeHtml==='function'?escapeHtml(String(v)):String(v).replaceAll('&','&amp;').replaceAll('<','&lt;');
+function havenLocationCard(title,desc,fn){return `<button type="button" class="prompt-library-home-category" onclick="${fn}"><span class="prompt-library-home-category-copy"><strong>${havenLocationEscape(title)}</strong><small>${havenLocationEscape(desc)}</small></span><span class="prompt-library-arrow" aria-hidden="true">›</span></button>`;}
+function havenLocationIntro(show){
+ const intro=document.getElementById('haven-location-intro'),cover=document.getElementById('haven-location-category-cover'),workspace=document.getElementById('haven-location-workspace');
+ if(!intro)return; intro.hidden=!show;cover.hidden=show;if(workspace)workspace.hidden=true;
+ if(!show)havenLocationHome();else intro.scrollIntoView({block:'start'});
+}
+function havenLocationHome(){
+ window.havenLocationNativeLinks=false;
+ const cover=document.getElementById('haven-location-category-cover'),workspace=document.getElementById('haven-location-workspace');
+ if(!cover)return;
+ document.getElementById('haven-location-intro').hidden=true; cover.hidden=false;workspace.hidden=true;
+ cover.innerHTML=havenLocationCategories.map((c,i)=>havenLocationCard(c.name,c.desc,`havenLocationOpenCategory(${i})`)).join('');
+}
+function havenLocationOpenCategory(i){
+ havenLocationState={category:i,place:-1,permission:null};
+ const c=havenLocationCategories[i],cover=document.getElementById('haven-location-category-cover'),work=document.getElementById('haven-location-workspace');
+ document.getElementById('haven-location-intro').hidden=true; cover.hidden=true;work.hidden=false;
+ work.innerHTML=`<div class="haven-eight-panel"><button type="button" class="cup-back" onclick="havenLocationHome()">← All Location Categories</button><h3 class="haven-eight-title">${havenLocationEscape(c.name)}</h3><p class="haven-eight-muted">${havenLocationEscape(c.desc)}. Choose a specific space to see its own numbered questions.</p><div class="haven-subgrid">${c.places.map((p,j)=>havenLocationCard(p,'Open location questions',`havenLocationOpenPlace(${j})`)).join('')}</div></div>`;
+ work.scrollIntoView({block:'start'});
+}
+function havenLocationPermissionText(c,p){
+ if(c.permission==='travel')return `Am I allowed to travel in this ${p.toLowerCase().includes('terminal')||p.toLowerCase().includes('parking')?'location':'vehicle'}?`;
+ if(c.permission==='stay')return `Am I allowed to stay in this ${p.toLowerCase().includes('room')||p.toLowerCase().includes('cabin')?'space':'location'}?`;
+ if(c.permission==='go')return `Am I allowed to go to this ${p.toLowerCase().includes('stage')||p.toLowerCase().includes('backstage')||p.toLowerCase().includes('green room')||p.toLowerCase().includes('dressing')?'space':'location'}?`;
+ if(/room|kitchen|bathroom|hallway|bedroom|office|desk|stage|booth|entrance|foyer|attic|basement|garage|balcony|closet|area/i.test(p))return 'Am I allowed to enter this space?';
+ return 'Am I allowed to be in this location?';
+}
+function havenLocationPrompts(){
+ const c=havenLocationCategories[havenLocationState.category],p=c.places[havenLocationState.place],f=c.focus;
+ return [
+ `What about ${p.toLowerCase()} needs my attention before I use this space?`,
+ `Is there something about ${f[0]} in ${p.toLowerCase()} that I need to explore?`,
+ `Does ${f[1]} affect my experience of ${p.toLowerCase()}?`,
+ `Is there something connected to ${f[2]} here that needs attention?`,
+ `Do my interactions with other people in ${p.toLowerCase()} need to be explored?`,
+ `Is there an experience involving ${f[3]} here that I am still carrying?`,
+ `Do I need to examine ${f[4]} in relation to ${p.toLowerCase()}?`,
+ `Is there a past experience involving ${f[5]} that I associate with this place?`,
+ `Is there something involving ${f[6]} here that needs attention?`,
+ `What about ${f[7]} should I consider before using ${p.toLowerCase()}?`,
+ `Is there anything related to ${f[8]} or ${f[9]} that I need to address here?`,
+ havenLocationPermissionText(c,p)
+ ];
+}
+function havenLocationOpenPlace(j){havenLocationState.place=j;havenLocationState.permission=null;havenLocationQuestions();}
+function havenLocationQuestions(){
+ const s=havenLocationState,c=havenLocationCategories[s.category];if(!c||s.place<0)return;
+ const p=c.places[s.place],questions=havenLocationPrompts(),work=document.getElementById('haven-location-workspace');
+ const inline=document.getElementById('prompt-library-inline-results');if(inline)inline.hidden=true;
+ const list=document.getElementById('prompt-library-group-list');if(list)list.hidden=false;
+ document.getElementById('haven-location-category-cover').hidden=true;work.hidden=false;
+ const group='haven-location-questions';if(typeof precheckFilterModes!=='undefined')precheckFilterModes[group]='all';
+ work.innerHTML=`<div class="haven-eight-panel"><button type="button" class="cup-back" onclick="havenLocationOpenCategory(${s.category})">← ${havenLocationEscape(c.name)}</button><h3 class="haven-eight-title">${havenLocationEscape(p)}</h3><p class="haven-eight-muted">Explore this space using its numbered prompts. Question 12 is the final permission check and does not lead to a clearing chart.</p><div class="search-panel" style="margin:10px 0"><div class="search-row"><input id="${group}-section-search" type="search" placeholder="Search questions..." oninput="filterPrecheckGroup('${group}')"><button class="clear-btn" type="button" onclick="clearGroupSearch('${group}')">Clear</button></div>${promptFinderButtons(group)}</div><div class="haven-question-grid">${questions.map((q,i)=>`<button class="precheck-item prompt-finder-item" type="button" data-filter-group="${group}" data-filter-number="${i+1}" data-filter-search="${havenLocationEscape((i+1+' '+q).toLowerCase())}" onclick="havenLocationChooseQuestion(${i})"><strong>${i+1}. ${havenLocationEscape(q)}</strong></button>`).join('')}</div><p class="prompt-disclaimer">Spiritual reflection is not a substitute for real-world safety checks, facility rules, permission to enter, or medical guidance.</p></div>`;
+ work.scrollIntoView({block:'start'});
+}
+function havenLocationChooseQuestion(i){
+ if(i===11){havenLocationState.permission=null;havenLocationPermission();return;}
+ const q=havenLocationPrompts()[i],inline=document.getElementById('prompt-library-inline-results'),list=document.getElementById('prompt-library-group-list');
+ window.havenLocationNativeLinks=true;havenFindItQuestion=q;
+ if(list)list.hidden=true;inline.hidden=false;
+ promptFinderRenderLinks();inline.scrollIntoView({block:'start'});
+}
+function havenLocationPermission(answer){
+ if(answer!==undefined)havenLocationState.permission=answer;
+ const s=havenLocationState,c=havenLocationCategories[s.category],p=c.places[s.place],work=document.getElementById('haven-location-workspace');
+ document.getElementById('prompt-library-group-list').hidden=false;
+ const inline=document.getElementById('prompt-library-inline-results');if(inline)inline.hidden=true;
+ work.hidden=false;
+ const result=s.permission===null?`<div class="prompt-answer-row"><button type="button" class="prompt-library-button gold" onclick="havenLocationPermission('yes')">Yes</button><button type="button" class="prompt-library-button" onclick="havenLocationPermission('no')">No</button></div>`:`<div class="prompt-question-box haven-eight-end-message" role="status"><h3>${s.permission==='yes'?'Yes — End of Check':'No — End of Check'}</h3><p>Your permission check is complete. No further drill-down, clearing, or explanation is part of this question.</p></div>`;
+ work.innerHTML=`<div class="haven-eight-panel"><button type="button" class="cup-back" onclick="havenLocationQuestions()">← Back to ${havenLocationEscape(p)} Questions</button><h3 class="haven-eight-title">${havenLocationEscape(p)}</h3><p class="haven-eight-sub">Question 12 of 12 · Final Permission Check</p><div class="prompt-question-box haven-eight-updated-question"><h3>${havenLocationEscape(havenLocationPermissionText(c,p))}</h3></div>${result}</div>`;
+ work.scrollIntoView({block:'start'});
+}
+// Fill covers only after the application's original markup and functions have loaded.
+// The Prompt Library is generated after page load, so initialize when its cover actually exists.
+function havenLocationEnsureCover(){
+ const cover=document.getElementById('haven-location-category-cover');
+ if(cover && !cover.children.length && !havenLocationState.categorySelected){havenLocationHome();}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',havenLocationEnsureCover);else havenLocationEnsureCover();
+const havenLocationObserver=new MutationObserver(()=>havenLocationEnsureCover());
+havenLocationObserver.observe(document.body,{childList:true,subtree:true});
+</script>
+
 </body>
 </html>
